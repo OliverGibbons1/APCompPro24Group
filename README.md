@@ -15,7 +15,5 @@ Bryce Thomson: Quality Assurance, Programming
 
 [Jack Wakefield](https://github.com/jack125251): Art and Multimedia, Programming
 
-
-
-
-![image]([https://github.com/OliverGibbons1/APCompPro24Group/blob/main/images/ClassDiagram.png])
+## Class Diagram
+![image]([https://github.com/OliverGibbons1/APCompPro24Group/blob/main/images/ClassDiagram1.png])
