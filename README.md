@@ -6,7 +6,7 @@ This will be a repository aimed at displaying the projects of this group.
 
 [Ian Turner](https://github.com/Ian-Turner4): Project Support, Programming
 
-John Mccullough: SFX and Post Processing, Programming
+[John Mccullough](https://github.com/jemrules): SFX and Post Processing, Programming
 
 Bryce Thomson: Quality Assurance, Programming
 
