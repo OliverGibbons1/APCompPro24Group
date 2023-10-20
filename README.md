@@ -1,6 +1,7 @@
 # Name Pending
 ## Description:
 Turn-based RPG similar to Pokémon or Dragon Quest
+
 This will be a repository aimed at displaying the projects of this group. 
 ## Collaborators: 
 
