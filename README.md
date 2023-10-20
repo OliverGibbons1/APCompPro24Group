@@ -1,4 +1,4 @@
-# Slumgullion Dragoon Expedition
+# Dragoon Expedition
 A turn-based RPG adventure game.
 ## Collaborators: 
 
