@@ -10,7 +10,7 @@ This will be a repository aimed at displaying the projects of this group.
 
 Bryce Thomson: Quality Assurance, Programming
 
-Jack Wakefield: Art and Multimedia, Programming
+[Jack Wakefield](https://github.com/jack125251): Art and Multimedia, Programming
 
 
 
