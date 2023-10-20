@@ -1,4 +1,4 @@
-# Name Pending
+# Slumgullion Dragoon
 This will be a repository aimed at displaying the projects of this group. 
 ## Collaborators: 
 
