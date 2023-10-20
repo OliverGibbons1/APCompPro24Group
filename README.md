@@ -1,5 +1,5 @@
-# Slumgullion Dragoon
-This will be a repository aimed at displaying the projects of this group. 
+# Slumgullion Dragoon Expedition
+A turn-based RPG adventure game.
 ## Collaborators: 
 
 [Oliver Gibbons](https://github.com/OliverGibbons1): Project Manager, Programming
