@@ -1,7 +1,4 @@
 # Name Pending
-## Description:
-Turn-based RPG similar to Pokémon or Dragon Quest
-
 This will be a repository aimed at displaying the projects of this group. 
 ## Collaborators: 
 
@@ -11,9 +8,12 @@ This will be a repository aimed at displaying the projects of this group.
 
 [John Mccullough](https://github.com/jemrules): SFX and Post Processing, Programming
 
-Bryce Thomson: Quality Assurance, Programming
+[Bryce Thomson](https://github.com/Brycet14): Quality Assurance, Programming
 
 [Jack Wakefield](https://github.com/jack125251): Art and Multimedia, Programming
 
+<img src="https://github.com/OliverGibbons1/APCompPro24Group/blob/main/images/Screenshot%202023-10-09%20at%208.47.38%20AM.png?raw=true">
+
 ## Class Diagram
-![image]([https://github.com/OliverGibbons1/APCompPro24Group/blob/main/images/ClassDiagram1.png])
+
+<img src="https://github.com/OliverGibbons1/APCompPro24Group/blob/main/images/ClassDiagram1.png?raw=true">
