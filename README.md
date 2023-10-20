@@ -4,7 +4,7 @@ This will be a repository aimed at displaying the projects of this group.
 
 [Oliver Gibbons](https://github.com/OliverGibbons1): Project Manager, Programming
 
-[Ian Turner]([https://github.com/Ian-Turner4](https://ian-turner4.github.io/ProgrammingPortfolio/)): Project Support, Programming
+[Ian Turner]([https://github.com/Ian-Turner4]): Project Support, Programming
 
 John Mccullough: SFX and Post Processing, Programming
 
