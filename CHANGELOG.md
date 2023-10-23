@@ -1,4 +1,4 @@
 # CHANGELOG
 
 ### Group repository created
-Four colaborators added
+Four collaborators added
