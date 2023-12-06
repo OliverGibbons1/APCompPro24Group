@@ -1,21 +1,23 @@
 class Button{
-  int x, y, sizex, sizey, halfx, halfy;
+  int x, y, w, h;
   
-  Button(int x, int y, int sizex, int sizey){
+  Button(int x, int y, int w, int h){
     this.x = x;
     this.y = y;
-    this.sizex = sizex;
-    this.sizey = sizey;
-    this.halfx = sizex/2;
-    this.halfy = sizey/2;
+    this.w = w;
+    this.h = h;
   }
   
   boolean pressed(){
-    if(mouseX < x+halfx && mouseX > x-halfx && mouseY < y+halfy && mouseY > y-halfy){
+    if(mouseX < x+w && mouseX > x && mouseY < y+h && mouseY > y && mousePressed){
       return true;
     }
     else {
       return false;
     }
+  }
+  
+  void display(){
+    rect(x, y, w, h);
   }
 }
