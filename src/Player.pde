@@ -1,5 +1,5 @@
 class Player{
-  int x, y, health;
+  int x, y, health, money;
   ArrayList<Item> items;
   
   Player(){
@@ -9,7 +9,7 @@ class Player{
     items = new ArrayList<Item>();
   }
   
-  void attack(Enemy target){
-    target.health --;
+  void attack(Enemy target, int damage){
+    target.health -= damage;
   }
 }
