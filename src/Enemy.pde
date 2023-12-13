@@ -1,8 +1,12 @@
 class Enemy{
   int health, damage;
   
-  Enemy(){
-    health = 5;
-    damage = 1;
+  Enemy(int health, int damage){
+    this.health = health;
+    this.damage = damage;
+  }
+  
+  void attack(Player target){
+    target.health -= damage;
   }
 }
