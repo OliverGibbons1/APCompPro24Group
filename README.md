@@ -14,4 +14,4 @@ A turn-based RPG adventure game.
 
 ## Class Diagram
 
-<img src="[https://github.com/OliverGibbons1/APCompPro24Group/blob/main/images/UpdatedClassDiagram.drawio.png?raw=true]">
+<img src="https://github.com/OliverGibbons1/APCompPro24Group/blob/main/images/UpdatedClassDiagram.drawio.png?raw=true">
