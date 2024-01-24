@@ -1,12 +1,8 @@
 class Enemy{
-  int health, damage;
-  
-  Enemy(int health, int damage){
-    this.health = health;
-    this.damage = damage;
-  }
-  
-  void attack(Player target){
-    target.health -= damage;
-  }
+int health, damage, prizeMoney;
+String type;
+//pImage;
+}
+boolean remove(){
+  return false;
 }
