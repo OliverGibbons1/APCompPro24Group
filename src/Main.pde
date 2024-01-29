@@ -12,8 +12,6 @@ void setup() {
   startButton = new Button(240, 415, 140, 60);
   quitButton = new Button(240, 492, 140, 60);
 }
-void startEncounter() {
-}
 void draw() {
   M1.display();
   if (start == false) {
