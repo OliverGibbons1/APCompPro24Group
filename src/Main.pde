@@ -8,7 +8,7 @@ boolean start = false;
 
 void setup() {
   size(620, 620);
-  M1 = new Map("Sprite/TitleScreen.png");
+  M1 = new Map("Sprites/TitleScreen.png");
   startButton = new Button(240, 415, 140, 60);
   quitButton = new Button(240, 492, 140, 60);
 }
@@ -20,7 +20,7 @@ void draw() {
     startButton.display();
     quitButton.display();
     if (startButton.pressed()) {
-      M1.loadNew("Sprite/DemoImage.png");
+      M1.loadNew("Sprites/DemoImage.png");
       start = true;
     }
     if (quitButton.pressed()) {
