@@ -1,5 +1,7 @@
 class Enemy{
-  int health, damage;
+  int health, damage, money;
+  PImage sprite;
+  String name;
   
   Enemy(int health, int damage){
     this.health = health;
