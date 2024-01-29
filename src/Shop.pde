@@ -1,7 +1,7 @@
 class Shop{
-  ArrayList<Item> items = new ArrayList<Item>();
+  ArrayList<Shop> items = new ArrayList<Shop>();
   
-  Shop(Item item1){
+  Shop(Shop item1){
     items.add(item1);
   }
   
