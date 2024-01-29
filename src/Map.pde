@@ -13,4 +13,7 @@ class Map{
   void display(){
     image(mapImage, 0, 0);
   }
+  void resize(int w, int h) {
+    mapImage.resize(w,h);
+  }
 }
