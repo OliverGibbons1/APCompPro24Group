@@ -1,10 +1,15 @@
 class Player{
-int xpos, ypos, health, damage, money;
-//Player = loadImage();
-
-}
-void display() {
-}
-boolean collisionDect(){
-return false;
+  int x, y, health, money;
+  ArrayList<Item> items;
+  
+  Player(){
+    x = 310;
+    y = 310;
+    health = 10;
+    items = new ArrayList<Item>();
+  }
+  
+  void attack(Enemy target, int damage){
+    target.health -= damage;
+  }
 }
