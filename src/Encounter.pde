@@ -1,9 +1,9 @@
-class Encounter{
+class Encounter {
 
-}
-void popUpScreen(){
-}
-void printBox() {
-}
-void endEncounter() {
+  void popUpScreen() {
+  }
+  void printBox() {
+  }
+  void endEncounter() {
+  }
 }
