@@ -6,7 +6,7 @@ PImage startScreen;
 
 void setup(){
   size(620, 620);
-  startScreen = loadImage("TitleScreen.png");
+  startScreen = loadImage("Sprites/TitleScreen.png");
 }
 void draw(){
   image(startScreen, 0, 0);
