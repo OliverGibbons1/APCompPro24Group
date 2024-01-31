@@ -90,7 +90,7 @@ while running:
 	for x in range(tileAmount[0]):
 		for y in range(tileAmount[1]):
 			draw.rect(screen, (200,200,200) if (x+y)%2==1 else (220,220,220), (x*tileSize[0]*SF,y*tileSize[1]*SF,tileSize[0]*SF,tileSize[1]*SF))
-			screen.blit(scale(sprites[Map[y][x]],(tileSize[0]*SF,tileSize[1]*SF)),(x*tileSize[0]*SF,y*tileSize[1]*SF+ScrollOffset))
+			screen.blit(scale(sprites[Map[y][x]],(tileSize[0]*SF,tileSize[1]*SF)),(x*tileSize[0]*SF,y*tileSize[1]*SF))
 	for y in range(len(sprites)):
 		screen.blit(scale(sprites[y],(tileSize[0]*SF,tileSize[1]*SF)),(RscreenSize[0]-tileSize[0]*SF,y*tileSize[1]*SF+ScrollOffset))
 		if SelectedSprite==y:
