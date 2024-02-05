@@ -3,9 +3,10 @@ class Player{
   ArrayList<Shop> items;
   
   Player(){
-    x = 310;
-    y = 310;
-    health = 10;
+    this.x = x;
+    this.y = y;
+    this.health = health;
+    this.money = money;
     items = new ArrayList<Shop>();
   }
   

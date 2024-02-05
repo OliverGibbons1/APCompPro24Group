@@ -1,32 +1,42 @@
 Player P1;
 Encounter[] Encounters;
 Shop[] Shops;
+Player p;
 Map M1;
-Button startButton, quitButton;
+Button startButton, quitButton, loadGameButton;
 PImage startScreen;
 boolean start = false;
+JSONObject saveGame;
 
 void setup() {
   size(640, 640);
   M1 = new Map("Sprites/TitleScreen.png");
+  p = new Player();
   startButton = new Button(240, 415, 140, 60);
   quitButton = new Button(240, 492, 140, 60);
+  loadGameButton = new Button(240, 569, 140, 60);
   M1.resize(640, 640);
+  saveGame = new JSONObject();
+//  saveGame = loadJSONObject();
 }
 void draw() {
   M1.display();
   if (start == false) {
     noFill();
-    noStroke();
+    stroke(0);
+    strokeWeight(2);
     startButton.display();
     quitButton.display();
+    loadGameButton.display();
 
     String s = "Start";
     String q = "Quit";
+    String l = "Load Game";
     String i = " ";
-    textSize(32);
-    text(s, 289, 470);
-    text(q, 289, 550);
+    textSize(28);
+    text(s, 280, 455);
+    text(q, 280, 535);
+    text(l, 245, 609);
     fill(0);
     if (startButton.pressed()) {
       M1.loadNew("Sprites/DemoImage.png");
@@ -34,8 +44,24 @@ void draw() {
       start = true;
       s = s.equals(i) ? i:s;
     }
+    if(loadGameButton.pressed()){
+    loadJSONObject("data.json");
+    p.health = saveGame.getInt("health");
+    p.money = saveGame.getInt("money");
+    p.x = saveGame.getInt("x");
+    p.y = saveGame.getInt("y");
+    
+    }
     if (quitButton.pressed()) {
       exit();
     }
   }
+}
+void saveGame(){
+  saveGame.setInt("health", p.health);
+  saveGame.setInt("money", p.money);
+  saveGame.setInt("x", p.x);
+  saveGame.setInt("y", p.y);
+  saveJSONObject(saveGame, "data/new.json");
+  exit();
 }
