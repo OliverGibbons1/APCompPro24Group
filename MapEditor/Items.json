@@ -1,0 +1,14 @@
+{
+	"Gun":{
+		"Type":"Weapon",
+		"Name":"Gun",
+		"Sprite":"gun.png",
+		"Damage":5,
+		""
+	},
+	"Rifle":{
+		"Type":"Weapon",
+		"Name":"Rifle",
+		"Damage":10,
+	},
+}

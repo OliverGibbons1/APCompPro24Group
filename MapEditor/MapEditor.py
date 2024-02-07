@@ -19,12 +19,12 @@ c=f.read()
 if c=='':
 	Map=np.zeros(tileAmount,dtype=int).tolist()
 else:
-	Map=json.loads(c)
+	Map=json.loads(c)["MapTiles"]
 f.close()
 
 def SaveMap(Map):
 	f=open("Map.json","w")
-	json.dump(Map,f)
+	json.dump({"MapTiles":Map},f)
 	f.close()
 print(Map)
 SaveMap(Map)
