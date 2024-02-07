@@ -11,11 +11,13 @@ boolean start = false;
 boolean savedGame = false;
 JSONObject saveGame;
 
+boolean testStart = false;
+
 void setup() {
   size(640, 640);
   M1 = new Map("Sprites/TitleScreen.png");
   p = new Player();
-  testEnemy = new Enemy(4, 4, 4, "SinisterMan.png", "Test Enemy");
+  testEnemy = new Enemy(4, 4, 4, "sprites/SinisterMan.png", "Test Enemy");
   testEncounter = new Encounter(testEnemy, "testing", p);
   startButton = new Button(240, 415, 140, 60);
   quitButton = new Button(240, 492, 140, 60);
@@ -48,6 +50,9 @@ void draw() {
       M1.resize(640, 640);
       start = true;
       s = s.equals(i) ? i:s;
+      testEncounter.begin();
+      testStart = true;
+      p.health = 5;
     }
     if(loadGameButton.pressed()){
       if(savedGame){
@@ -66,6 +71,11 @@ void draw() {
     if (quitButton.pressed()) {
       exit();
     }
+  }
+  
+  //Testing
+  if(testStart == true){
+    testEncounter.display();
   }
 }
 void saveGame(){
