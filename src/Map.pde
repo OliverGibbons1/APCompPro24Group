@@ -1,13 +1,18 @@
 class Map{
   PImage mapImage;
+  PImage mapSpSheet;
+  JSONArray Map;
   int[] coords;
   
-  Map(String imageName){
-    mapImage = loadImage(imageName);
+  Map(String MapFileName){
+    mapImage = loadImage("Sprites/TitleScreen.png");
   }
   
   void loadNew(String newImage){
     mapImage = loadImage(newImage);
+  }
+  void loadMap() {
+    
   }
   
   void display(){

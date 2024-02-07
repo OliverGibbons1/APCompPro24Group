@@ -19,7 +19,7 @@ c=f.read()
 if c=='':
 	Map=np.zeros(tileAmount,dtype=int).tolist()
 else:
-	Map=json.loads(c)
+	Map=json.loads(c)["MapTiles"]
 f.close()
 
 def SaveMap(Map):

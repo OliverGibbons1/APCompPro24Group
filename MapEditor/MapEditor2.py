@@ -20,6 +20,8 @@ from math import sin, pi
 #  - Remove enemy
 #  - Event Trigger
 
+# Individual Images
+
 class MapTile:
 	def __init__(self, x, y, w, h, img):
 		self.rect = pg.Rect(x, y, w, h)
