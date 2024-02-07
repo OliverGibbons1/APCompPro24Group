@@ -24,7 +24,6 @@ void setup() {
   loadGameButton = new Button(240, 569, 140, 60);
   M1.resize(640, 640);
   saveGame = new JSONObject();
-//  saveGame = loadJSONObject();
 }
 void draw() {
   M1.display();
