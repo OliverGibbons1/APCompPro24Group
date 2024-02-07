@@ -6,6 +6,7 @@ Map M1;
 Button startButton, quitButton, loadGameButton;
 PImage startScreen;
 boolean start = false;
+boolean savedGame = false;
 JSONObject saveGame;
 
 void setup() {
@@ -45,12 +46,18 @@ void draw() {
       s = s.equals(i) ? i:s;
     }
     if(loadGameButton.pressed()){
+      if(savedGame){
     loadJSONObject("data.json");
     p.health = saveGame.getInt("health");
     p.money = saveGame.getInt("money");
     p.x = saveGame.getInt("x");
     p.y = saveGame.getInt("y");
-    
+      } else {
+      M1.loadNew("Sprites/DemoImage.png");
+      M1.resize(640, 640);
+      start = true;
+      s = s.equals(i) ? i:s;
+      }
     }
     if (quitButton.pressed()) {
       exit();
@@ -63,5 +70,6 @@ void saveGame(){
   saveGame.setInt("x", p.x);
   saveGame.setInt("y", p.y);
   saveJSONObject(saveGame, "data/new.json");
+  savedGame = true;
   exit();
 }
