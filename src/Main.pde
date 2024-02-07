@@ -4,6 +4,8 @@ Shop[] Shops;
 Player p;
 Map M1;
 Button startButton, quitButton, loadGameButton;
+Enemy testEnemy;
+Encounter testEncounter;
 PImage startScreen;
 boolean start = false;
 boolean savedGame = false;
@@ -13,6 +15,8 @@ void setup() {
   size(640, 640);
   M1 = new Map("Sprites/TitleScreen.png");
   p = new Player();
+  testEnemy = new Enemy(4, 4, 4, "SinisterMan.png", "Test Enemy");
+  testEncounter = new Encounter(testEnemy, "testing", p);
   startButton = new Button(240, 415, 140, 60);
   quitButton = new Button(240, 492, 140, 60);
   loadGameButton = new Button(240, 569, 140, 60);
