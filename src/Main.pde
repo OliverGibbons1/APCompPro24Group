@@ -13,7 +13,7 @@ JSONObject saveGame;
 
 void setup() {
   size(640, 640);
-  M1 = new Map("Sprites/TitleScreen.png");
+  M1 = new Map("Maps/Map.json");
   p = new Player();
   testEnemy = new Enemy(4, 4, 4, "SinisterMan.png", "Test Enemy");
   testEncounter = new Encounter(testEnemy, "testing", p);

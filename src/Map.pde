@@ -1,10 +1,11 @@
 class Map{
   PImage mapImage;
   PImage mapSpSheet;
-  JSONArray Map;
+  JSONObject Map;
   int[] coords;
   
   Map(String MapFileName){
+    Map=loadJSONObject(MapFileName);
     mapImage = loadImage("Sprites/TitleScreen.png");
   }
   
