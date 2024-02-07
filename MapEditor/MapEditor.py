@@ -24,7 +24,7 @@ f.close()
 
 def SaveMap(Map):
 	f=open("Map.json","w")
-	json.dump(Map,f)
+	json.dump({"MapTiles":Map},f)
 	f.close()
 print(Map)
 SaveMap(Map)
