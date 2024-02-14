@@ -2,6 +2,7 @@ class Player{
   int x, y, health, damage, money;
   String weapon, helmet, chestplate, trousers, boots;
   ArrayList<Shop> items;
+  PImage sprite;
   
   Player(){
     this.x = x;
@@ -11,6 +12,7 @@ class Player{
     this.damage = damage;
     this.weapon = weapon;
     items = new ArrayList<Shop>();
+    this.sprite = loadImage("sprites/DemoPlayer.png");
   }
   
   void attack(Enemy target, int damage){
