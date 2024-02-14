@@ -12,6 +12,6 @@ class Enemy{
   }
   
   void attack(Player target){
-    target.health -= damage;
+    target.health -= this.damage;
   }
 }

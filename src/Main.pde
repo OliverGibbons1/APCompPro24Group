@@ -49,9 +49,9 @@ void draw() {
       M1.resize(640, 640);
       start = true;
       s = s.equals(i) ? i:s;
+      p.health = 5;
       testEncounter.begin();
       testStart = true;
-      p.health = 5;
     }
     if(loadGameButton.pressed()){
       if(savedGame){
