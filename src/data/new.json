@@ -1,7 +1,7 @@
 {
-  "savedGame": true,
-  "money": 126,
-  "x": 11,
-  "health": 101,
-  "y": 11
+  "savedGame": false,
+  "money": 0,
+  "x": 0,
+  "health": 0,
+  "y": 0
 }
