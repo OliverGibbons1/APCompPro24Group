@@ -6,17 +6,25 @@ class Map{
   int[][] MapData;
   int[] coords;
   int[] tileSize;
+  ArrayList<Integer> RelevantTiles;
   
   Map(String MapFileName){
+    RelevantTiles=new ArrayList<Integer>();
     int[] tileSize={32,32};
     MapJSON=loadJSONObject(MapFileName);
-    JSONArray MapJSONArray=MapJSON.getJSONArray("Map");
+    JSONArray MapJSONArray=MapJSON.getJSONArray("MapTiles");
     int[][] MapData=new int[10][10];
-    //for (int y=0;y<MapJSONArray.size();y+=tileSize[1]) {
-    //  for (int x=0;x<MapJSONArray.getJSONArray(y).size();x+=tileSize[0]) {
-    //    MapData[y][x]=MapJSONArray.getJSONArray(y).getInt(x);
-    //  }
-    //}
+    for (int y=0;y<MapJSONArray.size();y++) {
+      for (int x=0;x<MapJSONArray.getJSONArray(y).size();x++) {
+        MapData[y][x]=MapJSONArray.getJSONArray(y).getInt(x);
+        if (!(RelevantTiles.contains(MapData[y][x]))) {
+          RelevantTiles.add(MapData[y][x]);
+          //println(MapData[y][x]);
+        }
+        print(Integer.toString(MapData[y][x])+" ");
+      }
+      println("");
+    }
     mapImage = loadImage("Sprites/TitleScreen.png");
   }
   
