@@ -35,7 +35,7 @@ class Encounter{
     rect(50, 50, 540, 50);
     rect(50, 540, 540, 50);
     image(enemy.sprite, 70, 200);
-//    image(player.sprite, 450, 200);
+    image(player.sprite, 450, 200);
     fill(0);
     text(enemy.name + "~", 70, 83);
     text("Health: " + enemy.health, 200, 83);

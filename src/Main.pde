@@ -53,6 +53,9 @@ void draw() {
       //testEncounter.begin();
       //testStart = true;
       p.health = 5;
+      p.health = 5;
+      testEncounter.begin();
+      testStart = true;
     }
     if(loadGameButton.pressed()){
     saveGame = loadJSONObject("data/new.json");
@@ -79,9 +82,14 @@ void draw() {
   }
   
   //Testing
+  if(start == true){
+    p.display();
+  }
+  
   if(testStart == true){
     testEncounter.display();
   }
+  
 }
 void saveGame(){
   savedGame = true;

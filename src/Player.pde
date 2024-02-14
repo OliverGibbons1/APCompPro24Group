@@ -2,6 +2,7 @@ class Player{
   int x, y, health, damage, money;
   String weapon, helmet, chestplate, trousers, boots;
   ArrayList<Shop> items;
+  PImage sprite;
   
   Player(){
     this.x = x;
@@ -11,6 +12,8 @@ class Player{
     this.damage = damage;
     this.weapon = weapon;
     items = new ArrayList<Shop>();
+    this.sprite = loadImage("sprites/BlueGuy.png");
+    this.sprite.resize(64, 64);
   }
   
   void attack(Enemy target, int damage){
@@ -23,5 +26,9 @@ class Player{
   
   int getTotDmg(Item weapons) {
     return damage + weapons.getDmg();
+  }
+  
+  void display() {
+    image(this.sprite, x, y);
   }
 }
