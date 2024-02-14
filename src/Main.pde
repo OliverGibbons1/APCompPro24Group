@@ -50,9 +50,6 @@ void draw() {
       M1.resize(640, 640);
       start = true;
       s = s.equals(i) ? i:s;
-      //testEncounter.begin();
-      //testStart = true;
-      p.health = 5;
       p.health = 5;
       testEncounter.begin();
       testStart = true;
