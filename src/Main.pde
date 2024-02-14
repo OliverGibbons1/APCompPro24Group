@@ -62,6 +62,10 @@ void draw() {
     p.money = saveGame.getInt("money");
     p.x = saveGame.getInt("x");
     p.y = saveGame.getInt("y");
+    M1.loadNew("Sprites/DemoImage.png");
+      M1.resize(640, 640);
+      start = true;
+      s = s.equals(i) ? i:s;
       } else {
       M1.loadNew("Sprites/DemoImage.png");
       M1.resize(640, 640);
