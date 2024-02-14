@@ -8,7 +8,7 @@ Enemy testEnemy;
 Encounter testEncounter;
 PImage startScreen;
 boolean start = false;
-boolean savedGame = false;
+boolean savedGame;
 JSONObject saveGame;
 
 boolean testStart = false;
@@ -44,18 +44,20 @@ void draw() {
     text(q, 280, 535);
     text(l, 245, 609);
     fill(0);
+    
     if (startButton.pressed()) {
       M1.loadNew("Sprites/DemoImage.png");
       M1.resize(640, 640);
       start = true;
       s = s.equals(i) ? i:s;
-      testEncounter.begin();
-      testStart = true;
+      //testEncounter.begin();
+      //testStart = true;
       p.health = 5;
     }
     if(loadGameButton.pressed()){
+    saveGame = loadJSONObject("data/new.json");
+    savedGame = saveGame.getBoolean("savedGame");
       if(savedGame){
-    loadJSONObject("data.json");
     p.health = saveGame.getInt("health");
     p.money = saveGame.getInt("money");
     p.x = saveGame.getInt("x");
@@ -70,6 +72,10 @@ void draw() {
     if (quitButton.pressed()) {
       exit();
     }
+     //if (mousePressed == true){
+     // testSave();
+     // saveGame();
+     // }
   }
   
   //Testing
@@ -78,11 +84,19 @@ void draw() {
   }
 }
 void saveGame(){
+  savedGame = true;
   saveGame.setInt("health", p.health);
   saveGame.setInt("money", p.money);
   saveGame.setInt("x", p.x);
   saveGame.setInt("y", p.y);
+  saveGame.setBoolean("savedGame", true);
   saveJSONObject(saveGame, "data/new.json");
-  savedGame = true;
   exit();
+}
+
+void testSave(){
+  p.health = 101;
+  p.money = 126;
+  p.x = 11;
+  p.y = 11;
 }
