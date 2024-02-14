@@ -73,9 +73,14 @@ void draw() {
   }
   
   //Testing
+  if(start == true){
+    p.display();
+  }
+  
   if(testStart == true){
     testEncounter.display();
   }
+  
 }
 void saveGame(){
   saveGame.setInt("health", p.health);
