@@ -1,5 +1,5 @@
 # Dragoon Expedition
-A turn-based RPG adventure game inspired by the original Dragon Quest series. Based in Processing.
+A 64-bit RPG adventure game inspired by the original Nintendo-64 Dragon Quest series. Run in Processing with Python apps to aid the creation of maps and boundaries.
 ## Collaborators: 
 
 [Oliver Gibbons](https://github.com/OliverGibbons1): Project Manager, Programming
