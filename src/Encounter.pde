@@ -39,7 +39,7 @@ class Encounter{
     fill(0);
     text(enemy.name + "~", 70, 83);
     text("Health: " + enemy.health, 200, 83);
-    text("Player~", 70, 572);
-    text("Health: " + player.health, 150, 572);
+    text("Player~", 323, 83);
+    text("Health: " + player.health, 446, 83);
   }
 }
