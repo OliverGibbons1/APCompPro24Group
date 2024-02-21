@@ -1,32 +1,53 @@
 class Encounter{
   Player player;
   ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-  String dialogue;
+  String dialogue, consoleMessage;
   Enemy enemy;
   Button attackButton, healButton;
+  boolean playerTurn = true;
   
   Encounter(Enemy enemy, String dialogue, Player player){
     enemies.add(enemy);
     this.dialogue = dialogue;
     this.player = player;
     this.enemy = enemy;
-    attackButton = new Button(70, 480, 100, 40);
+    attackButton = new Button(175, 480, 100, 40);
+    healButton = new Button(375, 480, 100, 40);
+    consoleMessage = this.dialogue;
   }
   
-  void begin(){
-    print(dialogue);
-    for (int i = 0; i<enemies.size(); i++){
-      Enemy e = enemies.get(i);
-      player.attack(e, 1);
+  void tick() {
+    if(playerTurn){
+      if(attackButton.pressed()){
+        this.player.attack(this.enemy, 1);
+        consoleMessage = "Player hit enemy for 1 damage";
+        display();
+        delay(2000);
+        enemyTurn();
+      }
     }
   }
   
-  void turnChange(){
-    for (int i = 0; i<enemies.size(); i++){
-      Enemy e = enemies.get(i);
-      e.attack(this.player);
-    }
+  void enemyTurn() {
+    this.enemy.attack(this.player);
+    consoleMessage = this.enemy.name + " hit player for " + this.enemy.damage + " damage";
+    playerTurn = true;
   }
+  
+  //void begin(){
+  //  print(dialogue);
+  //  for (int i = 0; i<enemies.size(); i++){
+  //    Enemy e = enemies.get(i);
+  //    player.attack(e, 1);
+  //  }
+  //}
+  
+  //void turnChange(){
+  //  for (int i = 0; i<enemies.size(); i++){
+  //    Enemy e = enemies.get(i);
+  //    e.attack(this.player);
+  //  }
+  //}
   
   void display(){
     fill(0);
@@ -46,5 +67,7 @@ class Encounter{
     stroke(255);
     fill(0);
     attackButton.display();
+    healButton.display();
+    text(consoleMessage, 75, 575);
   }
 }

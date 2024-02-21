@@ -59,8 +59,7 @@ void draw() {
       start = true;
       s = s.equals(i) ? i:s;
       p.health = 5;
-      testEncounter.begin();
-      //testStart = true;
+      testStart = true;
     }
     if(loadGameButton.pressed()){
     saveGame = loadJSONObject("data/new.json");
@@ -99,9 +98,10 @@ void draw() {
     p.display();
   }
   
-  //if(testStart == true){
-  //  testEncounter.display();
-  //}
+  if(testStart == true){
+    testEncounter.display();
+    testEncounter.tick();
+  }
   
   p.move();
   
