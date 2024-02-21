@@ -1,5 +1,5 @@
 # Dragoon Expedition
-A turn-based RPG adventure game.
+A turn-based RPG adventure game inspired by the original Dragon Quest series. Based in Processing.
 ## Collaborators: 
 
 [Oliver Gibbons](https://github.com/OliverGibbons1): Project Manager, Programming
@@ -11,6 +11,10 @@ A turn-based RPG adventure game.
 [Bryce Thomson](https://github.com/Brycet14): Quality Assurance, Programming
 
 [Jack Wakefield](https://github.com/jack125251): Art and Multimedia, Programming
+
+## Title Screen
+
+<img src="https://github.com/OliverGibbons1/APCompPro24Group/blob/main/images/StartScreenshot.png?raw=true">
 
 ## Class Diagram
 
