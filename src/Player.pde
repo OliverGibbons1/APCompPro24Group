@@ -35,19 +35,19 @@ class Player {
 
   void move() {
     if (keyPressed) {
-      if (key == 'w' && moveW == true) {
+      if (key == 'w' && moveW == true && y>0) {
         y = y - 64;
         moveW = false;
       }
-      if (key == 'a' && moveW == true) {
+      if (key == 'a' && moveW == true && x>0) {
         x = x - 64;
         moveW = false;
       }
-      if (key == 's' && moveW == true) {
+      if (key == 's' && moveW == true && y<544) {
         y = y + 64;
         moveW = false;
       }
-      if (key == 'd' && moveW == true) {
+      if (key == 'd' && moveW == true && x<544) {
         x = x + 64;
         moveW = false;
       }
