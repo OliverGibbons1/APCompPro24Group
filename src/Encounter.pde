@@ -3,12 +3,14 @@ class Encounter{
   ArrayList<Enemy> enemies = new ArrayList<Enemy>();
   String dialogue;
   Enemy enemy;
+  Button attackButton, healButton;
   
   Encounter(Enemy enemy, String dialogue, Player player){
     enemies.add(enemy);
     this.dialogue = dialogue;
     this.player = player;
     this.enemy = enemy;
+    attackButton = new Button(70, 480, 100, 40);
   }
   
   void begin(){
@@ -34,12 +36,15 @@ class Encounter{
     fill(255);
     rect(50, 50, 540, 50);
     rect(50, 540, 540, 50);
-    image(enemy.sprite, 70, 200);
+    image(enemy.sprite, 70, 150);
     image(player.sprite, 450, 200);
     fill(0);
     text(enemy.name + "~", 70, 83);
     text("Health: " + enemy.health, 200, 83);
     text("Player~", 323, 83);
     text("Health: " + player.health, 446, 83);
+    stroke(255);
+    fill(0);
+    attackButton.display();
   }
 }
