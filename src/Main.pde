@@ -96,9 +96,11 @@ void draw() {
     p.display();
   }
   
-  if(testStart == true){
-    testEncounter.display();
-  }
+  //if(testStart == true){
+  //  testEncounter.display();
+  //}
+  
+  p.move();
   
 }
 void saveGame(){
