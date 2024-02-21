@@ -27,8 +27,11 @@ void setup() {
   saveGame = new JSONObject();
 }
 void draw() {
-  M1.display();
+  if (start) {
+    M1.displayMap();
+  }
   if (start == false) {
+    M1.display();
     noFill();
     stroke(0);
     strokeWeight(2);
@@ -51,7 +54,7 @@ void draw() {
     fill(0);
     
     if (startButton.pressed()) {
-      M1.loadNew("Sprites/DemoImage.png");
+      M1.loadNew("Maps/Map.json");
       M1.resize(640, 640);
       start = true;
       s = s.equals(i) ? i:s;
@@ -67,12 +70,12 @@ void draw() {
     p.money = saveGame.getInt("money");
     p.x = saveGame.getInt("x");
     p.y = saveGame.getInt("y");
-    M1.loadNew("Sprites/DemoImage.png");
+    M1.loadNew("Maps/Map.json");
       M1.resize(640, 640);
       start = true;
       s = s.equals(i) ? i:s;
       } else {
-      M1.loadNew("Sprites/DemoImage.png");
+      M1.loadNew("Maps/Map.json");
       M1.resize(640, 640);
       start = true;
       s = s.equals(i) ? i:s;
