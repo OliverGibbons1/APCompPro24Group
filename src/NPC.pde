@@ -1,5 +1,5 @@
-class NPC{
-String type;
-//pimage;
-String message;
+class NPC {
+  String type;
+  //pimage;
+  String message;
 }

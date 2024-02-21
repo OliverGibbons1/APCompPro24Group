@@ -1,5 +1,5 @@
-class Object{
-int xpos, ypos;
+class Object {
+  int xpos, ypos;
 }
 boolean intersect() {
   return false;

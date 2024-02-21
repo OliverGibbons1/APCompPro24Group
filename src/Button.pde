@@ -1,23 +1,22 @@
-class Button{
+class Button {
   int x, y, w, h;
-  
-  Button(int x, int y, int w, int h){
+
+  Button(int x, int y, int w, int h) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
   }
-  
-  boolean pressed(){
-    if(mouseX < x+w && mouseX > x && mouseY < y+h && mouseY > y && mousePressed){
+
+  boolean pressed() {
+    if (mouseX < x+w && mouseX > x && mouseY < y+h && mouseY > y && mousePressed) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
-  
-  void display(){
+
+  void display() {
     rect(x, y, w, h);
   }
 }

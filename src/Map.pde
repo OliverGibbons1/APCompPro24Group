@@ -1,4 +1,4 @@
-class Map{
+class Map {
   PImage mapImage;
   PImage mapSpSheet;
   PImage[] MapSprites;
@@ -7,15 +7,15 @@ class Map{
   int[] coords;
   int[] tileSize;
   ArrayList<Integer> RelevantTiles;
-  
-  Map(String MapFileName){
+
+  Map(String MapFileName) {
     RelevantTiles=new ArrayList<Integer>();
-    int[] tileSize={32,32};
+    int[] tileSize={32, 32};
     MapJSON=loadJSONObject(MapFileName);
     JSONArray MapJSONArray=MapJSON.getJSONArray("MapTiles");
     int[][] MapData=new int[10][10];
-    for (int y=0;y<MapJSONArray.size();y++) {
-      for (int x=0;x<MapJSONArray.getJSONArray(y).size();x++) {
+    for (int y=0; y<MapJSONArray.size(); y++) {
+      for (int x=0; x<MapJSONArray.getJSONArray(y).size(); x++) {
         MapData[y][x]=MapJSONArray.getJSONArray(y).getInt(x);
         if (!(RelevantTiles.contains(MapData[y][x]))) {
           RelevantTiles.add(MapData[y][x]);
@@ -27,18 +27,17 @@ class Map{
     }
     mapImage = loadImage("Sprites/TitleScreen.png");
   }
-  
-  void loadNew(String newImage){
+
+  void loadNew(String newImage) {
     mapImage = loadImage(newImage);
   }
   void loadMap() {
-    
   }
-  
-  void display(){
+
+  void display() {
     image(mapImage, 0, 0);
   }
   void resize(int w, int h) {
-    mapImage.resize(w,h);
+    mapImage.resize(w, h);
   }
 }

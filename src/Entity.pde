@@ -1,5 +1,5 @@
-class Entity{
-int xpos, ypos;
+class Entity {
+  int xpos, ypos;
 }
 void startEncounter() {
 }
