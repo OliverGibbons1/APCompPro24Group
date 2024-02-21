@@ -31,9 +31,9 @@ class Map{
           RelevantTiles.add(MapData[y][x]);
           //println(MapData[y][x]);
         }
-        print(Integer.toString(MapData[y][x])+" ");
+        //print(Integer.toString(MapData[y][x])+" ");
       }
-      println("");
+      //println("");
     }
     JSONArray MapImagesJSONArr=MapJSON.getJSONArray("MapTilesRef");
     MapSprites=new PImage[MapImagesJSONArr.size()];
@@ -44,13 +44,13 @@ class Map{
   }
 
   void displayMap() {
-    println(width/mapSize[0]);
+    //println(width/mapSize[0]);
     for (int y=0;y<MapData.length;y++) {
       for (int x=0;x<MapData[y].length;x++) {
-        print(MapData[y][x]+" ");
+        //print(MapData[y][x]+" ");
         image(MapSprites[MapData[y][x]],x*width/mapSize[0],y*height/mapSize[1],width/mapSize[0],height/mapSize[1]);
       }
-    println("");
+    //println("");
     }
   }
   
