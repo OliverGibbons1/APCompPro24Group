@@ -1,6 +1,6 @@
 class Player {
   int x, y, health, damage, money;
-  boolean moveW = true;
+  int moveW = 0;
   String weapon, helmet, chestplate, trousers, boots;
   ArrayList<Shop> items;
   PImage sprite;
@@ -35,25 +35,22 @@ class Player {
 
   void move() {
     if (keyPressed) {
-      if (key == 'w' && moveW == true && y>0) {
+      if (key == 'w' && moveW==0 && y>0) {
         y = y - 64;
-        moveW = false;
       }
-      if (key == 'a' && moveW == true && x>0) {
+      if (key == 'a' && moveW == 0 && x>0) {
         x = x - 64;
-        moveW = false;
       }
-      if (key == 's' && moveW == true && y<544) {
+      if (key == 's' && moveW == 0 && y<544) {
         y = y + 64;
-        moveW = false;
       }
-      if (key == 'd' && moveW == true && x<544) {
+      if (key == 'd' && moveW == 0 && x<544) {
         x = x + 64;
-        moveW = false;
       }
+      moveW+=1;
     }
-    if (!keyPressed) {
-      moveW = true;
+    if (!keyPressed || moveW>=30) {
+      moveW = 0;
     }
   }
 }
