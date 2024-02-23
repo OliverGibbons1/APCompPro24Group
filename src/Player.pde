@@ -26,7 +26,7 @@ class Player {
   }
 
   int getTotDmg(Item weapons) {
-    return damage + weapons.getDmg();
+    return damage;// + weapons.getDmg();
   }
 
   void display() {

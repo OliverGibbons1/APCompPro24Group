@@ -16,7 +16,7 @@ class Enemy {
       p.money = p.money + money;
     }
   }
-  }
+  
 
   void attack(Player target) {
     target.health -= this.damage;
