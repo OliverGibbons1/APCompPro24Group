@@ -95,11 +95,6 @@ void draw() {
     if (clearSaveButton.pressed()) {
     clearSave();
     }
-     //saveGame testing
-     //if (mousePressed == true){
-     // testSave();
-     // saveGame();
-     // }
   }
   
   //Testing
