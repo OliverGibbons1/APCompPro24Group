@@ -5,28 +5,29 @@ class Item {
   float legendary = 2;
   
   ArrayList<Weapon> weapons;
+  ArrayList<Armor> armors;
   
   Item () {
     weapons = new ArrayList<>();
     weaponL();
+    
+    armors = new ArrayList<>();
+    armorL();
   }
   
-  void items() {
-
-    String[] armor = new String[11];
-    armor[0] = "Basic Helmet";
-    armor[1] = "Refined Helmet";
-    armor[2] = "Dragon Helmet";
-    armor[3] = "Basic Chestplate";
-    armor[4] = "Refined Chestplate";
-    armor[5] = "Dragon Chestplate";
-    armor[6] = "Basic Trousers";
-    armor[7] = "Refined Trousers";
-    armor[8] = "Dragon Trousers";
-    armor[9] = "Basic Boots";
-    armor[10] = "Refined Boots";
-    armor[11] = "Dragon Boots";
-
+  void armorL() {
+    armors.add(new Armor("Basic Helmet", 10));
+    armors.add(new Armor("Refined Helmet", 15));
+    armors.add(new Armor("Dragon Helmet", 20));
+    armors.add(new Armor("Basic Chestplate", 20));
+    armors.add(new Armor("Refined Chestplate", 25));
+    armors.add(new Armor("Dragon Chestplate", 30));
+    armors.add(new Armor("Basic Trousers", 15));
+    armors.add(new Armor("Refined Trousers", 20));
+    armors.add(new Armor("Dragon Trousers", 25));
+    armors.add(new Armor("Basic Boots", 10));
+    armors.add(new Armor("Refined Boots", 15));
+    armors.add(new Armor("Dragon Boots", 20));
   }
   
   void weaponL() {
