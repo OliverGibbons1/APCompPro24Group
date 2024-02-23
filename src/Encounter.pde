@@ -69,5 +69,8 @@ class Encounter{
     attackButton.display();
     healButton.display();
     text(consoleMessage, 75, 575);
+    fill(255);
+    text("Attack", 200, 510);
+    text("Heal", 400, 510);
   }
 }
