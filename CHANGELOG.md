@@ -12,5 +12,5 @@
 #### SaveGame added
  - SaveGame created, LoadGame created, ClearSave created; all buttons for these functions were created and added to startScreen.
 #### Player movement added
-
+#### Player and enemy attacks added to encounter
 
