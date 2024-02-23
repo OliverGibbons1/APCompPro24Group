@@ -22,13 +22,16 @@ class Encounter{
         this.player.attack(this.enemy, 1);
         consoleMessage = "Player hit enemy for 1 damage";
         display();
-        delay(2000);
-        enemyTurn();
+        playerTurn = false;
       }
+    }
+    else {
+      enemyTurn();
     }
   }
   
   void enemyTurn() {
+    delay(2000);
     this.enemy.attack(this.player);
     consoleMessage = this.enemy.name + " hit player for " + this.enemy.damage + " damage";
     playerTurn = true;
