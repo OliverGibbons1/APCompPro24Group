@@ -33,7 +33,7 @@ class Encounter{
   void enemyTurn() {
     delay(2000);
     this.enemy.attack(this.player);
-    consoleMessage = this.enemy.name + " hit player for " + this.enemy.damage + " damage";
+    consoleMessage = this.enemy.name + " hit player for " + this.enemy.damage + " damage. Your move?";
     playerTurn = true;
   }
   
