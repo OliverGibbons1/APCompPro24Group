@@ -20,7 +20,14 @@ from math import sin, pi
 #  - Remove enemy
 #  - Event Trigger
 
-# Individual Images
+# All Individual Images
+
+# MapTilesRef 1D array of Strings Refrencing tile filenames
+# MapTiles 2D array of Integers Refrencing MapTilesRef
+# ObjectTiles 2D array of Strings Refrencing object
+# EventTiles 2D array of Strings Refrencing event
+# CollisionTiles 2D Boolean
+# Enemy 2D array of Strings Refrencing enemy
 
 class MapTile:
 	def __init__(self, x, y, w, h, img):
