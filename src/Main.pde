@@ -26,6 +26,7 @@ void setup() {
   clearSaveButton = new Button(550, 575, 50, 50);
   M1.resize(640, 640);
   saveGame = new JSONObject();
+  p.health = 5;
 }
 void draw() {
   if (start) {
@@ -109,6 +110,12 @@ void draw() {
   
   p.move();
   
+  if(checkGameOver()){
+  PImage end = loadImage("Maps/GameOver1.png");
+  end.resize(640, 640);
+  background(end);
+  delay(1000);
+}
 }
 void saveGame(){
   savedGame = true;
@@ -134,4 +141,11 @@ void testSave(){
   p.money = 126;
   p.x = 11;
   p.y = 11;
+}
+boolean checkGameOver(){
+  if (p.health <= 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
