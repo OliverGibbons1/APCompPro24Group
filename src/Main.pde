@@ -59,7 +59,7 @@ void draw() {
       start = true;
       s = s.equals(i) ? i:s;
       p.health = 5;
-      testStart = true;
+      //testStart = true;
     }
     if(loadGameButton.pressed()){
     saveGame = loadJSONObject("data/new.json");
