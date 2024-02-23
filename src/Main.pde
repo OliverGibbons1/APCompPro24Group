@@ -12,6 +12,7 @@ boolean savedGame;
 JSONObject saveGame;
 
 boolean testStart = false;
+int AlreadyPressed = 0;
 
 void setup() {
   size(640, 640);
@@ -29,6 +30,14 @@ void setup() {
 void draw() {
   if (start) {
     M1.displayMap();
+    if (keyPressed && AlreadyPressed<=0) {
+      AlreadyPressed=10;
+      if (key==' ') {
+        testStart=!testStart;
+      }
+    } else {
+      AlreadyPressed-=1;
+    }
   }
   if (start == false) {
     M1.display();
@@ -94,7 +103,7 @@ void draw() {
   }
   
   //Testing
-  if(start == true){
+  if(start){
     p.display();
   }
   
