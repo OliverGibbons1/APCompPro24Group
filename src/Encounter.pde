@@ -1,13 +1,11 @@
 class Encounter{
   Player player;
-  ArrayList<Enemy> enemies = new ArrayList<Enemy>();
   String dialogue, consoleMessage;
   Enemy enemy;
   Button attackButton, healButton;
   boolean playerTurn = true;
   
   Encounter(Enemy enemy, String dialogue, Player player){
-    enemies.add(enemy);
     this.dialogue = dialogue;
     this.player = player;
     this.enemy = enemy;
@@ -20,7 +18,7 @@ class Encounter{
     if(playerTurn){
       if(attackButton.pressed()){
         this.player.attack(this.enemy, 1);
-        consoleMessage = "Player hit enemy for 1 damage";
+        consoleMessage = "Player hit " + enemy.name + " for 1 damage";
         display();
         playerTurn = false;
       }
@@ -37,23 +35,8 @@ class Encounter{
     playerTurn = true;
   }
   
-  //void begin(){
-  //  print(dialogue);
-  //  for (int i = 0; i<enemies.size(); i++){
-  //    Enemy e = enemies.get(i);
-  //    player.attack(e, 1);
-  //  }
-  //}
-  
-  //void turnChange(){
-  //  for (int i = 0; i<enemies.size(); i++){
-  //    Enemy e = enemies.get(i);
-  //    e.attack(this.player);
-  //  }
-  //}
-  
   void display(){
-    fill(0);
+    fill(155);
     textSize(20);
     stroke(255);
     rect(50, 50, 540, 540);

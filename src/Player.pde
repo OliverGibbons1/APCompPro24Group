@@ -1,11 +1,13 @@
 class Player {
   int x, y, health, damage, money, maxHealth;
   int moveW = 0;
-  String weapon, helmet, chestplate, trousers, boots;
+  String weapon, armor, helmet, chestplate, trousers, boots;
   ArrayList<Shop> items;
   PImage sprite;
+  Item i;
 
   Player() {
+    i = new Item();
     this.x = x;
     this.y = y;
     this.health = health;
@@ -16,6 +18,20 @@ class Player {
     items = new ArrayList<Shop>();
     this.sprite = loadImage("sprites/BlueGuy.png");
     this.sprite.resize(64, 64);
+
+    weapon = "Basic Sword";
+    int weaponDmg = i.wpnDmg(weapon);
+    
+    if(weaponDmg != -1) {
+      damage = damage + weaponDmg;
+    }
+    
+    armor = "Refined Helmet";
+    int armorHp = i.armorHp(armor);
+    
+    if(armorHp != -1) {
+      health = health + armorHp;
+    }
   }
 
   void attack(Enemy target, int damage) {
@@ -24,10 +40,6 @@ class Player {
 
   void attacked(Enemy target, int health) {
     target.damage -= health;
-  }
-
-  int getTotDmg(Item weapons) {
-    return damage;// + weapons.getDmg();
   }
 
   void display() {
