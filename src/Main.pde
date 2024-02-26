@@ -120,7 +120,7 @@ void draw() {
     fill(255);
     resetButton.display();
     fill(0);
-    text(t, 280, 535);
+    text(t, 270, 530);
     if (resetButton.pressed()) {
       gameOverReset();
       M1.loadNew("Maps/Map.json");
