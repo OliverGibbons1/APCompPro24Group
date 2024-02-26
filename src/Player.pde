@@ -17,19 +17,19 @@ class Player {
     this.sprite = loadImage("sprites/BlueGuy.png");
     this.sprite.resize(64, 64);
 
-    weapon = "Basic Sword";
-    int weaponDmg = i.wpnDmg(weapon);
+    //weapon = "Basic Sword";
+    //int weaponDmg = i.wpnDmg(weapon);
     
-    if(weaponDmg != -1) {
-      damage = damage + weaponDmg;
-    }
+    //if(weaponDmg != -1) {
+    //  damage = damage + weaponDmg;
+    //}
     
-    armor = "Refined Helmet";
-    int armorHp = i.armorHp(armor);
+    //armor = "Refined Helmet";
+    //int armorHp = i.armorHp(armor);
     
-    if(armorHp != -1) {
-      health = health + armorHp;
-    }
+    //if(armorHp != -1) {
+    //  health = health + armorHp;
+    //}
   }
 
   void attack(Enemy target, int damage) {
