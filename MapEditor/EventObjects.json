@@ -1,28 +1,6 @@
 {
-	"Encounters":{
-		"Goblin":{
-			"Type":"Enemy",
-			"Name":"Goblin",
-			"Health":10,
-		},
-		"Gun Shop":{
-			"Type":"Shop",
-			"Name":"Gun Shop",
-			"Items":{
-				"Gun":{
-					"Type":"Weapon",
-					"Name":"Gun",
-					"Sprite":"gun.png",
-					"Damage":5,
-					""
-				},
-				"Rifle":{
-					"Type":"Weapon",
-					"Name":"Rifle",
-					"Damage":10,
-				}
-			}
-		},
-		}
+	"Encounter":{
+		"dialog":"STRING",
+		"Enemy":"ENEMY"
 	}
 }

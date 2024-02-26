@@ -5,6 +5,8 @@ from pygame.locals import *
 from pygame.transform import scale
 from pygame import draw
 from math import sin, pi
+from BetterPyGame import Button, InputBox
+
 
 # Enemy Editor
 #  - Save enemy
@@ -74,12 +76,18 @@ class Enemy:
 	def draw(self, screen):
 		screen.blit(self.img, (self.x, self.y))
 
+
+
 class MapEditor:
-	def __init__(self,screen):
+	def __init__(self,screen,ProgSize,SpriteSize):
 		self.screen = screen
-		self.width = 800
-		self.height = 600
+		self.width = ProgSize[0]
+		self.height = ProgSize[1]
 		self.running = True
-		self.tile = pg.image.load('tile.png')
-		self.tile = scale(self.tile, (32, 32))
+		self.MapTiles = []
 		self.map = []
+	def draw(self):
+		print("Not Implemented")
+
+
+
