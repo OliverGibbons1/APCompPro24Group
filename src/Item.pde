@@ -45,7 +45,16 @@ class Item {
         }
       }
       return -1;
-    } 
+    }
+
+    int armorHp(String armorName) {
+      for (Armor armor : armors) {
+        if (armor.getName().equals(armorName)) {
+          return armor.getHp();
+        }
+      }
+      return -1;
+    }
   
   //future item transfer method
   void iT(Player p) {
