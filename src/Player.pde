@@ -1,5 +1,5 @@
 class Player {
-  int x, y, health, damage, money;
+  int x, y, health, damage, money, maxHealth;
   int moveW = 0;
   String weapon, helmet, chestplate, trousers, boots;
   ArrayList<Shop> items;
@@ -9,6 +9,7 @@ class Player {
     this.x = x;
     this.y = y;
     this.health = health;
+    this.maxHealth = maxHealth;
     this.money = money;
     this.damage = damage;
     this.weapon = weapon;
