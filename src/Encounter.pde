@@ -20,7 +20,7 @@ class Encounter{
     if(playerTurn){
       if(attackButton.pressed()){
         this.player.attack(this.enemy, 1);
-        consoleMessage = "Player hit enemy for 1 damage";
+        consoleMessage = "Player hit " + enemy.name + " for 1 damage";
         display();
         playerTurn = false;
       }
