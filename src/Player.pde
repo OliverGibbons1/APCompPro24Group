@@ -26,11 +26,13 @@ class Player {
       damage += weaponDmg;
     }
     
-    armor = "Refined Helmet";
-    int armorHp = i.armorHp(armor);
+    helmet = "Refined Helmet";
+    int armorHp = i.armorHp(helmet);
+    int armorSpot = i.armorSpot(helmet);
     
-    if(armorHp != -1) {
-      health += armorHp;
+    
+    if(armorHp != -1 && armorSpot == 1) {
+      maxHealth += armorHp;
     }
   }
 

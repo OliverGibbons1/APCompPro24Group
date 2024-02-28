@@ -18,16 +18,16 @@ class Item {
   void armorL() {
     armors.add(new Armor("Basic Helmet", 10, 1));
     armors.add(new Armor("Refined Helmet", 15, 1));
-    armors.add(new Armor("Dragon Helmet", 20, 1));
+    armors.add(new Armor("Dragoon Helmet", 20, 1));
     armors.add(new Armor("Basic Chestplate", 20, 2));
     armors.add(new Armor("Refined Chestplate", 25, 2));
-    armors.add(new Armor("Dragon Chestplate", 30, 2));
+    armors.add(new Armor("Dragoon Chestplate", 30, 2));
     armors.add(new Armor("Basic Trousers", 15, 3));
     armors.add(new Armor("Refined Trousers", 20, 3));
-    armors.add(new Armor("Dragon Trousers", 25, 3));
+    armors.add(new Armor("Dragoon Trousers", 25, 3));
     armors.add(new Armor("Basic Boots", 10, 4));
     armors.add(new Armor("Refined Boots", 15, 4));
-    armors.add(new Armor("Dragon Boots", 20, 4));
+    armors.add(new Armor("Dragoon Boots", 20, 4));
   }
   
   void weaponL() {
@@ -35,7 +35,7 @@ class Item {
     weapons.add(new Weapon("Refined Sword", 15));
     weapons.add(new Weapon("Katana", 20));
     weapons.add(new Weapon("Long Sword", 25));
-    weapons.add(new Weapon("Dragon Sword", 30));
+    weapons.add(new Weapon("Dragoon Sword", 30));
     }
     
     int wpnDmg(String wpnName) {
