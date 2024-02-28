@@ -19,27 +19,38 @@ class Encounter {
   void tick() {
 
     if (playerTurn) {
-      if (attackButton.pressed()) {
-        this.player.attack(this.enemy, 2);
-        if(this.enemy.health > 0){
-          consoleMessage = "Player hit " + enemy.name + " for " + this.player.damage + " damage";
-          display();
-          playerTurn = false;
-        } else {
-          this.over = true;
-        }
+      if(this.enemy.health <= 0){
+        display();
+        delay(2000);
+        end();
+      }else if (attackButton.pressed()) {
+        this.player.attack(this.enemy, this.player.damage);
+        consoleMessage = "Player hit " + enemy.name + " for " + this.player.damage + " damage";
+        display();
+        playerTurn = false;
       }
     } else {
       enemyTurn();
     }
   }
 
+  void end() {
+    //delay(2000);
+    this.over = true;
+  }
 
   void enemyTurn() {
     delay(2000);
-    this.enemy.attack(this.player);
-    consoleMessage = this.enemy.name + " hit player for " + this.enemy.damage + " damage. Your move?";
-    playerTurn = true;
+    if (this.enemy.health > 0) {
+      this.enemy.attack(this.player);
+      consoleMessage = this.enemy.name + " hit player for " + this.enemy.damage + " damage. Your move?";
+      playerTurn = true;
+    } else{
+      this.player.money += this.enemy.money;
+      consoleMessage = "You win! Got $" + this.enemy.money;
+      display();
+      playerTurn = true;
+    }
   }
 
   void display() {
