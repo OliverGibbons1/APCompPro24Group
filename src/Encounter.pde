@@ -5,7 +5,6 @@ class Encounter {
   Button attackButton, healButton;
   boolean playerTurn = true;
   boolean over = false;
-  boolean close = false;
 
   Encounter(Enemy enemy, String dialogue, Player player) {
     this.dialogue = dialogue;
@@ -15,30 +14,25 @@ class Encounter {
     healButton = new Button(375, 480, 100, 40);
     consoleMessage = this.dialogue;
     this.over = false;
-    this.close = false;
   }
 
   void tick() {
 
     if (playerTurn) {
       if (attackButton.pressed()) {
-        this.player.attack(this.enemy, 1);
-
-        if (playerTurn) {
-          if (attackButton.pressed()) {
-            this.player.attack(this.enemy, this.player.damage);
-
-            consoleMessage = "Player hit " + enemy.name + " for " + this.player.damage + " damage";
-            display();
-            playerTurn = false;
-          }
+        this.player.attack(this.enemy, 2);
+        if(this.enemy.health > 0){
+          consoleMessage = "Player hit " + enemy.name + " for " + this.player.damage + " damage";
+          display();
+          playerTurn = false;
         } else {
-          enemyTurn();
+          this.over = true;
         }
       }
+    } else {
+      enemyTurn();
     }
   }
-
 
 
   void enemyTurn() {
