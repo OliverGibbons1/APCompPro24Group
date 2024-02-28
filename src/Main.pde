@@ -107,7 +107,7 @@ void draw() {
     encounter.display();
     encounter.tick();
     
-    if(p.health <= 0){
+    if(p.health <= 0 || encounter.close){
       encounterOn = false;
     }
   }
