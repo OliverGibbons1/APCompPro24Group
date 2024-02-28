@@ -16,18 +16,18 @@ class Item {
   }
   
   void armorL() {
-    armors.add(new Armor("Basic Helmet", 10));
-    armors.add(new Armor("Refined Helmet", 15));
-    armors.add(new Armor("Dragon Helmet", 20));
-    armors.add(new Armor("Basic Chestplate", 20));
-    armors.add(new Armor("Refined Chestplate", 25));
-    armors.add(new Armor("Dragon Chestplate", 30));
-    armors.add(new Armor("Basic Trousers", 15));
-    armors.add(new Armor("Refined Trousers", 20));
-    armors.add(new Armor("Dragon Trousers", 25));
-    armors.add(new Armor("Basic Boots", 10));
-    armors.add(new Armor("Refined Boots", 15));
-    armors.add(new Armor("Dragon Boots", 20));
+    armors.add(new Armor("Basic Helmet", 10, 1));
+    armors.add(new Armor("Refined Helmet", 15, 1));
+    armors.add(new Armor("Dragon Helmet", 20, 1));
+    armors.add(new Armor("Basic Chestplate", 20, 2));
+    armors.add(new Armor("Refined Chestplate", 25, 2));
+    armors.add(new Armor("Dragon Chestplate", 30, 2));
+    armors.add(new Armor("Basic Trousers", 15, 3));
+    armors.add(new Armor("Refined Trousers", 20, 3));
+    armors.add(new Armor("Dragon Trousers", 25, 3));
+    armors.add(new Armor("Basic Boots", 10, 4));
+    armors.add(new Armor("Refined Boots", 15, 4));
+    armors.add(new Armor("Dragon Boots", 20, 4));
   }
   
   void weaponL() {
@@ -51,6 +51,15 @@ class Item {
       for (Armor armor : armors) {
         if (armor.getName().equals(armorName)) {
           return armor.getHp();
+        }
+      }
+      return -1;
+    }
+    
+    int armorSpot(String armorName) {
+      for (Armor armor : armors) {
+        if(armor.getName().equals(armorName)) {
+          return armor.getSpot();
         }
       }
       return -1;
