@@ -38,7 +38,7 @@ class Map{
     JSONArray MapImagesJSONArr=MapJSON.getJSONArray("MapTilesRef");
     MapSprites=new PImage[MapImagesJSONArr.size()];
     for (int s=0;s<MapImagesJSONArr.size();s++) {
-      MapSprites[s]=loadImage("Sprites/MapTiles/"+MapImagesJSONArr.getString(s));
+      MapSprites[s]=loadImage("Sprites/MapTiles/MapBack/"+MapImagesJSONArr.getString(s));
     }
     displayMap();
   }

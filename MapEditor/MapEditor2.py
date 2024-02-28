@@ -17,13 +17,13 @@ src=pf+"/src"
 SpritesFolder=src+"/Sprites"
 MapTilesFolder=SpritesFolder+"/MapTiles"
 if not os.path.exists(src):
-	exit(128)
+    exit(128)
 
 
 # Simple Methods
 
 def rl(x):
-	return range(len(x))
+    return range(len(x))
 
 # --------------
 
@@ -50,71 +50,78 @@ def rl(x):
 # CollisionTiles 2D Boolean
 # Enemy 2D array of Strings Refrencing enemy
 
+# Background MapTiles
+# NPC Layer
+# Foreground Objects
+
 class MapTile:
-	def __init__(self, x, y, w, h, img):
-		self.rect = pg.Rect(x, y, w, h)
-		self.img = img
-		self.x = x
-		self.y = y
-	def draw(self, screen):
-		screen.blit(self.img, (self.x, self.y))
+    def __init__(self, x, y, w, h, img):
+        self.rect = pg.Rect(x, y, w, h)
+        self.img = img
+        self.x = x
+        self.y = y
+    def draw(self, screen):
+        screen.blit(self.img, (self.x, self.y))
 
 class ObjectTile:
-	def __init__(self, x, y, w, h, img):
-		self.rect = pg.Rect(x, y, w, h)
-		self.img = img
-		self.x = x
-		self.y = y
-	def draw(self, screen):
-		screen.blit(self.img, (self.x, self.y))
+    def __init__(self, x, y, w, h, img):
+        self.rect = pg.Rect(x, y, w, h)
+        self.img = img
+        self.x = x
+        self.y = y
+    def draw(self, screen):
+        screen.blit(self.img, (self.x, self.y))
 
 class EventTile:
-	def __init__(self, x, y, w, h, img):
-		self.rect = pg.Rect(x, y, w, h)
-		self.img = img
-		self.x = x
-		self.y = y
-	def draw(self, screen):
-		screen.blit(self.img, (self.x, self.y))
+    def __init__(self, x, y, w, h, img):
+        self.rect = pg.Rect(x, y, w, h)
+        self.img = img
+        self.x = x
+        self.y = y
+    def draw(self, screen):
+        screen.blit(self.img, (self.x, self.y))
 
 class CollisionTile:
-	def __init__(self, x, y, w, h, img):
-		self.rect = pg.Rect(x, y, w, h)
-		self.img = img
-		self.x = x
-		self.y = y
-	def draw(self, screen):
-		screen.blit(self.img, (self.x, self.y))
+    def __init__(self, x, y, w, h, img):
+        self.rect = pg.Rect(x, y, w, h)
+        self.img = img
+        self.x = x
+        self.y = y
+    def draw(self, screen):
+        screen.blit(self.img, (self.x, self.y))
 
 class Enemy:
-	def __init__(self, x, y, w, h, img):
-		self.rect = pg.Rect(x, y, w, h)
-		self.img = img
-		self.x = x
-		self.y = y
-	def draw(self, screen):
-		screen.blit(self.img, (self.x, self.y))
+    def __init__(self, x, y, w, h, img):
+        self.rect = pg.Rect(x, y, w, h)
+        self.img = img
+        self.x = x
+        self.y = y
+    def draw(self, screen):
+        screen.blit(self.img, (self.x, self.y))
 
 
 
 class MapEditor:
-	def __init__(self,screen,ProgSize,SpriteSize):
-		self.spriteCount=(10,10)
-		self.spriteSize=SpriteSize
-		self.screen = screen
-		self.width = ProgSize[0]
-		self.height = ProgSize[1]
-		self.running = True
-		self.mapRef = [x for x in os.listdir(MapTilesFolder) if x.endswith(".png")]
-		print(self.mapRef)
-		self.MapTiles = np.zeros(self.spriteCount)
-		self.map = [[0 for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
-	def draw(self):
-		# Draw Background
-		for y in range(self.spriteCount[1]):
-			for x in range(self.spriteCount[0]):
-				draw.rect(self.screen,(120,120,120) if (x+y)%2==1 else (0,0,0),(x*self.spriteSize[0],y*self.spriteSize[1],self.spriteSize[0],self.spriteSize[1]))
-		# Draw Map
+    def __init__(self,screen,ProgSize,SpriteSize):
+        self.spriteCount=(10,10)
+        self.spriteSize=SpriteSize
+        self.screen = screen
+        self.width = ProgSize[0]
+        self.height = ProgSize[1]
+        self.running = True
+        self.mapTilesRef = [x for x in os.listdir(MapTilesFolder) if x.endswith(".png")]
+        print(self.mapRef)
+        self.MapTiles = np.zeros(self.spriteCount)
+        self.map = [[0 for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
+    def draw(self):
+        # Draw Background Grid
+        for y in range(self.spriteCount[1]):
+            for x in range(self.spriteCount[0]):
+                draw.rect(self.screen,(120,120,120) if (x+y)%2==1 else (0,0,0),(x*self.spriteSize[0],y*self.spriteSize[1],self.spriteSize[0],self.spriteSize[1]))
+        # Draw MapTiles / Background Layer
+        for y in range(self.spriteCount[1]):
+            for x in range(self.spriteCount[0]):
+                self.screen.blit(scale(self.mapTilesRef[self.MapTiles[y][x]],self.spriteSize),(x*self.spriteSize[0],y*self.spriteSize[1]))
 
 pg.init()
 pg.font.init()
@@ -128,16 +135,16 @@ ME=MapEditor(screen, screenSize, (64,64))
 
 running=True
 while running:
-	screen.fill((100,100,100))
-	PGE=BPG.keyboard_update()
-	for event in PGE:
-		if event.type == QUIT:
-			print("Quitting")
-			running = False
-		if event.type == KEYDOWN:
-			if event.key == K_ESCAPE:
-				running = False
-	ME.draw()
-	pg.display.flip()
-	clock.tick(60)
+    screen.fill((100,100,100))
+    PGE=BPG.keyboard_update()
+    for event in PGE:
+        if event.type == QUIT:
+            print("Quitting")
+            running = False
+        if event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
+                running = False
+    ME.draw()
+    pg.display.flip()
+    clock.tick(60)
 pg.quit()
