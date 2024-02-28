@@ -18,7 +18,7 @@ class Encounter{
     if(playerTurn){
       if(attackButton.pressed()){
         this.player.attack(this.enemy, 1);
-        consoleMessage = "Player hit " + enemy.name + " for 1 damage";
+        consoleMessage = "Player hit " + enemy.name + " for " + this.player.damage + " damage";
         display();
         playerTurn = false;
       }
