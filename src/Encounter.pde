@@ -19,35 +19,26 @@ class Encounter {
   }
 
   void tick() {
-<<<<<<< Updated upstream
-    if(playerTurn){
-      if(attackButton.pressed()){
-        this.player.attack(this.enemy, 1);
-=======
+
     if (playerTurn) {
       if (attackButton.pressed()) {
-        this.player.attack(this.enemy, this.player.damage);
->>>>>>> Stashed changes
-        consoleMessage = "Player hit " + enemy.name + " for " + this.player.damage + " damage";
-        display();
-        playerTurn = false;
-      }
-    } else {
-      enemyTurn();
+        this.player.attack(this.enemy, 1);
 
-      if (this.enemy.health <= 0) {
-        delay(2000);
-        consoleMessage = "Blue guy wins! Got $" + this.enemy.money + ". Click to exit.";
-        this.player.money += this.enemy.money;
-        display();
-        redraw();
-        this.over = true;
-      }
-      if (this.over && mousePressed) {
-        this.close = true;
+        if (playerTurn) {
+          if (attackButton.pressed()) {
+            this.player.attack(this.enemy, this.player.damage);
+
+            consoleMessage = "Player hit " + enemy.name + " for " + this.player.damage + " damage";
+            display();
+            playerTurn = false;
+          }
+        } else {
+          enemyTurn();
+        }
       }
     }
   }
+
 
 
   void enemyTurn() {
