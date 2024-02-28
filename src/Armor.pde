@@ -1,10 +1,11 @@
 class Armor{
   String name;
-  int hp;
+  int hp, spot;
   
-  Armor(String name, int hp){
+  Armor(String name, int hp, int spot){
     this.name = name;
     this.hp = hp;
+    this.spot = spot;
   }
   
   String getName() {
@@ -13,5 +14,9 @@ class Armor{
   
   int getHp() {
     return hp;
+  }
+  
+  int getSpot() {
+    return spot;
   }
 }

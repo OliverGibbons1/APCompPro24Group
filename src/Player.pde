@@ -23,14 +23,14 @@ class Player {
     int weaponDmg = i.wpnDmg(weapon);
     
     if(weaponDmg != -1) {
-      damage = damage + weaponDmg;
+      damage += weaponDmg;
     }
     
     armor = "Refined Helmet";
     int armorHp = i.armorHp(armor);
     
     if(armorHp != -1) {
-      health = health + armorHp;
+      health += armorHp;
     }
   }
 
