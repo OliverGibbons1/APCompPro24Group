@@ -8,8 +8,9 @@ keyboard = []
 def keyboard_update():
 	global keyboard,mouse
 	keyboard=[]
-	for event in pg.event.get():
-		elif event.type==pg.MOUSEBUTTONDOWN:
+	pgGet=pg.event.get()
+	for event in pgGet:
+		if event.type==pg.MOUSEBUTTONDOWN:
 			mouse[event.button+1]=True
 		elif event.type==pg.MOUSEBUTTONUP:
 			mouse[event.button+1]=False
@@ -18,6 +19,7 @@ def keyboard_update():
 	if len(keyboard)>0:
 		print(keyboard)
 	mouse=list(pg.mouse.get_pos())+mouse[2:]
+	return pgGet
 
 class Button:
 	def __init__(self, text, pos, size, color=(255,255,255), font="Arial", font_size=20, font_color=(0,0,0)):

@@ -1,3 +1,5 @@
+import os
+from os import getcwd as gcd
 import json
 import numpy as np
 import pygame as pg
@@ -6,7 +8,24 @@ from pygame.transform import scale
 from pygame import draw
 from math import sin, pi
 from BetterPyGame import Button, InputBox
+import BetterPyGame as BPG
 
+pf=gcd()
+print(pf)
+pf="/".join(pf.split("/")[:-1])
+src=pf+"/src"
+SpritesFolder=src+"/Sprites"
+MapTilesFolder=SpritesFolder+"/MapTiles"
+if not os.path.exists(src):
+	exit(128)
+
+
+# Simple Methods
+
+def rl(x):
+	return range(len(x))
+
+# --------------
 
 # Enemy Editor
 #  - Save enemy
@@ -80,14 +99,45 @@ class Enemy:
 
 class MapEditor:
 	def __init__(self,screen,ProgSize,SpriteSize):
+		self.spriteCount=(10,10)
+		self.spriteSize=SpriteSize
 		self.screen = screen
 		self.width = ProgSize[0]
 		self.height = ProgSize[1]
 		self.running = True
-		self.MapTiles = []
-		self.map = []
+		self.mapRef = [x for x in os.listdir(MapTilesFolder) if x.endswith(".png")]
+		print(self.mapRef)
+		self.MapTiles = np.zeros(self.spriteCount)
+		self.map = [[0 for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
 	def draw(self):
-		print("Not Implemented")
+		# Draw Background
+		for y in range(self.spriteCount[1]):
+			for x in range(self.spriteCount[0]):
+				draw.rect(self.screen,(120,120,120) if (x+y)%2==1 else (0,0,0),(x*self.spriteSize[0],y*self.spriteSize[1],self.spriteSize[0],self.spriteSize[1]))
+		# Draw Map
 
+pg.init()
+pg.font.init()
 
+screen = pg.display.set_mode((64*10 + 32*4, 64*10 + 64*2 ))
+pg.display.set_caption("Map Editor")
+clock = pg.time.Clock()
+Font=pg.font.Font(None, 36)
+screenSize=pg.display.get_surface().get_size()
+ME=MapEditor(screen, screenSize, (64,64))
 
+running=True
+while running:
+	screen.fill((100,100,100))
+	PGE=BPG.keyboard_update()
+	for event in PGE:
+		if event.type == QUIT:
+			print("Quitting")
+			running = False
+		if event.type == KEYDOWN:
+			if event.key == K_ESCAPE:
+				running = False
+	ME.draw()
+	pg.display.flip()
+	clock.tick(60)
+pg.quit()
