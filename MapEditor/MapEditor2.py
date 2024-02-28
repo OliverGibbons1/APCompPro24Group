@@ -109,8 +109,9 @@ class MapEditor:
         self.width = ProgSize[0]
         self.height = ProgSize[1]
         self.running = True
-        self.mapTilesRef = [x for x in os.listdir(MapTilesFolder) if x.endswith(".png")]
-        print(self.mapRef)
+        print(MapTilesFolder)
+        self.mapTilesRef = [x for x in os.listdir(os.fsencode(MapTilesFolder)) if x.endswith(".png")]
+        print(self.mapTilesRef,"@")
         self.MapTiles = np.zeros(self.spriteCount)
         self.map = [[0 for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
     def draw(self):
