@@ -1,6 +1,6 @@
 Player P1;
 Encounter[] Encounters;
-Shop[] Shops;
+Shop [] shop;
 Player p;
 Map M1;
 Button startButton, quitButton, loadGameButton, clearSaveButton, resetButton;
@@ -29,6 +29,7 @@ void setup() {
   saveGame = new JSONObject();
   p.health = 5;
   p.maxHealth = 5;
+  Shop s = new Shop();
 }
 void draw() {
   if (start) {
@@ -71,6 +72,7 @@ void draw() {
       start = true;
       s = s.equals(i) ? i:s;
       //encounterOn = true;
+      
     }
     if (loadGameButton.pressed()) {
       saveGame = loadJSONObject("data/new.json");
