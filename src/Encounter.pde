@@ -5,6 +5,7 @@ class Encounter {
   Button attackButton, healButton;
   boolean playerTurn = true;
   boolean over = false;
+  PImage playerSprite;
 
   Encounter(Enemy enemy, String dialogue, Player player) {
     this.dialogue = dialogue;
@@ -14,6 +15,7 @@ class Encounter {
     healButton = new Button(375, 480, 100, 40);
     consoleMessage = this.dialogue;
     this.over = false;
+    playerSprite = loadImage("Sprites/JackStance.png");
   }
 
   void tick() {
@@ -61,8 +63,8 @@ class Encounter {
     fill(255);
     rect(50, 50, 540, 50);
     rect(50, 540, 540, 50);
-    image(enemy.sprite, 70, 150);
-    image(player.sprite, 450, 200);
+    image(enemy.sprite, 300, 150);
+    image(playerSprite, 20, 180);
     fill(0);
     text(enemy.name + "~", 70, 83);
     text("Health: " + enemy.health, 200, 83);
