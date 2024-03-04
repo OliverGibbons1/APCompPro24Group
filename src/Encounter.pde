@@ -49,7 +49,7 @@ class Encounter {
       playerTurn = true;
     } else{
       this.player.money += this.enemy.money;
-      consoleMessage = "You win! Got $" + this.enemy.money;
+      consoleMessage = "You win! Got ₽" + this.enemy.money;
       display();
       playerTurn = true;
     }
