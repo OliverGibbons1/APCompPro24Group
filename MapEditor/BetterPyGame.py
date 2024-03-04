@@ -2,7 +2,7 @@ import pygame as pg
 import numpy as np
 import math as m
 
-mouse = [0,0,False,False,False]
+mouse = [0,0,False,False,False,0]
 keyboard = []
 
 def keyboard_update():
@@ -10,10 +10,18 @@ def keyboard_update():
 	keyboard=[]
 	pgGet=pg.event.get()
 	for event in pgGet:
+		if event.type==pg.MOUSEWHEEL:
+			mouse[5]=event.y
 		if event.type==pg.MOUSEBUTTONDOWN:
-			mouse[event.button+1]=True
+			try:
+				mouse[event.button+1]=True
+			except:
+				pass
 		elif event.type==pg.MOUSEBUTTONUP:
-			mouse[event.button+1]=False
+			try:
+				mouse[event.button+1]=False
+			except:
+				pass
 		elif event.type==pg.KEYDOWN:
 			keyboard.append(event.key)
 	if len(keyboard)>0:
