@@ -1,6 +1,6 @@
 Player P1;
 Encounter[] Encounters;
-Shop shop = new Shop();
+Shop shop;
 Player p;
 Map M1;
 Button startButton, quitButton, loadGameButton, clearSaveButton, resetButton;
@@ -14,12 +14,12 @@ JSONObject saveGame;
 boolean shopOn = false;
 boolean encounterOn = false;
 int AlreadyPressed = 0;
-Shop s;
 
 void setup() {
   size(640, 640);
   M1 = new Map("Maps/Map.json");
   p = new Player();
+  shop = new Shop();
   enemy = new Enemy(4, 4, 4, "sprites/SinisterMan.png", "Test Enemy");
   encounter = new Encounter(enemy, "dialogue here", p);
   startButton = new Button(240, 415, 140, 60);
@@ -31,16 +31,7 @@ void setup() {
   saveGame = new JSONObject();
   p.health = 5;
   p.maxHealth = 5;
-<<<<<<< Updated upstream
-
-=======
-<<<<<<< HEAD
   p.money = 10;
-  s = new Shop();
-=======
-
->>>>>>> cc037ea3f81397e1e5b66f362f2c7f64aaabbaf0
->>>>>>> Stashed changes
 }
 void draw() {
   if (start) {
@@ -114,7 +105,6 @@ void draw() {
 
   if (start) {
     p.display();
-    shop.armorDisplay();
   }
 //testing shop and encounter
   if (encounterOn == true) {
@@ -125,24 +115,20 @@ void draw() {
       encounterOn = false;
     }
   }
-<<<<<<< Updated upstream
+
   if(!encounterOn){
     p.move();
   }
-=======
-<<<<<<< HEAD
   
   if (shopOn) {
-    s.armorDisplay();
+    shop.armorDisplay();
   }
 
   p.move();
-=======
+
   if(!encounterOn){
     p.move();
   }
->>>>>>> cc037ea3f81397e1e5b66f362f2c7f64aaabbaf0
->>>>>>> Stashed changes
 
   if (checkGameOver()) {
     String t = "Try Again?";
