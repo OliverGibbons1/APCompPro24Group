@@ -2,7 +2,7 @@ class Player {
   int x, y, health, damage, money, maxHealth;
   int moveW = 0;
   String weapon, armor, helmet, chestplate, trousers, boots;
-  ArrayList<Shop> items;
+  //ArrayList<Shop> items;
   PImage sprite;
   Item i;
 
@@ -15,24 +15,48 @@ class Player {
     this.money = money;
     this.damage = damage;
     this.weapon = weapon;
-    items = new ArrayList<Shop>();
+    //items = new ArrayList<Shop>();
     this.sprite = loadImage("sprites/BlueGuy.png");
     this.sprite.resize(64, 64);
 
     weapon = "Basic Sword";
     int weaponDmg = i.wpnDmg(weapon);
-    
-    if(weaponDmg != -1) {
+
+    if (weaponDmg != -1) {
       damage += weaponDmg;
     }
-    
+
     helmet = "Refined Helmet";
     int helmetHp = i.armorHp(helmet);
     int helmetSpot = i.armorSpot(helmet);
-    
-    
-    if(helmetHp != -1 && helmetSpot == 1) {
+
+
+    if (helmetHp != -1 && helmetSpot == 1) {
       maxHealth += helmetHp;
+    }
+
+    chestplate = "Refined Chestplate";
+    int chestHp = i.armorHp(chestplate);
+    int chestSpot = i.armorSpot(chestplate);
+
+    if (chestHp != -1 && chestSpot == 2) {
+      maxHealth += chestHp;
+    }
+
+    trousers = "Refined Trousers";
+    int pantsHp = i.armorHp(trousers);
+    int pantsSpot = i.armorSpot(trousers);
+
+    if (pantsHp != -1 && pantsSpot == 3) {
+      maxHealth += pantsHp;
+    }
+
+    boots = "Refined Boots";
+    int bootsHp = i.armorHp(boots);
+    int bootsSpot = i.armorSpot(boots);
+
+    if (bootsHp != -1 && bootsSpot == 4) {
+      maxHealth += bootsHp;
     }
   }
 
