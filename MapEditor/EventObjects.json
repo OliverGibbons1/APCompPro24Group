@@ -1,6 +1,6 @@
 {
 	"Encounter":{
 		"dialog":"STRING",
-		"Enemy":"ENEMY"
+		"Enemy":"STRING"
 	}
 }
