@@ -1,6 +1,6 @@
 Player P1;
 Encounter[] Encounters;
-Shop [] shop;
+Shop shop = new Shop();
 Player p;
 Map M1;
 Button startButton, quitButton, loadGameButton, clearSaveButton, resetButton;
@@ -29,7 +29,7 @@ void setup() {
   saveGame = new JSONObject();
   p.health = 5;
   p.maxHealth = 5;
-  Shop s = new Shop();
+
 }
 void draw() {
   if (start) {
@@ -103,6 +103,7 @@ void draw() {
 
   if (start) {
     p.display();
+    shop.armorDisplay();
   }
 
   if (encounterOn == true) {
