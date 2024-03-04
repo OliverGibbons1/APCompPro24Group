@@ -20,6 +20,8 @@ class Item {
   }
 
   void armorL() {
+    //Name, Hp, Slot, Price
+    //Slots: 1=Helmet | 2=Chestplate | 3=Pants | 4=Boots
     armors.add(new Armor("Basic Helmet", 10, 1, 15));
     armors.add(new Armor("Refined Helmet", 15, 1, 15));
     armors.add(new Armor("Dragoon Helmet", 20, 1, 15));
@@ -35,6 +37,7 @@ class Item {
   }
 
   void weaponL() {
+    //Name, Damage, Price
     weapons.add(new Weapon("Basic Sword", 10, 15));
     weapons.add(new Weapon("Refined Sword", 15, 15));
     weapons.add(new Weapon("Katana", 20, 15));
@@ -43,6 +46,7 @@ class Item {
   }
 
   void potionL() {
+    //Name, hp healed, price
     potions.add(new Potion("Small Health Potion", 1, 5));
     potions.add(new Potion("Medium Health Potion", 2, 10));
     potions.add(new Potion("Large Potion", 3, 20));
