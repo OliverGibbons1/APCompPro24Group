@@ -2,7 +2,7 @@ class Player {
   int x, y, health, damage, money, maxHealth;
   int moveW = 0;
   String weapon, armor, helmet, chestplate, trousers, boots;
-  //ArrayList<Shop> items;
+  ArrayList<Shop> items;
   PImage sprite;
   Item i;
 
