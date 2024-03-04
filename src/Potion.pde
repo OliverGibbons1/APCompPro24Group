@@ -1,10 +1,11 @@
 class Potion{
   String name;
-  int hp;
+  int hp, price;
   
-  Potion(String name, int hp) {
+  Potion(String name, int hp, int price) {
     this.name = name;
     this.hp = hp;
+    this.price = price;
   }
   
   String getName() {
@@ -13,5 +14,9 @@ class Potion{
   
   int getHp() {
     return hp;
+  }
+  
+  int getPrice() {
+    return price;
   }
 }
