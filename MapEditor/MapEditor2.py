@@ -18,6 +18,7 @@ SpritesFolder=src+"/Sprites"
 MapTilesFolder=SpritesFolder+"/MapTiles"
 MapBackFolder=MapTilesFolder+"/MapBack"
 MapForeFolder=MapTilesFolder+"/MapFore"
+NPCSpritesFolder=SpritesFolder+"/NPCSprites"
 if not os.path.exists(src):
     exit(128)
 
@@ -113,16 +114,23 @@ class MapEditor:
         self.running = True
         self.Selected = (0,0) # (0 Background, 1 NPC, 2 Foreground, 3 Event),(index)
 
+        f=open("EventObjects.json","r")
+        self.EventJSON=json.loads(f.read())
+        f.close()
+
         self.BackRef = [pg.image.load(f"{MapBackFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapBackFolder)) if x.decode().endswith(".png")]
         self.MapBackTiles = np.zeros(self.spriteCount,dtype=int)
 
-        self.ForeRef = [pg.image.load(f"{MapForeFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapForeFolder)) if x.decode().endswith(".png")]
-        self.MapForeTiles = np.zeros(self.spriteCount,dtype=int)
-        
-        self.NPCRef = [pg.image.load(f"{MapForeFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapForeFolder)) if x.decode().endswith(".png")]
+        self.NPCRef = [pg.image.load(f"{NPCSpritesFolder}/{x.decode()}") for x in os.listdir(os.fsencode(NPCSpritesFolder)) if x.decode().endswith(".png")]
         self.MapNPCTiles = np.zeros(self.spriteCount,dtype=int)
 
-        
+        self.ForeRef = [pg.image.load(f"{MapForeFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapForeFolder)) if x.decode().endswith(".png")]
+        self.MapForeTiles = np.zeros(self.spriteCount,dtype=int)
+
+        self.EventRef = [x[0:2] for x in self.EventJSON]
+        print(self.EventRef)
+        self.MapEventTiles = [[{} for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
+        #print(self.MapEventTiles)
         #             Back,NPC,Fore
         self.map = [[[0,   0,  0] for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
     def draw(self):
@@ -138,13 +146,22 @@ class MapEditor:
         m=BPG.mouse
         if m[2] and m[0]>self.width-self.spriteSize[0]//2*4 and m[1]<self.spriteSize[1]*4*self.spriteCount[1]:
             self.Selected=(max(0,3-((self.spriteCount[0]*2+3)-m[0]//(self.spriteSize[1]//2))),m[1]//(self.spriteSize[1]//2))
-        self.Selected=(self.Selected[0],min(self.Selected[1],len(self.BackRef)-1) if self.Selected[0]==0 else min(self.Selected[1],len(self.ForeRef)-1))
-        print(self.Selected)
+        self.Selected=(self.Selected[0],min(self.Selected[1],len(self.BackRef)-1) if self.Selected[0]==0 else min(self.Selected[1],len(self.NPCRef)-1) if self.Selected[0]==1 else min(self.Selected[1],len(self.ForeRef)-1) if self.Selected[0]==2 else min(self.Selected[1],len(self.EventRef)-1))
+        #print(self.Selected)
         # Draw BackRef
         for BRef in rl(self.BackRef):
             self.screen.blit(scale(self.BackRef[BRef],(self.spriteSize[0]//2,self.spriteSize[1]//2)),(self.width-self.spriteSize[0]//2*4,BRef*self.spriteSize[1]//2))
-        draw.rect(self.screen,(0,0,0),((self.width-self.spriteSize[0]//2*(4-self.Selected[0]),self.Selected[1]*self.spriteSize[1]//2),(self.spriteSize[0]//2,self.spriteSize[1]//2)),2)
+        # Draw NPCRef
+        for NRef in rl(self.NPCRef):
+            self.screen.blit(scale(self.NPCRef[NRef],(self.spriteSize[0]//2,self.spriteSize[1]//2)),(self.width-self.spriteSize[0]//2*3,NRef*self.spriteSize[1]//2))
         # Draw ForeRef
+        for FRef in rl(self.ForeRef):
+            self.screen.blit(scale(self.ForeRef[FRef],(self.spriteSize[0]//2,self.spriteSize[1]//2)),(self.width-self.spriteSize[0]//2*2,FRef*self.spriteSize[1]//2))
+        # Draw EventRef
+        for ERef in rl(self.EventRef):
+            txt=Font.render(self.EventRef[ERef],True,(0,0,0))
+            self.screen.blit(txt,(self.width-self.spriteSize[0]//2*1,ERef*self.spriteSize[1]//2))
+        draw.rect(self.screen,(0,0,0),((self.width-self.spriteSize[0]//2*(4-self.Selected[0]),self.Selected[1]*self.spriteSize[1]//2),(self.spriteSize[0]//2,self.spriteSize[1]//2)),2)
 pg.init()
 pg.font.init()
 
