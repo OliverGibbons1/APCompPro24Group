@@ -113,8 +113,9 @@ void draw() {
       encounterOn = false;
     }
   }
-
-  p.move();
+  if(!encounterOn){
+    p.move();
+  }
 
   if (checkGameOver()) {
     String t = "Try Again?";
