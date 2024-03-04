@@ -43,9 +43,9 @@ class Item {
   }
 
   void potionL() {
-    potions.add(new Potion("Small Health Potion", 1));
-    potions.add(new Potion("Medium Health Potion", 2));
-    potions.add(new Potion("Large Potion", 3));
+    potions.add(new Potion("Small Health Potion", 1, 5));
+    potions.add(new Potion("Medium Health Potion", 2, 10));
+    potions.add(new Potion("Large Potion", 3, 20));
   }
 
   int wpnDmg(String wpnName) {
