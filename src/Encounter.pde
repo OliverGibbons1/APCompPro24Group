@@ -30,6 +30,11 @@ class Encounter {
         consoleMessage = "Player hit " + enemy.name + " for " + this.player.damage + " damage";
         display();
         playerTurn = false;
+      }else if (healButton.pressed()) {
+        // Healing operation here
+        consoleMessage = "Used health potion";
+        display();
+        playerTurn = false;
       }
     } else {
       enemyTurn();
@@ -49,7 +54,7 @@ class Encounter {
       playerTurn = true;
     } else{
       this.player.money += this.enemy.money;
-      consoleMessage = "You win! Got $" + this.enemy.money;
+      consoleMessage = "You win! Got ₽" + this.enemy.money;
       display();
       playerTurn = true;
     }

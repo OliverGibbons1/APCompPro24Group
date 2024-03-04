@@ -1,11 +1,10 @@
-class Armor{
+class Potion{
   String name;
-  int hp, spot, price;
+  int hp, price;
   
-  Armor(String name, int hp, int spot, int price){
+  Potion(String name, int hp, int price) {
     this.name = name;
     this.hp = hp;
-    this.spot = spot;
     this.price = price;
   }
   
@@ -15,10 +14,6 @@ class Armor{
   
   int getHp() {
     return hp;
-  }
-  
-  int getSpot() {
-    return spot;
   }
   
   int getPrice() {
