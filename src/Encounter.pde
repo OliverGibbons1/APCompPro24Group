@@ -30,6 +30,11 @@ class Encounter {
         consoleMessage = "Player hit " + enemy.name + " for " + this.player.damage + " damage";
         display();
         playerTurn = false;
+      }else if (healButton.pressed()) {
+        // Healing operation here
+        consoleMessage = "Used health potion";
+        display();
+        playerTurn = false;
       }
     } else {
       enemyTurn();
