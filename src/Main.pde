@@ -11,8 +11,10 @@ boolean start = false;
 boolean savedGame;
 JSONObject saveGame;
 
+boolean shopOn = false;
 boolean encounterOn = false;
 int AlreadyPressed = 0;
+Shop s;
 
 void setup() {
   size(640, 640);
@@ -29,7 +31,16 @@ void setup() {
   saveGame = new JSONObject();
   p.health = 5;
   p.maxHealth = 5;
+<<<<<<< Updated upstream
 
+=======
+<<<<<<< HEAD
+  p.money = 10;
+  s = new Shop();
+=======
+
+>>>>>>> cc037ea3f81397e1e5b66f362f2c7f64aaabbaf0
+>>>>>>> Stashed changes
 }
 void draw() {
   if (start) {
@@ -72,7 +83,7 @@ void draw() {
       start = true;
       s = s.equals(i) ? i:s;
       //encounterOn = true;
-      
+      shopOn = true;
     }
     if (loadGameButton.pressed()) {
       saveGame = loadJSONObject("data/new.json");
@@ -105,7 +116,7 @@ void draw() {
     p.display();
     shop.armorDisplay();
   }
-
+//testing shop and encounter
   if (encounterOn == true) {
     encounter.display();
     encounter.tick();
@@ -114,9 +125,24 @@ void draw() {
       encounterOn = false;
     }
   }
+<<<<<<< Updated upstream
   if(!encounterOn){
     p.move();
   }
+=======
+<<<<<<< HEAD
+  
+  if (shopOn) {
+    s.armorDisplay();
+  }
+
+  p.move();
+=======
+  if(!encounterOn){
+    p.move();
+  }
+>>>>>>> cc037ea3f81397e1e5b66f362f2c7f64aaabbaf0
+>>>>>>> Stashed changes
 
   if (checkGameOver()) {
     String t = "Try Again?";
