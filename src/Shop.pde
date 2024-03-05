@@ -9,10 +9,7 @@ class Shop {
   Shop() {
     selectButton[0] = new Button (175, 495, 100, 40);
     selectButton[1] = new Button (375, 495, 100, 40);
-    armorButton[0] = new Button (126, 425, 120, 118);
-    armorButton[1] = new Button (256, 425, 120, 118);
-    armorButton[2] = new Button (386, 425, 120, 118);
-    armorButton[3] = new Button (516, 425, 120, 118);
+    this.player = p;
   }
 
   void display() {
@@ -24,7 +21,7 @@ class Shop {
     rect(50, 50, 540, 50);
     rect(50, 540, 540, 50);
     fill(0);
-    text("Gold: " + player.money, 290, 83);
+    text("Gold: " + p.money, 290, 83);
     stroke(255);
     fill(0);
     text(consoleMessage, 75, 575);
@@ -53,7 +50,7 @@ class Shop {
     rect(50, 50, 540, 50);
     rect(50, 540, 540, 50);
     fill(0);
-    //   text("Gold: " + player.money, 290, 83);
+    text("Gold: " + p.money, 290, 83);
     stroke(255);
     fill(0);
     text(consoleMessage, 75, 575);
@@ -93,21 +90,15 @@ class Shop {
     rect(50, 50, 540, 50);
     rect(50, 540, 540, 50);
     fill(0);
-    //    text("Gold: " + player.money, 290, 83);
+    text("Gold: " + p.money, 290, 83);
     stroke(255);
     fill(0);
-    //    text(consoleMessage, 75, 575);
+    text(consoleMessage, 75, 575);
     fill(255);
     selectButton[0].display();
     selectButton[1].display();
     text("Weapon", 200, 525);
     text("Armor", 400, 525);
-
-    //for(int i = 0; i < armorButton.length; i++){
-    //  armorButton[i].display();
-    //}
-
-    // armorButton[0].display();
 
     int screenWidth = 640;
     int screenHeight = 640;
@@ -138,7 +129,7 @@ class Shop {
       rectMode(CORNER);
     }
   }
-  //OG forLoop
+    //OG forLoop
   //for (int row = 0; row < numRows; row++) {
   //  for (int col = 0; col < numCols; col++) {
   //    rectMode(CENTER);
