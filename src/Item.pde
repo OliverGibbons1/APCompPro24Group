@@ -96,4 +96,13 @@ class Item {
     }
     return -1;
   }
+  
+  int potionPrice(String potName) {
+    for(Potion potion : potions) {
+      if(potion.getName().equals(potName)) {
+        return potion.getPrice();
+      }
+    }
+    return -1;
+  }
 }
