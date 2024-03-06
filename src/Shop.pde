@@ -1,14 +1,17 @@
 class Shop {
   Player player;
+  Item i;
   String consoleMessage;
   Button [] selectButton = new Button[2];
   Button [] weaponButton = new Button[5];
   Button [] armorButton;
   boolean playerTurn = true;
   int wPrice, aPrice;
+  boolean purchased = false;
 
   Shop() {
     this.player = p;
+    i = new Item();
 
     //SELECTBUTTON ARRAY -------------------------------------
     selectButton[0] = new Button(175, 495, 100, 40);
@@ -103,15 +106,13 @@ class Shop {
     selectButton[1].display();
     text("Weapon", 200, 510);
     text("Armor", 400, 510);
+    
+    
 
     for (int i = 0; i < weaponButton.length; i++) {
       weaponButton[i].display();
       if (weaponButton[i].pressed()) {
         println("WB true");
-        if(p.money >= wPrice) {
-          p.money -= wPrice;
-          println("Thank you for your business");
-        }
         //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
       }
     }
