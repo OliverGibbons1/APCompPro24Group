@@ -86,19 +86,19 @@ class Shop {
     text("Weapon", 200, 510);
     text("Armor", 400, 510);
 
-    if (selectButton[0].pressed()) {
+if (selectButton[0].pressed()) {
       weaponDisplay = true;
-    } else if (selectButton[1].pressed()) {
+    } if (selectButton[1].pressed()) {
       armorDisplay = true;
     }
     
-    if(weaponDisplay) {
+    if (weaponDisplay) {
       armorDisplay = false;
-    weaponDisplay();
+      weaponDisplay();
     } 
     if (armorDisplay) {
-    weaponDisplay = false;
-    armorDisplay();
+      weaponDisplay = false;
+      armorDisplay();
     }
   }
 
@@ -131,6 +131,14 @@ class Shop {
         println("WB true");
         //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
       }
+    }
+    
+    if (selectButton[1].pressed()) {
+      armorDisplay = true;
+    }
+    if (armorDisplay) {
+      weaponDisplay = false;
+      armorDisplay();
     }
   }
 
@@ -168,5 +176,13 @@ class Shop {
     if (corner) {
       rectMode(CORNER);
     }
+    
+    if (selectButton[0].pressed()) {
+      weaponDisplay = true;
+    }
+    if (weaponDisplay) {
+      armorDisplay = false;
+      weaponDisplay();
+    } 
   }
 }
