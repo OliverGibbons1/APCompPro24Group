@@ -5,13 +5,17 @@ class Shop {
   String consoleMessage;
   Button [] selectButton = new Button[3];
   Button [] weaponButton = new Button[5];
+  Button [] potionButton = new Button[3];
   Button [] armorButton;
   boolean playerTurn = true;
   int screenWidth = 640;
   int screenHeight = 640;
-  boolean weaponDisplay, armorDisplay = false;
+  boolean weaponDisplay, armorDisplay, potionDisplay = false;
   int wPrice, aPrice;
   boolean purchased = false;
+  int center = screenWidth / 2;
+  int qLeft = screenWidth / 4;
+  int qRight = qLeft * 3;
 
 
   Shop() {
@@ -19,11 +23,10 @@ class Shop {
     i = new Item();
 
     //SELECTBUTTON ARRAY -------------------------------------
-    int center = screenWidth / 2;
-    
-    selectButton[0] = new Button(175, 495, 100, 40);
-    selectButton[1] = new Button(375, 495, 100, 40);
-    //selectButton[3] = new Button(center, 495, 100, 40);
+
+    selectButton[0] = new Button(qLeft - 50, 495, 100, 40);
+    selectButton[1] = new Button(qRight - 50, 495, 100, 40);
+    selectButton[2] = new Button(center - 50, 495, 100, 40);
 
     //ARMORBUTTON ARRAY --------------------------------------
     armorButton = new Button[12];
@@ -64,6 +67,13 @@ class Shop {
 
     // Coordinates for the centered box
     weaponButton[4] = new Button(pmc, 350, 150, 100);
+
+    //POTIONBUTTON ARRAY -------------------------------------------
+    potionButton[0] = new Button(pm, 200, 150, 100);
+    potionButton[1] = new Button(pma, 200, 150, 100);
+
+    // Coordinates for the centered box
+    potionButton[2] = new Button(pmc, 310, 150, 100);
   }
 
   void display() {
@@ -76,29 +86,44 @@ class Shop {
     rect(50, 50, 540, 50);
     rect(50, 540, 540, 50);
     fill(0);
-    text("Gold: " + p.money, 290, 83);
+    text("Gold: " + p.money, center, 83);
     stroke(255);
     fill(0);
-    text(consoleMessage, 75, 575);
-    fill(255);
-    selectButton[0].display();
-    selectButton[1].display();
-    text("Weapon", 200, 510);
-    text("Armor", 400, 510);
+    text(consoleMessage, center, 575);
 
-if (selectButton[0].pressed()) {
+    for (int i = 0; i < selectButton.length; i ++) {
+      selectButton[i].display();
+    }
+    fill(255);
+    textAlign(CENTER);
+    text("Weapon", qLeft, 520);
+    text("Armor", qRight, 520);
+    text("Potions", center, 520);
+
+    if (selectButton[0].pressed()) {
       weaponDisplay = true;
-    } if (selectButton[1].pressed()) {
+    }
+    if (selectButton[1].pressed()) {
       armorDisplay = true;
     }
-    
+    if (selectButton[2].pressed()){
+       potionDisplay = true;
+    }
+
     if (weaponDisplay) {
       armorDisplay = false;
+      potionDisplay = false;
       weaponDisplay();
-    } 
+    }
     if (armorDisplay) {
       weaponDisplay = false;
+      potionDisplay = false;
       armorDisplay();
+    }
+    if (potionDisplay) {
+      armorDisplay = false;
+      weaponDisplay = false;
+      potionDisplay();
     }
   }
 
@@ -113,17 +138,18 @@ if (selectButton[0].pressed()) {
     rect(50, 50, 540, 50);
     rect(50, 540, 540, 50);
     fill(0);
-    text("Gold: " + p.money, 290, 83);
+    text("Gold: " + p.money, center, 83);
     stroke(255);
     fill(0);
-    text(consoleMessage, 75, 575);
+    text(consoleMessage, center, 575);
+    for (int i = 0; i < selectButton.length; i ++) {
+      selectButton[i].display();
+    }
     fill(255);
-    selectButton[0].display();
-    selectButton[1].display();
-    text("Weapon", 200, 510);
-    text("Armor", 400, 510);
-    
-    
+    textAlign(CENTER);
+    text("Weapon", qLeft, 520);
+    text("Armor", qRight, 520);
+    text("Potions", center, 520);
 
     for (int i = 0; i < weaponButton.length; i++) {
       weaponButton[i].display();
@@ -132,13 +158,18 @@ if (selectButton[0].pressed()) {
         //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
       }
     }
-    
+
     if (selectButton[1].pressed()) {
       armorDisplay = true;
+    } else if (selectButton[2].pressed()) {
+      potionDisplay = true;
     }
     if (armorDisplay) {
       weaponDisplay = false;
       armorDisplay();
+    } else if (potionDisplay) {
+      weaponDisplay = false;
+      potionDisplay();
     }
   }
 
@@ -152,15 +183,18 @@ if (selectButton[0].pressed()) {
     rect(50, 50, 540, 50);
     rect(50, 540, 540, 50);
     fill(0);
-    text("Gold: " + p.money, 290, 83);
+    text("Gold: " + p.money, center, 83);
     stroke(255);
     fill(0);
-    text(consoleMessage, 75, 575);
+    text(consoleMessage, center, 575);
+    for (int i = 0; i < selectButton.length; i ++) {
+      selectButton[i].display();
+    }
     fill(255);
-    selectButton[0].display();
-    selectButton[1].display();
-    text("Weapon", 200, 525);
-    text("Armor", 400, 525);
+    textAlign(CENTER);
+    text("Weapon", qLeft, 520);
+    text("Armor", qRight, 520);
+    text("Potions", center, 520);
 
     boolean corner = false;
     for (int i = 0; i < armorButton.length; i++) {
@@ -176,13 +210,63 @@ if (selectButton[0].pressed()) {
     if (corner) {
       rectMode(CORNER);
     }
-    
+
     if (selectButton[0].pressed()) {
       weaponDisplay = true;
+    } else if (selectButton[2].pressed()) {
+      potionDisplay = true;
     }
     if (weaponDisplay) {
       armorDisplay = false;
       weaponDisplay();
-    } 
+    } else if (potionDisplay) {
+      armorDisplay = false;
+      potionDisplay();
+    }
+  }
+
+  void potionDisplay() {
+    consoleMessage = "Welcome to the Potion Shop! Buy what you can!";
+    fill(155);
+    textSize(20);
+    stroke(255);
+    rect(50, 50, 540, 540);
+    fill(255);
+    rect(50, 50, 540, 50);
+    rect(50, 540, 540, 50);
+    fill(0);
+    text("Gold: " + p.money, center, 83);
+    stroke(255);
+    fill(0);
+    text(consoleMessage, center, 575);
+    for (int i = 0; i < selectButton.length; i ++) {
+      selectButton[i].display();
+    }
+    fill(255);
+    textAlign(CENTER);
+    text("Weapon", qLeft, 520);
+    text("Armor", qRight, 520);
+    text("Potions", center, 520);
+
+    for (int i = 0; i < potionButton.length; i++) {
+      potionButton[i].display();
+      if (potionButton[i].pressed()) {
+        println("PB true");
+        //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
+      }
+    }
+
+    if (selectButton[1].pressed()) {
+      armorDisplay = true;
+    } else if (selectButton[0].pressed()) {
+      weaponDisplay = true;
+    }
+    if (armorDisplay) {
+      potionDisplay = false;
+      armorDisplay();
+    } else if (weaponDisplay) {
+      potionDisplay = false;
+      weaponDisplay();
+    }
   }
 }
