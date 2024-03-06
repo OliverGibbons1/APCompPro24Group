@@ -7,16 +7,10 @@ from pygame.locals import *
 from pygame.transform import scale
 from pygame import draw
 from math import sin, pi
-import sys
 from BetterPyGame import Button, InputBox
 import BetterPyGame as BPG
 
-def OSPath(x):
-    if sys.platform=="win32":
-        return x.replace("/", "\\")
-    else:
-        return x
-pf=gcd().replace("\\", "/")
+pf=gcd()
 print(pf)
 pf="/".join(pf.split("/")[:-1])
 src=pf+"/src"
@@ -25,7 +19,6 @@ MapTilesFolder=SpritesFolder+"/MapTiles"
 MapBackFolder=MapTilesFolder+"/MapBack"
 MapForeFolder=MapTilesFolder+"/MapFore"
 NPCSpritesFolder=SpritesFolder+"/NPCSprites"
-print(pf)
 if not os.path.exists(src):
     exit(128)
 
@@ -63,7 +56,6 @@ def rl(x):
 # Background MapTiles
 # NPC Layer
 # Foreground Objects
-
 
 class MapBack:
     def __init__(self, x, y, w, h, img):
@@ -122,21 +114,27 @@ class MapEditor:
         self.running = True
         self.Selected = (0,0) # (0 Background, 1 NPC, 2 Foreground, 3 Event),(index)
 
+        self.EditorSprites={}
+        for x in os.listdir(os.fsencode(SpritesFolder)):
+            if x.decode().endswith(".png"):
+                self.EditorSprites[x.decode()]=pg.image.load(f"{SpritesFolder}/{x.decode()}")
         f=open("EventObjects.json","r")
         self.EventJSON=json.loads(f.read())
         f.close()
 
-        self.BackRef = [pg.image.load(OSPath(f"{MapBackFolder}/{x.decode()}")) for x in os.listdir(os.fsencode(OSPath(MapBackFolder))) if x.decode().endswith(".png")]
+        self.BackRef = [pg.image.load(f"{MapBackFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapBackFolder)) if x.decode().endswith(".png")]
         self.MapBackTiles = np.zeros(self.spriteCount,dtype=int)
-        print(os.fsencode(OSPath(MapBackFolder)))
-        self.NPCRef = [pg.image.load(OSPath(f"{NPCSpritesFolder}/{x.decode()}")) for x in os.listdir(os.fsencode(OSPath(NPCSpritesFolder))) if x.decode().endswith(".png")]
-        self.MapNPCTiles = np.zeros(self.spriteCount,dtype=int)
+        self.MapBackTiles[0][0]=0
 
-        self.ForeRef = [pg.image.load(OSPath(f"{MapForeFolder}/{x.decode()}")) for x in os.listdir(os.fsencode(OSPath(MapForeFolder))) if x.decode().endswith(".png")]
+        self.NPCRef = [pg.image.load(f"{NPCSpritesFolder}/{x.decode()}") for x in os.listdir(os.fsencode(NPCSpritesFolder)) if x.decode().endswith(".png")]
+        self.MapNPCTiles = np.zeros(self.spriteCount,dtype=int)
+        self.MapNPCTiles[:,:]=-1
+
+        self.ForeRef = [pg.image.load(f"{MapForeFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapForeFolder)) if x.decode().endswith(".png")]
         self.MapForeTiles = np.zeros(self.spriteCount,dtype=int)
+        self.MapForeTiles[:,:]=-1
 
         self.EventRef = [x[0:2] for x in self.EventJSON]
-        print(self.EventRef)
         self.MapEventTiles = [[{} for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
         #print(self.MapEventTiles)
         #             Back,NPC,Fore
@@ -147,9 +145,36 @@ class MapEditor:
             for x in range(self.spriteCount[0]):
                 draw.rect(self.screen,(120,120,120) if (x+y)%2==1 else (0,0,0),(x*self.spriteSize[0],y*self.spriteSize[1],self.spriteSize[0],self.spriteSize[1]))
         # Draw MapTiles / Background Layer
-        for y in range(self.MapBackTiles.shape[0]):
-            for x in range(self.MapBackTiles.shape[1]):
-                self.screen.blit(scale(self.BackRef[self.MapBackTiles[y][x]],self.spriteSize),(x*self.spriteSize[0],y*self.spriteSize[1]))
+        if len(self.BackRef)>0:
+            for y in range(self.MapBackTiles.shape[0]):
+                for x in range(self.MapBackTiles.shape[1]):
+                    self.screen.blit(scale(self.BackRef[self.MapBackTiles[y][x]],self.spriteSize),(x*self.spriteSize[0],y*self.spriteSize[1]))
+        # Draw NPCTiles / NPC Layer
+        print(self.NPCRef)
+        if len(self.NPCRef)>0:
+            for y in range(self.MapNPCTiles.shape[0]):
+                for x in range(self.MapNPCTiles.shape[1]):
+                    print(y,x)
+                    self.screen.blit(scale(self.NPCRef[self.MapNPCTiles[y][x]],self.spriteSize),(x*self.spriteSize[0],y*self.spriteSize[1]))
+        # Draw ForegroundTiles / Foreground Layer
+        if len(self.ForeRef)>0:
+            for y in range(self.MapForeTiles.shape[0]):
+                for x in range(self.MapForeTiles.shape[1]):
+                    if self.MapForeTiles[y][x]>=0:
+                        self.screen.blit(scale(self.ForeRef[self.MapForeTiles[y][x]],self.spriteSize),(x*self.spriteSize[0],y*self.spriteSize[1]))
+        # Draw EventTiles / Event Layer
+        if len(self.EventRef)>0:
+            for y in rl(self.MapEventTiles):
+                for x in rl(self.MapEventTiles[y]):
+                    if len(self.MapEventTiles[y][x])>0:
+                        self.screen.blit(scale(self.EventRef[self.MapEventTiles[y][x]],self.spriteSize),(x*self.spriteSize[0],y*self.spriteSize[1]))
+        
+        # Draw Bottom Toolbar
+
+        #   Draw Save Button
+
+        #   Draw Load Button
+
         # Mouse Selection
         m=BPG.mouse
         if m[2] and m[0]>self.width-self.spriteSize[0]//2*4 and m[1]<self.spriteSize[1]*4*self.spriteCount[1]:
