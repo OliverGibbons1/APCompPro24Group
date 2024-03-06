@@ -1,17 +1,24 @@
 //Completed by Oliver Gibbons
 class Shop {
   Player player;
+  Item i;
   String consoleMessage;
   Button [] selectButton = new Button[3];
   Button [] weaponButton = new Button[5];
   Button [] armorButton;
   boolean playerTurn = true;
+<<<<<<< HEAD
   int screenWidth = 640;
   int screenHeight = 640;
   boolean weaponDisplay, armorDisplay = false;
+=======
+  int wPrice, aPrice;
+  boolean purchased = false;
+>>>>>>> 37fe7d2a548daed1ae1a48988abcf5ecee9daff9
 
   Shop() {
     this.player = p;
+    i = new Item();
 
     //SELECTBUTTON ARRAY -------------------------------------
     int center = screenWidth / 2;
@@ -117,6 +124,8 @@ class Shop {
     selectButton[1].display();
     text("Weapon", 200, 510);
     text("Armor", 400, 510);
+    
+    
 
     for (int i = 0; i < weaponButton.length; i++) {
       weaponButton[i].display();
