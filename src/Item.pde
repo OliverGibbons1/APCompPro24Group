@@ -60,6 +60,15 @@ class Item {
     }
     return -1;
   }
+  
+  int wpnPrice(String wpnName) {
+    for(Weapon weapon : weapons) {
+      if(weapon.getName().equals(wpnName)){
+        return weapon.getPrice();
+      }
+    }
+    return -1;
+  }
 
   int armorHp(String armorName) {
     for (Armor armor : armors) {
@@ -74,6 +83,15 @@ class Item {
     for (Armor armor : armors) {
       if (armor.getName().equals(armorName)) {
         return armor.getSpot();
+      }
+    }
+    return -1;
+  }
+  
+  int armorPrice(String armorName) {
+    for(Armor armor : armors) {
+      if(armor.getName().equals(armorName)) {
+        return armor.getPrice();
       }
     }
     return -1;

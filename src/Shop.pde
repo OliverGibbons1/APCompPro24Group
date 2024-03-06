@@ -5,6 +5,7 @@ class Shop {
   Button [] weaponButton = new Button[5];
   Button [] armorButton;
   boolean playerTurn = true;
+  int wPrice, aPrice;
 
   Shop() {
     this.player = p;
@@ -107,6 +108,10 @@ class Shop {
       weaponButton[i].display();
       if (weaponButton[i].pressed()) {
         println("WB true");
+        if(p.money >= wPrice) {
+          p.money -= wPrice;
+          println("Thank you for your business");
+        }
         //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
       }
     }
