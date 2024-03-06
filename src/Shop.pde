@@ -1,22 +1,28 @@
+//Completed by Oliver Gibbons
 class Shop {
   Player player;
   String consoleMessage;
-  Button [] selectButton = new Button[2];
+  Button [] selectButton = new Button[3];
   Button [] weaponButton = new Button[5];
   Button [] armorButton;
   boolean playerTurn = true;
+  int screenWidth = 640;
+  int screenHeight = 640;
+  boolean weaponDisplay, armorDisplay = false;
 
   Shop() {
     this.player = p;
 
     //SELECTBUTTON ARRAY -------------------------------------
+    int center = screenWidth / 2;
+    
     selectButton[0] = new Button(175, 495, 100, 40);
     selectButton[1] = new Button(375, 495, 100, 40);
+    //selectButton[3] = new Button(center, 495, 100, 40);
 
     //ARMORBUTTON ARRAY --------------------------------------
     armorButton = new Button[12];
-    int screenWidth = 640;
-    int screenHeight = 640;
+
     int centeredBoxWidth = 500;
     int centeredBoxHeight = 375;
     int marginX = ((screenWidth - centeredBoxWidth) / 2) + 6;
@@ -76,9 +82,18 @@ class Shop {
     text("Armor", 400, 510);
 
     if (selectButton[0].pressed()) {
-      weaponDisplay();
+      weaponDisplay = true;
     } else if (selectButton[1].pressed()) {
-      armorDisplay();
+      armorDisplay = true;
+    }
+    
+    if(weaponDisplay) {
+      armorDisplay = false;
+    weaponDisplay();
+    } 
+    if (armorDisplay) {
+    weaponDisplay = false;
+    armorDisplay();
     }
   }
 
