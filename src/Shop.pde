@@ -3,6 +3,7 @@ class Shop {
   Player player;
   Item i;
   String consoleMessage;
+  String weapon = "Basic Sword";
   Button [] selectButton = new Button[3];
   Button [] weaponButton = new Button[5];
   Button [] potionButton = new Button[3];
@@ -11,7 +12,7 @@ class Shop {
   int screenWidth = 640;
   int screenHeight = 640;
   boolean weaponDisplay, armorDisplay, potionDisplay = false;
-  int wPrice, aPrice;
+  int price;
   boolean purchased = false;
   int center = screenWidth / 2;
   int qLeft = screenWidth / 4;
@@ -21,6 +22,9 @@ class Shop {
   Shop() {
     this.player = p;
     i = new Item();
+
+    String[] weaponNames = {"Basic Sword", "Refined Sword", "Katana"};
+    int numWpns = weaponNames.length;
 
     //SELECTBUTTON ARRAY -------------------------------------
 
@@ -106,8 +110,8 @@ class Shop {
     if (selectButton[1].pressed()) {
       armorDisplay = true;
     }
-    if (selectButton[2].pressed()){
-       potionDisplay = true;
+    if (selectButton[2].pressed()) {
+      potionDisplay = true;
     }
 
     if (weaponDisplay) {
@@ -150,6 +154,14 @@ class Shop {
     text("Weapon", qLeft, 520);
     text("Armor", qRight, 520);
     text("Potions", center, 520);
+
+    for (int i = 0; i < numWpns; i++) {
+      if (weaponButton[i].pressed()) {
+        weapon = weaponNames[i];
+        price = i.wpnPrice(weapon);
+        break; // exit the loop after finding the pressed button
+      }
+    }
 
     for (int i = 0; i < weaponButton.length; i++) {
       weaponButton[i].display();
