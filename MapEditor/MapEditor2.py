@@ -113,11 +113,15 @@ class MapEditor:
         self.height = ProgSize[1]
         self.running = True
         self.Selected = (0,0) # (0 Background, 1 NPC, 2 Foreground, 3 Event),(index)
-
+        self.Mouse=(BPG.mouse)
+        print(self.Mouse)
+        self.HeldKeys=[]
         self.EditorSprites={}
-        for x in os.listdir(os.fsencode(SpritesFolder)):
+        for x in os.listdir(os.fsencode(f"EditorSprites/")):
+            print(x.decode().strip())
             if x.decode().endswith(".png"):
-                self.EditorSprites[x.decode()]=pg.image.load(f"{SpritesFolder}/{x.decode()}")
+                self.EditorSprites[x.decode().strip().replace(".png", "")]=pg.image.load(f"EditorSprites/{x.decode().strip()}")
+        print(self.EditorSprites)
         f=open("EventObjects.json","r")
         self.EventJSON=json.loads(f.read())
         f.close()
@@ -134,11 +138,22 @@ class MapEditor:
         self.MapForeTiles = np.zeros(self.spriteCount,dtype=int)
         self.MapForeTiles[:,:]=-1
 
-        self.EventRef = [x[0:2] for x in self.EventJSON]
-        self.MapEventTiles = [[{} for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
+        self.EventRefT = [x[0:2] for x in self.EventJSON]
+        self.EventRef = [x for x in self.EventJSON]
+        print(self.EventRef,"--")
+        self.MapEventTiles = [["" for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
         #print(self.MapEventTiles)
         #             Back,NPC,Fore
         self.map = [[[0,   0,  0] for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
+    def key_update(self,P):
+        for event in P:
+            if event.type==pg.KEYDOWN:
+                self.HeldKeys.append(event.key)
+            if event.type==pg.KEYUP:
+                try:
+                    self.HeldKeys.remove(event.key)
+                except:
+                    pass
     def draw(self):
         # Draw Background Grid
         for y in range(self.spriteCount[1]):
@@ -150,7 +165,7 @@ class MapEditor:
                 for x in range(self.MapBackTiles.shape[1]):
                     self.screen.blit(scale(self.BackRef[self.MapBackTiles[y][x]],self.spriteSize),(x*self.spriteSize[0],y*self.spriteSize[1]))
         # Draw NPCTiles / NPC Layer
-        print(self.NPCRef)
+        # print(self.NPCRef)
         if len(self.NPCRef)>0:
             for y in range(self.MapNPCTiles.shape[0]):
                 for x in range(self.MapNPCTiles.shape[1]):
@@ -167,19 +182,35 @@ class MapEditor:
             for y in rl(self.MapEventTiles):
                 for x in rl(self.MapEventTiles[y]):
                     if len(self.MapEventTiles[y][x])>0:
-                        self.screen.blit(scale(self.EventRef[self.MapEventTiles[y][x]],self.spriteSize),(x*self.spriteSize[0],y*self.spriteSize[1]))
+                        txt=Font.render(self.EventRefT[self.EventRef.index(self.MapEventTiles[y][x])],True,(0,0,0))
+                        self.screen.blit(txt,(x*self.spriteSize[0],y*self.spriteSize[1]))
         
-        # Draw Bottom Toolbar
-
-        #   Draw Save Button
-
-        #   Draw Load Button
-
+        
         # Mouse Selection
         m=BPG.mouse
-        if m[2] and m[0]>self.width-self.spriteSize[0]//2*4 and m[1]<self.spriteSize[1]*4*self.spriteCount[1]:
+        if m[2] and not self.Mouse[2] and m[0]>self.width-self.spriteSize[0]//2*4 and m[1]<self.spriteSize[1]*4*self.spriteCount[1]:
             self.Selected=(max(0,3-((self.spriteCount[0]*2+3)-m[0]//(self.spriteSize[1]//2))),m[1]//(self.spriteSize[1]//2))
         self.Selected=(self.Selected[0],min(self.Selected[1],len(self.BackRef)-1) if self.Selected[0]==0 else min(self.Selected[1],len(self.NPCRef)-1) if self.Selected[0]==1 else min(self.Selected[1],len(self.ForeRef)-1) if self.Selected[0]==2 else min(self.Selected[1],len(self.EventRef)-1))
+        #print(self.HeldKeys)
+        #print(self.Mouse,m)
+        # Draw Selected Tile
+        if ((m[2] and not self.Mouse[2]) or m[4]) and m[0]<self.spriteSize[0]*self.spriteCount[0] and m[1]<self.spriteSize[1]*self.spriteCount[1]:
+            match self.Selected[0]:
+                case 0:
+                    self.MapBackTiles[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]=self.Selected[1]
+                case 1:
+                    self.MapNPCTiles[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]=self.Selected[1]
+                case 2:
+                    self.MapForeTiles[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]=self.Selected[1]
+                case 3:
+                    self.MapEventTiles[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]=self.EventRef[self.Selected[1]]
+        # Draw Bottom Toolbar
+        #   Draw Save Button
+        self.screen.blit(scale(self.EditorSprites["SaveIcon"],self.spriteSize),(self.width-self.spriteSize[0]*2,self.height-self.spriteSize[1]*2))
+        if m[2] and not self.Mouse[2] and m[0]>self.width-self.spriteSize[0]*2 and m[0]<self.width-self.spriteSize[0] and m[1]>self.height-self.spriteSize[1]*2 and m[1]<self.height-self.spriteSize[1]:
+            print("Save")
+        #   Draw Load Button
+        self.screen.blit(scale(self.EditorSprites["LoadIcon"],self.spriteSize),(self.width-self.spriteSize[0],self.height-self.spriteSize[1]*2))
         #print(self.Selected)
         # Draw BackRef
         for BRef in rl(self.BackRef):
@@ -192,8 +223,11 @@ class MapEditor:
             self.screen.blit(scale(self.ForeRef[FRef],(self.spriteSize[0]//2,self.spriteSize[1]//2)),(self.width-self.spriteSize[0]//2*2,FRef*self.spriteSize[1]//2))
         # Draw EventRef
         for ERef in rl(self.EventRef):
-            txt=Font.render(self.EventRef[ERef],True,(0,0,0))
+            txt=Font.render(self.EventRefT[ERef],True,(0,0,0))
             self.screen.blit(txt,(self.width-self.spriteSize[0]//2*1,ERef*self.spriteSize[1]//2))
+
+        # Mouse Update
+        self.Mouse=tuple(m)
         draw.rect(self.screen,(0,0,0),((self.width-self.spriteSize[0]//2*(4-self.Selected[0]),self.Selected[1]*self.spriteSize[1]//2),(self.spriteSize[0]//2,self.spriteSize[1]//2)),2)
 pg.init()
 pg.font.init()
@@ -209,6 +243,7 @@ running=True
 while running:
     screen.fill((100,100,100))
     PGE=BPG.keyboard_update()
+    ME.key_update(PGE)
     #print(BPG.mouse)
     for event in PGE:
         if event.type == QUIT:
