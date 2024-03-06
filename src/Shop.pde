@@ -2,17 +2,61 @@ class Shop {
   Player player;
   String consoleMessage;
   Button [] selectButton = new Button[2];
-  Button [] weaponButton = new Button[6];
-  Button [] armorButton = new Button[12];
+  Button [] weaponButton = new Button[5];
+  Button [] armorButton;
   boolean playerTurn = true;
 
   Shop() {
-    selectButton[0] = new Button (175, 495, 100, 40);
-    selectButton[1] = new Button (375, 495, 100, 40);
     this.player = p;
+
+    //SELECTBUTTON ARRAY -------------------------------------
+    selectButton[0] = new Button(175, 495, 100, 40);
+    selectButton[1] = new Button(375, 495, 100, 40);
+
+    //ARMORBUTTON ARRAY --------------------------------------
+    armorButton = new Button[12];
+    int screenWidth = 640;
+    int screenHeight = 640;
+    int centeredBoxWidth = 500;
+    int centeredBoxHeight = 375;
+    int marginX = ((screenWidth - centeredBoxWidth) / 2) + 6;
+    int marginY = ((screenHeight - centeredBoxHeight) / 2) - 63;
+
+    int numRows = 3;
+    int numCols = 4;
+    int innerBoxWidth = (centeredBoxWidth - 2 * 10) / numCols;
+    int innerBoxHeight = (centeredBoxHeight - 2 * 10) / numRows;
+
+    int index = 0;
+
+    for (int row = 0; row < numRows; row++) {
+      for (int col = 0; col < numCols; col++) {
+        int x = marginX + 50 + col * (innerBoxWidth + 10);
+        int y = marginY + 100 + row * (innerBoxHeight + 10);
+        armorButton[index] = new Button(x, y, innerBoxWidth, innerBoxHeight);
+        index++;
+      }
+    }
+
+    //WEAPONBUTTON ARRAY -----------------------------------------
+    int pm = (screenWidth / 2) - 150;
+    int pma = (screenWidth / 2) + 10;
+    int pmc = (screenWidth / 2) - 75;
+
+    // First row boxes
+    weaponButton[0] = new Button(pm, 130, 150, 100);
+    weaponButton[1] = new Button(pma, 130, 150, 100);
+
+    // Coordinates for the second row of boxes
+    weaponButton[2] = new Button(pm, 240, 150, 100);
+    weaponButton[3] = new Button(pma, 240, 150, 100);
+
+    // Coordinates for the centered box
+    weaponButton[4] = new Button(pmc, 350, 150, 100);
   }
 
   void display() {
+    consoleMessage = "Welcome to the shop! Buy what you can!";
     fill(155);
     textSize(20);
     stroke(255);
@@ -31,7 +75,6 @@ class Shop {
     text("Weapon", 200, 510);
     text("Armor", 400, 510);
 
-    consoleMessage = "Welcome to the shop! Buy what you can!";
     if (selectButton[0].pressed()) {
       weaponDisplay();
     } else if (selectButton[1].pressed()) {
@@ -41,7 +84,7 @@ class Shop {
 
 
   void weaponDisplay() {
-    consoleMessage = "Welcome to the shop! Buy what you can!";
+    consoleMessage = "Welcome to the Weapons Shop! Buy what you can!";
     fill(155);
     textSize(20);
     stroke(255);
@@ -59,29 +102,18 @@ class Shop {
     selectButton[1].display();
     text("Weapon", 200, 510);
     text("Armor", 400, 510);
-    //for(int i = 0; i < weaponButton.length; i++){
-    //  weaponButton[i].display();
-    //}
+
+    for (int i = 0; i < weaponButton.length; i++) {
+      weaponButton[i].display();
+      if (weaponButton[i].pressed()) {
+        println("WB true");
+        //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
+      }
+    }
   }
-  //void armorDisplay() {
-
-
-  //  int pm= (640 / 2) - 150;
-  //  int pma = (640 / 2) + 10;
-  //  // First row boxes
-  //  rect(pm, 130, 150, 100);
-  //  rect(pma, 130, 150, 100);
-
-  //  // Coordinates for the second row of boxes
-  //  rect(pm, 240, 150, 100);
-  //  rect(pma, 240, 150, 100);
-  //  int pmc= (640 / 2) - 75;
-  //  // Coordinates for the centered box
-  //  rect(pmc, 350, 150, 100);
-  //}
 
   void armorDisplay() {
-    consoleMessage = "Welcome to the shop! Buy what you can!";
+    consoleMessage = "Welcome to the Armor Shop! Buy what you can!";
     fill(155);
     textSize(20);
     stroke(255);
@@ -100,45 +132,19 @@ class Shop {
     text("Weapon", 200, 525);
     text("Armor", 400, 525);
 
-    int screenWidth = 640;
-    int screenHeight = 640;
-    int centeredBoxWidth = 500;
-    int centeredBoxHeight = 375;
-    int marginX = ((screenWidth - centeredBoxWidth) / 2) + 6;
-    int marginY = ((screenHeight - centeredBoxHeight) / 2) - 63;
+    boolean corner = false;
+    for (int i = 0; i < armorButton.length; i++) {
+      rectMode(CENTER);
+      armorButton[i].display();
+      corner = true;
 
-    int numRows = 3;
-    int numCols = 4;
-    int innerBoxWidth = (centeredBoxWidth - 2 * 10) / numCols; // Subtract 10 pixels for left and right margins
-    int innerBoxHeight = (centeredBoxHeight - 2 * 10) / numRows; // Subtract 10 pixels for top and bottom margins
-
-    for (int row = 0; row < numRows; row++) {
-      for (int col = 0; col < numCols; col++) {
-        for (int i = 0; i < 12; i++) {
-          rectMode(CENTER);
-          int x = marginX + 50 + col * (innerBoxWidth + 10); // Add 50 pixels for left margin
-          int y = marginY + 100 + row * (innerBoxHeight + 10); // Add 100 pixels for top margin
-          //println(x, ",", y, ",", innerBoxWidth, ",", innerBoxHeight);
-          //rect(x, y, innerBoxWidth, innerBoxHeight);
-          armorButton[i] = new Button (x, y, innerBoxWidth, innerBoxHeight);
-          //          println(armorButton[i]);
-          armorButton[i].display();
-        }
+      if (armorButton[i].pressed()) {
+        println("AB true");
+        //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
       }
-      //println("---------");
+    }
+    if (corner) {
       rectMode(CORNER);
     }
   }
-    //OG forLoop
-  //for (int row = 0; row < numRows; row++) {
-  //  for (int col = 0; col < numCols; col++) {
-  //    rectMode(CENTER);
-  //    int x = marginX + 50 + col * (innerBoxWidth + 10); // Add 50 pixels for left margin
-  //    int y = marginY + 100 + row * (innerBoxHeight + 10); // Add 100 pixels for top margin
-  //    println(x, ",", y, ",", innerBoxWidth, ",", innerBoxHeight);
-  //    rect(x, y, innerBoxWidth, innerBoxHeight);
-  //  }
-  //  println("---------");
-  //  rectMode(CORNER);
-  //}
 }

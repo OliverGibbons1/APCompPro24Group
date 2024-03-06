@@ -121,7 +121,7 @@ void draw() {
   }
   
   if (shopOn) {
-    shop.armorDisplay();
+    shop.display();
   }
 
   p.move();
