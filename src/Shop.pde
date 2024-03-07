@@ -18,6 +18,9 @@ class Shop {
   int qLeft = screenWidth / 4;
   int qRight = qLeft * 3;
 
+  boolean[] WBPressed = new boolean[weaponButton.length];
+  boolean[] ABPressed = new boolean[12];
+  boolean[] PBPressed = new boolean[potionButton.length];
 
   Shop() {
     this.player = p;
@@ -37,8 +40,8 @@ class Shop {
 
     int centeredBoxWidth = 500;
     int centeredBoxHeight = 375;
-    int marginX = ((screenWidth - centeredBoxWidth) / 2) + 6;
-    int marginY = ((screenHeight - centeredBoxHeight) / 2) - 63;
+    int marginX = ((screenWidth - centeredBoxWidth) / 2) - 5;
+    int marginY = ((screenHeight - centeredBoxHeight) / 2) - 20;
 
     int numRows = 3;
     int numCols = 4;
@@ -46,11 +49,10 @@ class Shop {
     int innerBoxHeight = (centeredBoxHeight - 2 * 10) / numRows;
 
     int index = 0;
-
     for (int row = 0; row < numRows; row++) {
       for (int col = 0; col < numCols; col++) {
-        int x = marginX + 50 + col * (innerBoxWidth + 10);
-        int y = marginY + 100 + row * (innerBoxHeight + 10);
+        int x = marginX + col * (innerBoxWidth + 10);
+        int y = marginY + row * (innerBoxHeight + 10);
         armorButton[index] = new Button(x, y, innerBoxWidth, innerBoxHeight);
         index++;
       }
@@ -78,6 +80,17 @@ class Shop {
 
     // Coordinates for the centered box
     potionButton[2] = new Button(pmc, 310, 150, 100);
+
+    //Check for Weapon, armor, and potion button pressed
+    for (int i = 0; i < WBPressed.length; i++) {
+      WBPressed[i] = false;
+    }
+    for (int i = 0; i < ABPressed.length; i++) {
+      ABPressed[i] = false;
+    }
+    for (int i = 0; i < PBPressed.length; i++) {
+      PBPressed[i] = false;
+    }
   }
 
   void display() {
@@ -106,27 +119,25 @@ class Shop {
 
     if (selectButton[0].pressed()) {
       weaponDisplay = true;
-    }
-    if (selectButton[1].pressed()) {
+      armorDisplay = false;
+      potionDisplay = false;
+    } else if (selectButton[1].pressed()) {
       armorDisplay = true;
-    }
-    if (selectButton[2].pressed()) {
+      weaponDisplay = false;
+      potionDisplay = false;
+    } else if (selectButton[2].pressed()) {
       potionDisplay = true;
+      armorDisplay = false;
+      weaponDisplay = false;
     }
 
     if (weaponDisplay) {
-      armorDisplay = false;
-      potionDisplay = false;
       weaponDisplay();
     }
     if (armorDisplay) {
-      weaponDisplay = false;
-      potionDisplay = false;
       armorDisplay();
     }
     if (potionDisplay) {
-      armorDisplay = false;
-      weaponDisplay = false;
       potionDisplay();
     }
   }
@@ -155,33 +166,24 @@ class Shop {
     text("Armor", qRight, 520);
     text("Potions", center, 520);
 
-    for (int i = 0; i < numWpns; i++) {
-      if (weaponButton[i].pressed()) {
-        weapon = weaponNames[i];
-        price = i.wpnPrice(weapon);
-        break; // exit the loop after finding the pressed button
-      }
-    }
+    //for (int i = 0; i < numWpns; i++) {
+    //  if (weaponButton[i].pressed()) {
+    //    weapon = weaponNames[i];
+    //    price = i.wpnPrice(weapon);
+    //    break; // exit the loop after finding the pressed button
+    //  }
+    //}
 
     for (int i = 0; i < weaponButton.length; i++) {
       weaponButton[i].display();
-      if (weaponButton[i].pressed()) {
-        println("WB true");
-        //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
-      }
-    }
 
-    if (selectButton[1].pressed()) {
-      armorDisplay = true;
-    } else if (selectButton[2].pressed()) {
-      potionDisplay = true;
-    }
-    if (armorDisplay) {
-      weaponDisplay = false;
-      armorDisplay();
-    } else if (potionDisplay) {
-      weaponDisplay = false;
-      potionDisplay();
+      // Check if the button is pressed and it's not already marked as pressed
+      if (weaponButton[i].pressed() && !WBPressed[i]) {
+        println("WB true");
+        WBPressed[i] = true; // Mark the button as pressed
+      } else if (!weaponButton[i].pressed()) {
+        WBPressed[i] = false; // Reset the pressed state when the button is released
+      }
     }
   }
 
@@ -208,32 +210,16 @@ class Shop {
     text("Armor", qRight, 520);
     text("Potions", center, 520);
 
-    boolean corner = false;
     for (int i = 0; i < armorButton.length; i++) {
-      rectMode(CENTER);
       armorButton[i].display();
-      corner = true;
 
-      if (armorButton[i].pressed()) {
+      if (armorButton[i].pressed() && !ABPressed[i]) {
         println("AB true");
         //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
+        ABPressed[i] = true; // Mark the button as pressed
+      } else if (!armorButton[i].pressed()) {
+        ABPressed[i] = false; // Reset the pressed state when the button is released
       }
-    }
-    if (corner) {
-      rectMode(CORNER);
-    }
-
-    if (selectButton[0].pressed()) {
-      weaponDisplay = true;
-    } else if (selectButton[2].pressed()) {
-      potionDisplay = true;
-    }
-    if (weaponDisplay) {
-      armorDisplay = false;
-      weaponDisplay();
-    } else if (potionDisplay) {
-      armorDisplay = false;
-      potionDisplay();
     }
   }
 
@@ -262,23 +248,14 @@ class Shop {
 
     for (int i = 0; i < potionButton.length; i++) {
       potionButton[i].display();
-      if (potionButton[i].pressed()) {
-        println("PB true");
-        //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
-      }
-    }
 
-    if (selectButton[1].pressed()) {
-      armorDisplay = true;
-    } else if (selectButton[0].pressed()) {
-      weaponDisplay = true;
-    }
-    if (armorDisplay) {
-      potionDisplay = false;
-      armorDisplay();
-    } else if (weaponDisplay) {
-      potionDisplay = false;
-      weaponDisplay();
+      // Check if the button is pressed and it's not already marked as pressed
+      if (potionButton[i].pressed() && !PBPressed[i]) {
+        println("PB true");
+        PBPressed[i] = true; // Mark the button as pressed
+      } else if (!potionButton[i].pressed()) {
+        PBPressed[i] = false; // Reset the pressed state when the button is released
+      }
     }
   }
 }
