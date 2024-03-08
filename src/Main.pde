@@ -20,7 +20,7 @@ void setup() {
   M1 = new Map("Maps/Map.json");
   p = new Player();
   shop = new Shop();
-  enemy = new Enemy(4, 4, 4, "sprites/SinisterMan.png", "Test Enemy");
+  enemy = new Enemy(4, 4, 4, "sprites/NPCSprites/SinisterMan.png", "Test Enemy");
   encounter = new Encounter(enemy, "dialogue here", p);
   startButton = new Button(240, 415, 140, 60);
   quitButton = new Button(240, 492, 140, 60);
