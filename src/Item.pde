@@ -1,8 +1,8 @@
 class Item {
-  float common = 1;
-  float rare = 1.2;
-  float epic = 1.5;
-  float legendary = 2;
+  //float common = 1;
+  //float rare = 1.2;
+  //float epic = 1.5;
+  //float legendary = 2;
 
   ArrayList<Weapon> weapons;
   ArrayList<Armor> armors;

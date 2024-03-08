@@ -26,14 +26,11 @@ class Shop {
     this.player = p;
     i = new Item();
 
-    String[] weaponNames = {"Basic Sword", "Refined Sword", "Katana"};
-    int numWpns = weaponNames.length;
-
     //SELECTBUTTON ARRAY -------------------------------------
 
-    selectButton[0] = new Button(qLeft - 50, 495, 100, 40);
-    selectButton[1] = new Button(qRight - 50, 495, 100, 40);
-    selectButton[2] = new Button(center - 50, 495, 100, 40);
+    selectButton[0] = new Button(qLeft - 50, 495, 100, 40, 's');
+    selectButton[1] = new Button(qRight - 50, 495, 100, 40, 's');
+    selectButton[2] = new Button(center - 50, 495, 100, 40, 's');
 
     //ARMORBUTTON ARRAY --------------------------------------
     armorButton = new Button[12];
@@ -53,7 +50,7 @@ class Shop {
       for (int col = 0; col < numCols; col++) {
         int x = marginX + col * (innerBoxWidth + 10);
         int y = marginY + row * (innerBoxHeight + 10);
-        armorButton[index] = new Button(x, y, innerBoxWidth, innerBoxHeight);
+        armorButton[index] = new Button(x, y, innerBoxWidth, innerBoxHeight, 'a');
         index++;
       }
     }
@@ -64,22 +61,22 @@ class Shop {
     int pmc = (screenWidth / 2) - 75;
 
     // First row boxes
-    weaponButton[0] = new Button(pm, 130, 150, 100);
-    weaponButton[1] = new Button(pma, 130, 150, 100);
+    weaponButton[0] = new Button(pm, 130, 150, 100, 'w');
+    weaponButton[1] = new Button(pma, 130, 150, 100, 'w');
 
     // Coordinates for the second row of boxes
-    weaponButton[2] = new Button(pm, 240, 150, 100);
-    weaponButton[3] = new Button(pma, 240, 150, 100);
+    weaponButton[2] = new Button(pm, 240, 150, 100, 'w');
+    weaponButton[3] = new Button(pma, 240, 150, 100, 'w');
 
     // Coordinates for the centered box
-    weaponButton[4] = new Button(pmc, 350, 150, 100);
+    weaponButton[4] = new Button(pmc, 350, 150, 100, 'w');
 
     //POTIONBUTTON ARRAY -------------------------------------------
-    potionButton[0] = new Button(pm, 200, 150, 100);
-    potionButton[1] = new Button(pma, 200, 150, 100);
+    potionButton[0] = new Button(pm, 200, 150, 100, 'p');
+    potionButton[1] = new Button(pma, 200, 150, 100, 'p');
 
     // Coordinates for the centered box
-    potionButton[2] = new Button(pmc, 310, 150, 100);
+    potionButton[2] = new Button(pmc, 310, 150, 100, 'p');
 
     //Check for Weapon, armor, and potion button pressed
     for (int i = 0; i < WBPressed.length; i++) {
@@ -166,13 +163,31 @@ class Shop {
     text("Armor", qRight, 520);
     text("Potions", center, 520);
 
-    //for (int i = 0; i < numWpns; i++) {
-    //  if (weaponButton[i].pressed()) {
-    //    weapon = weaponNames[i];
-    //    price = i.wpnPrice(weapon);
-    //    break; // exit the loop after finding the pressed button
-    //  }
-    //}
+    for (int i = 0; i < weaponButton.length; i++) {
+      if (weaponButton[i].pressed() && weaponButton[i].type == 'w') {
+      }
+    }
+    if (weaponButton[0].pressed()) {
+      weapon = "Basic Sword";
+      price = i.wpnPrice(weapon);
+      p.money -= price;
+    } else if (weaponButton[1].pressed()) {
+      weapon = "Refined Sword";
+      price = i.wpnPrice(weapon);
+      p.money -= price;
+    } else if (weaponButton[2].pressed()) {
+      weapon = "Katana";
+      price = i.wpnPrice(weapon);
+      p.money -= price;
+    } else if (weaponButton[3].pressed()) {
+      weapon = "Long Sword";
+      price = i.wpnPrice(weapon);
+      p.money -= price;
+    } else if (weaponButton[4].pressed()) {
+      weapon = "Dragoon Sword";
+      price = i.wpnPrice(weapon);
+      p.money -= price;
+    }
 
     for (int i = 0; i < weaponButton.length; i++) {
       weaponButton[i].display();

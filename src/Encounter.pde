@@ -11,8 +11,8 @@ class Encounter {
     this.dialogue = dialogue;
     this.player = player;
     this.enemy = enemy;
-    attackButton = new Button(175, 480, 100, 40);
-    healButton = new Button(375, 480, 100, 40);
+    attackButton = new Button(175, 480, 100, 40, 'e');
+    healButton = new Button(375, 480, 100, 40, 'e');
     consoleMessage = this.dialogue;
     this.over = false;
     playerSprite = loadImage("Sprites/JackStance.png");

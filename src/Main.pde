@@ -22,11 +22,11 @@ void setup() {
   shop = new Shop();
   enemy = new Enemy(4, 4, 4, "sprites/NPCSprites/SinisterMan.png", "Test Enemy");
   encounter = new Encounter(enemy, "dialogue here", p);
-  startButton = new Button(240, 415, 140, 60);
-  quitButton = new Button(240, 492, 140, 60);
-  loadGameButton = new Button(240, 569, 140, 60);
-  clearSaveButton = new Button(550, 575, 50, 50);
-  resetButton = new Button(240, 492, 140, 60);
+  startButton = new Button(240, 415, 140, 60, 'm');
+  quitButton = new Button(240, 492, 140, 60, 'm');
+  loadGameButton = new Button(240, 569, 140, 60, 'm');
+  clearSaveButton = new Button(550, 575, 50, 50, 'm');
+  resetButton = new Button(240, 492, 140, 60, 'm');
   M1.resize(640, 640);
   saveGame = new JSONObject();
   p.health = 5;
