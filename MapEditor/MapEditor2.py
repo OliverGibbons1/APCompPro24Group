@@ -140,6 +140,8 @@ class MapEditor:
 
         self.EventRefT = [x[0:2] for x in self.EventJSON]
         self.EventRef = [x for x in self.EventJSON]
+
+        self.Boundary = [for y in range()]
         print(self.EventRef,"--")
         self.MapEventTiles = [["" for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
         #print(self.MapEventTiles)
