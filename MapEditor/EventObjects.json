@@ -2,5 +2,9 @@
 	"Encounter":{
 		"dialog":"STRING",
 		"Enemy":"STRING"
-	}
+	},
+	"Map Leave Left":{"IGNORE":1},
+	"Map Leave Right":{"IGNORE":1},
+	"Map Leave Up":{"IGNORE":1},
+	"Map Leave Down":{"IGNORE":1}
 }
