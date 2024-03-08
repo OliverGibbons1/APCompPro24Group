@@ -141,7 +141,9 @@ class MapEditor:
         self.EventRefT = [x[0:2] for x in self.EventJSON]
         self.EventRef = [x for x in self.EventJSON]
 
-        self.Boundary = [for y in range()]
+        self.BoundaryFirst = (False,False)
+        self.Boundary = [[False for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
+
         print(self.EventRef,"--")
         self.MapEventTiles = [["" for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
         #print(self.MapEventTiles)
@@ -171,8 +173,8 @@ class MapEditor:
         if len(self.NPCRef)>0:
             for y in range(self.MapNPCTiles.shape[0]):
                 for x in range(self.MapNPCTiles.shape[1]):
-                    print(y,x)
-                    self.screen.blit(scale(self.NPCRef[self.MapNPCTiles[y][x]],self.spriteSize),(x*self.spriteSize[0],y*self.spriteSize[1]))
+                    if self.MapNPCTiles[y][x]>=0:
+                        self.screen.blit(scale(self.NPCRef[self.MapNPCTiles[y][x]],self.spriteSize),(x*self.spriteSize[0],y*self.spriteSize[1]))
         # Draw ForegroundTiles / Foreground Layer
         if len(self.ForeRef)>0:
             for y in range(self.MapForeTiles.shape[0]):
@@ -186,6 +188,11 @@ class MapEditor:
                     if len(self.MapEventTiles[y][x])>0:
                         txt=Font.render(self.EventRefT[self.EventRef.index(self.MapEventTiles[y][x])],True,(0,0,0))
                         self.screen.blit(txt,(x*self.spriteSize[0],y*self.spriteSize[1]))
+        # Draw Boundary
+        for y in rl(self.Boundary):
+            for x in rl(self.Boundary[y]):
+                if self.Boundary[y][x]:
+                    draw.rect(self.screen,(255,0,0),(x*self.spriteSize[0],y*self.spriteSize[1],self.spriteSize[0],self.spriteSize[1]),2)
         
         
         # Mouse Selection
@@ -193,8 +200,16 @@ class MapEditor:
         if m[2] and not self.Mouse[2] and m[0]>self.width-self.spriteSize[0]//2*4 and m[1]<self.spriteSize[1]*4*self.spriteCount[1]:
             self.Selected=(max(0,3-((self.spriteCount[0]*2+3)-m[0]//(self.spriteSize[1]//2))),m[1]//(self.spriteSize[1]//2))
         self.Selected=(self.Selected[0],min(self.Selected[1],len(self.BackRef)-1) if self.Selected[0]==0 else min(self.Selected[1],len(self.NPCRef)-1) if self.Selected[0]==1 else min(self.Selected[1],len(self.ForeRef)-1) if self.Selected[0]==2 else min(self.Selected[1],len(self.EventRef)-1))
+        if m[3] and m[0]<self.spriteSize[0]*self.spriteCount[0] and m[1]<self.spriteSize[1]*self.spriteCount[1]:
+            if self.BoundaryFirst[0]==False:
+                self.BoundaryFirst=(True,self.Boundary[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]])
+            self.Boundary[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]=not self.BoundaryFirst[1]
+        else:
+            self.BoundaryFirst=(False,False)
         #print(self.HeldKeys)
         #print(self.Mouse,m)
+        if self.HeldKeys.__contains__(int(pg.K_LSHIFT)) and self.Selected[0]>0:
+            self.Selected=(self.Selected[0],-1)
         # Draw Selected Tile
         if ((m[2] and not self.Mouse[2]) or m[4]) and m[0]<self.spriteSize[0]*self.spriteCount[0] and m[1]<self.spriteSize[1]*self.spriteCount[1]:
             match self.Selected[0]:
@@ -205,7 +220,7 @@ class MapEditor:
                 case 2:
                     self.MapForeTiles[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]=self.Selected[1]
                 case 3:
-                    self.MapEventTiles[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]=self.EventRef[self.Selected[1]]
+                    self.MapEventTiles[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]="" if self.Selected[1]==-1 else self.EventRef[self.Selected[1]]
         # Draw Bottom Toolbar
         #   Draw Save Button
         self.screen.blit(scale(self.EditorSprites["SaveIcon"],self.spriteSize),(self.width-self.spriteSize[0]*2,self.height-self.spriteSize[1]*2))
@@ -213,6 +228,8 @@ class MapEditor:
             print("Save")
         #   Draw Load Button
         self.screen.blit(scale(self.EditorSprites["LoadIcon"],self.spriteSize),(self.width-self.spriteSize[0],self.height-self.spriteSize[1]*2))
+        if m[2] and not self.Mouse[2] and m[0]>self.width-self.spriteSize[0] and m[1]>self.height-self.spriteSize[1]*2 and m[1]<self.height-self.spriteSize[1]:
+            print("Load")
         #print(self.Selected)
         # Draw BackRef
         for BRef in rl(self.BackRef):
