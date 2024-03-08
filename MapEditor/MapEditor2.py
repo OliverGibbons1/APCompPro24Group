@@ -138,7 +138,7 @@ class MapEditor:
         self.MapForeTiles = np.zeros(self.spriteCount,dtype=int)
         self.MapForeTiles[:,:]=-1
 
-        self.EventRefT = [x[0:2] if len(x.split(" "))==0 else "".join([y[0] for y in x.split(" ")]) for x in self.EventJSON]
+        self.EventRefT = [x[0:2] if len(x.split(" "))<=1 else x.split(" ")[0][0]+x.split(" ")[-1][0] for x in self.EventJSON]
         self.EventRef = [x for x in self.EventJSON]
 
         self.BoundaryFirst = (False,False)
