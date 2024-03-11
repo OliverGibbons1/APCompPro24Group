@@ -39,10 +39,11 @@ class Item {
   void weaponL() {
     //Name, Damage, Price
     weapons.add(new Weapon("Basic Sword", 10, 15));
-    weapons.add(new Weapon("Refined Sword", 15, 15));
-    weapons.add(new Weapon("Katana", 20, 15));
-    weapons.add(new Weapon("Long Sword", 25, 15));
-    weapons.add(new Weapon("Dragoon Sword", 30, 15));
+    weapons.add(new Weapon("Refined Sword", 15, 30));
+    weapons.add(new Weapon("Katana", 20, 45));
+    weapons.add(new Weapon("Long Sword", 25, 60));
+    weapons.add(new Weapon("Dragoon Sword", 30, 75));
+    weapons.add(new Weapon("Starter Sword", 5, 0));
   }
 
   void potionL() {
@@ -101,6 +102,15 @@ class Item {
     for(Potion potion : potions) {
       if(potion.getName().equals(potName)) {
         return potion.getPrice();
+      }
+    }
+    return -1;
+  }
+  
+  int potionHp(String potName) {
+    for(Potion potion : potions) {
+      if(potion.getName().equals(potName)) {
+        return potion.getHp();
       }
     }
     return -1;

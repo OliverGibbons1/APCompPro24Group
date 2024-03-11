@@ -3,7 +3,8 @@ class Shop {
   Player player;
   Item it;
   String consoleMessage;
-  String weapon = "Basic Sword";
+  int spot;
+  String weapon, potion, helmet, chestplate, trousers, boots;
   Button [] selectButton = new Button[3];
   Button [] weaponButton = new Button[5];
   Button [] potionButton = new Button[3];
@@ -221,13 +222,80 @@ class Shop {
 
       if (armorButton[i].pressed() && !ABPressed[i]) {
         println("AB true");
+        if (i == 0) {
+          helmet = "Basic Helmet";
+          price = it.armorPrice(helmet);
+          spot = 1;
+        } else if (i == 1) {
+          chestplate = "Basic Chestplate";
+          price = it.armorPrice(chestplate);
+          spot = 2;
+        } else if (i == 2) {
+          trousers = "Basic Trousers";
+          price = it.armorPrice(trousers);
+          spot = 3;
+        } else if (i == 3) {
+          boots = "Basic Boots";
+          price = it.armorPrice(boots);
+          spot = 4;
+        } else if (i == 4) {
+          helmet = "Refined Helmet";
+          price = it.armorPrice(helmet);
+          spot = 1;
+        } else if (i == 5) {
+          chestplate = "Refined Chestplate";
+          price = it.armorPrice(chestplate);
+          spot = 2;
+        } else if (i == 6) {
+          trousers = "Refined Trousers";
+          price = it.armorPrice(trousers);
+          spot = 3;
+        } else if (i == 7) {
+          boots = "Refined Boots";
+          price = it.armorPrice(boots);
+          spot = 4;
+        } else if (i == 8) {
+          helmet = "Dragoon Helmet";
+          price = it.armorPrice(helmet);
+          spot = 1;
+        } else if (i == 9) {
+          chestplate = "Dragoon Chestplate";
+          price = it.armorPrice(chestplate);
+          spot = 2;
+        } else if (i == 10) {
+          trousers = "Dragoon Trousers";
+          price = it.armorPrice(trousers);
+          spot = 3;
+        } else if (i == 11) {
+          boots = "Dragoon Boots";
+          price = it.armorPrice(boots);
+          spot = 4;
+        }
+
+        if (spot == 1) {
+          p.helmet = helmet;
+          println(p.helmet);
+          println(p.maxHealth);
+        }
+        if (spot == 2) {
+          p.chestplate = chestplate;
+          println(p.chestplate);
+        }
+        if(spot == 3) {
+          p.trousers = trousers;
+          println(p.trousers);
+        }
+        if(spot == 4) {
+          p.boots = boots;
+          println(p.boots);
+        }
         //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
         ABPressed[i] = true; // Mark the button as pressed
       } else if (!armorButton[i].pressed()) {
         ABPressed[i] = false; // Reset the pressed state when the button is released
       }
     }
-  } 
+  }
 
   void potionDisplay() {
     consoleMessage = "Welcome to the Potion Shop! Buy what you can!";
@@ -257,7 +325,16 @@ class Shop {
 
       // Check if the button is pressed and it's not already marked as pressed
       if (potionButton[i].pressed() && !PBPressed[i]) {
-        println("PB true");
+        if (i == 0) {
+          potion = "Small Potion";
+        } else if (i == 1) {
+          potion = "Medium Potion";
+        } else if (i ==2) {
+          potion = "Large Potion";
+        }
+        price = it.potionPrice(potion);
+        p.money -= price;
+        p.health += it.potionHp(potion);
         PBPressed[i] = true; // Mark the button as pressed
       } else if (!potionButton[i].pressed()) {
         PBPressed[i] = false; // Reset the pressed state when the button is released
