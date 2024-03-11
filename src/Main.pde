@@ -31,7 +31,7 @@ void setup() {
   saveGame = new JSONObject();
   p.health = 5;
   p.maxHealth = 5;
-  p.money = 10;
+  p.money = 1100;
 }
 void draw() {
   if (start) {
@@ -74,7 +74,7 @@ void draw() {
       start = true;
       s = s.equals(i) ? i:s;
       //encounterOn = true;
-      //shopOn = true;
+      shopOn = true;
     }
     if (loadGameButton.pressed()) {
       saveGame = loadJSONObject("data/new.json");

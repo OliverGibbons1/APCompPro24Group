@@ -245,7 +245,6 @@ class Shop {
       armorButton[i].display();
 
       if (armorButton[i].pressed() && !ABPressed[i]) {
-        println("AB true");
         if (i == 0) {
           helmet = "Basic Helmet";
           price = it.armorPrice(helmet);
@@ -335,9 +334,11 @@ class Shop {
           }
           //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
           ABPressed[i] = true; // Mark the button as pressed
-        } else if (!armorButton[i].pressed()) {
-          ABPressed[i] = false; // Reset the pressed state when the button is released
+        } else {
+          println("Not enough money!");
         }
+      } else if (!armorButton[i].pressed()) {
+        ABPressed[i] = false; // Reset the pressed state when the button is released
       }
     }
   }
