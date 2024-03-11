@@ -1,7 +1,7 @@
 //Completed by Oliver Gibbons
 class Shop {
   Player player;
-  Item i;
+  Item it;
   String consoleMessage;
   String weapon = "Basic Sword";
   Button [] selectButton = new Button[3];
@@ -24,7 +24,7 @@ class Shop {
 
   Shop() {
     this.player = p;
-    i = new Item();
+    it = new Item();
 
     //SELECTBUTTON ARRAY -------------------------------------
 
@@ -167,33 +167,24 @@ class Shop {
       if (weaponButton[i].pressed() && weaponButton[i].type == 'w') {
       }
     }
-    if (weaponButton[0].pressed()) {
-      weapon = "Basic Sword";
-      price = i.wpnPrice(weapon);
-      p.money -= price;
-    } else if (weaponButton[1].pressed()) {
-      weapon = "Refined Sword";
-      price = i.wpnPrice(weapon);
-      p.money -= price;
-    } else if (weaponButton[2].pressed()) {
-      weapon = "Katana";
-      price = i.wpnPrice(weapon);
-      p.money -= price;
-    } else if (weaponButton[3].pressed()) {
-      weapon = "Long Sword";
-      price = i.wpnPrice(weapon);
-      p.money -= price;
-    } else if (weaponButton[4].pressed()) {
-      weapon = "Dragoon Sword";
-      price = i.wpnPrice(weapon);
-      p.money -= price;
-    }
 
     for (int i = 0; i < weaponButton.length; i++) {
       weaponButton[i].display();
-
-      // Check if the button is pressed and it's not already marked as pressed
-      if (weaponButton[i].pressed() && !WBPressed[i]) {
+      if (weaponButton[i].pressed() && !WBPressed[i]) {  // Check if the button is pressed and it's not already marked as pressed
+        if (i == 0) {
+          weapon = "Basic Sword";
+        } else if (i == 1) {
+          weapon = "Refined Sword";
+        } else if (i == 2) {
+          weapon = "Katana";
+        } else if (i == 3) {
+          weapon = "Long Sword";
+        } else if (i == 4) {
+          weapon = "Dragoon Sword";
+        }
+        price = it.wpnPrice(weapon);
+        p.money -= price;
+        p.weapon = weapon;
         println("WB true");
         WBPressed[i] = true; // Mark the button as pressed
       } else if (!weaponButton[i].pressed()) {
@@ -236,7 +227,7 @@ class Shop {
         ABPressed[i] = false; // Reset the pressed state when the button is released
       }
     }
-  }
+  } 
 
   void potionDisplay() {
     consoleMessage = "Welcome to the Potion Shop! Buy what you can!";
