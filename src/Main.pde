@@ -39,7 +39,7 @@ void draw() {
     if (keyPressed && AlreadyPressed<=0) {
       AlreadyPressed=10;
       if (key==' ') {
-        encounterOn=!encounterOn;
+        encounterOn =! encounterOn;
       }
     } else {
       AlreadyPressed-=1;
@@ -74,7 +74,7 @@ void draw() {
       start = true;
       s = s.equals(i) ? i:s;
       //encounterOn = true;
-      shopOn = true;
+      //shopOn = true;
     }
     if (loadGameButton.pressed()) {
       saveGame = loadJSONObject("data/new.json");
@@ -106,30 +106,30 @@ void draw() {
   if (start) {
     p.display();
   }
-//testing shop and encounter
+  //testing shop and encounter
   if (encounterOn == true) {
     encounter.display();
     encounter.tick();
-    
-    if(p.health <= 0 || encounter.over){
+
+    if (p.health <= 0 || encounter.over) {
       encounterOn = false;
     }
   }
 
-  if(!encounterOn){
+  if (!encounterOn) {
     p.move();
   }
-  
+
   if (shopOn) {
     shop.display();
-    if (shop.quit){
-    shopOn = false;
-  }
+    if (shop.quit) {
+      shopOn = false;
+    }
   }
 
   p.move();
 
-  if(!encounterOn){
+  if (!encounterOn) {
     p.move();
   }
 
