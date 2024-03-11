@@ -2,9 +2,10 @@ class Encounter {
   Player player;
   String dialogue, consoleMessage;
   Enemy enemy;
-  Button attackButton, healButton;
+  Button attackButton, healButton, smallPB, medPB, largePB, cancPB;
   boolean playerTurn = true;
   boolean over = false;
+  boolean healSelect = false;
   PImage playerSprite;
 
   Encounter(Enemy enemy, String dialogue, Player player) {
@@ -13,6 +14,10 @@ class Encounter {
     this.enemy = enemy;
     attackButton = new Button(175, 480, 100, 40, 'e');
     healButton = new Button(375, 480, 100, 40, 'e');
+    smallPB = new Button(175, 440, 100, 40, 'e');
+    medPB = new Button(275, 440, 100, 40, 'e');
+    largePB = new Button(375, 440, 100, 40, 'e');
+    cancPB = new Button(275, 480, 100, 40, 'e');
     consoleMessage = this.dialogue;
     this.over = false;
     playerSprite = loadImage("Sprites/JackStance.png");
@@ -21,25 +26,52 @@ class Encounter {
   void tick() {
 
     if (playerTurn) {
-      if(this.enemy.health <= 0){
+      if (this.enemy.health <= 0) {
         display();
         delay(2000);
         end();
-      }else if (attackButton.pressed()) {
+      } else if (attackButton.pressed() && !healSelect) {
         this.player.attack(this.enemy, this.player.damage);
         consoleMessage = "Player hit " + enemy.name + " for " + this.player.damage + " damage";
         display();
         playerTurn = false;
-      }else if (healButton.pressed()) {
-        // Healing operation here
-        consoleMessage = "Used health potion";
+      } else if (healButton.pressed() && !healSelect) {
+        healSelect = true;
+        consoleMessage = "Choose health potion";
         display();
-        playerTurn = false;
+        //playerTurn = false;
+      } else if (healSelect) {
+        if (smallPB.pressed()) {
+          if (over == true) { // check for potion here
+            //heal here, pass turn
+          } else {
+            consoleMessage = "No small potion available";
+          }
+        }
+        if (medPB.pressed()) {
+          if (over == true) { // check for potion here
+            //heal here, pass turn
+          } else {
+            consoleMessage = "No medium potion available";
+          }
+        }
+        if (largePB.pressed()) {
+          if (over == true) { // check for potion here
+            //heal here, pass turn
+          } else {
+            consoleMessage = "No large potion available";
+          }
+        }
+        if (cancPB.pressed()) {
+          consoleMessage = ("Choose action");
+          healSelect = false;
+        }
       }
     } else {
       enemyTurn();
     }
   }
+
 
   void end() {
     //delay(2000);
@@ -52,7 +84,7 @@ class Encounter {
       this.enemy.attack(this.player);
       consoleMessage = this.enemy.name + " hit player for " + this.enemy.damage + " damage. Your move?";
       playerTurn = true;
-    } else{
+    } else {
       this.player.money += this.enemy.money;
       consoleMessage = "You win! Got ₽" + this.enemy.money;
       display();
@@ -77,11 +109,24 @@ class Encounter {
     text("Health: " + player.health, 446, 83);
     stroke(255);
     fill(0);
-    attackButton.display();
-    healButton.display();
+    if (!healSelect) {
+      attackButton.display();
+      healButton.display();
+      fill(255);
+      text("Attack", 200, 510);
+      text("Heal", 400, 510);
+    } else {
+      smallPB.display();
+      medPB.display();
+      largePB.display();
+      cancPB.display();
+      fill(255);
+      text("Small", 200, 470);
+      text("Medium", 300, 470);
+      text("Large", 400, 470);
+      text("Cancel", 300, 510);
+    }
+    fill(0);
     text(consoleMessage, 75, 575);
-    fill(255);
-    text("Attack", 200, 510);
-    text("Heal", 400, 510);
   }
 }
