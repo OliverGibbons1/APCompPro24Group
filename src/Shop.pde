@@ -184,9 +184,11 @@ class Shop {
           weapon = "Dragoon Sword";
         }
         price = it.wpnPrice(weapon);
-        p.money -= price;
-        p.weapon = weapon;
-        println("WB true");
+        if (p.money >= price) {
+          p.money -= price;
+          p.weapon = weapon;
+          println("WB true");
+        }
         WBPressed[i] = true; // Mark the button as pressed
       } else if (!weaponButton[i].pressed()) {
         WBPressed[i] = false; // Reset the pressed state when the button is released
@@ -272,22 +274,24 @@ class Shop {
           spot = 4;
         }
 
-        if (spot == 1) {
-          p.helmet = helmet;
-          println(p.helmet);
-          println(p.maxHealth);
-        }
-        if (spot == 2) {
-          p.chestplate = chestplate;
-          println(p.chestplate);
-        }
-        if(spot == 3) {
-          p.trousers = trousers;
-          println(p.trousers);
-        }
-        if(spot == 4) {
-          p.boots = boots;
-          println(p.boots);
+        if (p.money >= price) {
+          if (spot == 1) {
+            p.money -= price;
+            p.helmet = helmet;
+            println("Purchased " + p.helmet);
+          } else if (spot == 2) {
+            p.money -= price;
+            p.chestplate = chestplate;
+            println("Purchased " + p.chestplate);
+          } else if (spot == 3) {
+            p.money -= price;
+            p.trousers = trousers;
+            println("Purchased " + p.trousers);
+          } else if (spot == 4) {
+            p.money -= price;
+            p.boots = boots;
+            println("Purchased " + p.boots);
+          }
         }
         //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
         ABPressed[i] = true; // Mark the button as pressed
@@ -333,8 +337,10 @@ class Shop {
           potion = "Large Potion";
         }
         price = it.potionPrice(potion);
-        p.money -= price;
-        p.health += it.potionHp(potion);
+        if (p.money >= price) {
+          p.money -= price;
+          p.health += it.potionHp(potion);
+        }
         PBPressed[i] = true; // Mark the button as pressed
       } else if (!potionButton[i].pressed()) {
         PBPressed[i] = false; // Reset the pressed state when the button is released
