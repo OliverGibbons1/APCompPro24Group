@@ -18,15 +18,14 @@ class Player {
     //items = new ArrayList<Shop>();
     this.sprite = loadImage("sprites/BlueGuy.png");
     this.sprite.resize(64, 64);
-
-    weapon = "Basic Sword";
+    
+    weapon  = "Starter Sword";
     int weaponDmg = i.wpnDmg(weapon);
 
     if (weaponDmg != -1) {
       damage += weaponDmg;
     }
 
-    helmet = "Refined Helmet";
     int helmetHp = i.armorHp(helmet);
     int helmetSpot = i.armorSpot(helmet);
 
@@ -35,7 +34,6 @@ class Player {
       maxHealth += helmetHp;
     }
 
-    chestplate = "Refined Chestplate";
     int chestHp = i.armorHp(chestplate);
     int chestSpot = i.armorSpot(chestplate);
 
@@ -43,7 +41,6 @@ class Player {
       maxHealth += chestHp;
     }
 
-    trousers = "Refined Trousers";
     int pantsHp = i.armorHp(trousers);
     int pantsSpot = i.armorSpot(trousers);
 
@@ -51,7 +48,6 @@ class Player {
       maxHealth += pantsHp;
     }
 
-    boots = "Refined Boots";
     int bootsHp = i.armorHp(boots);
     int bootsSpot = i.armorSpot(boots);
 
