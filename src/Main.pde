@@ -122,6 +122,9 @@ void draw() {
   
   if (shopOn) {
     shop.display();
+    if (shop.quit){
+    shopOn = false;
+  }
   }
 
   p.move();
