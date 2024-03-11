@@ -126,6 +126,8 @@ class MapEditor:
         self.EventJSON=json.loads(f.read())
         f.close()
 
+        self.InputBoxes=[]
+
         self.BackRef = [pg.image.load(f"{MapBackFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapBackFolder)) if x.decode().endswith(".png")]
         self.MapBackTiles = np.zeros(self.spriteCount,dtype=int)
         self.MapBackTiles[0][0]=0
@@ -140,12 +142,14 @@ class MapEditor:
 
         self.EventRefT = [x[0:2] if len(x.split(" "))<=1 else x.split(" ")[0][0]+x.split(" ")[-1][0] for x in self.EventJSON]
         self.EventRef = [x for x in self.EventJSON]
+        self.DataRef = [self.EventJSON[x] for x in self.EventJSON]
 
         self.BoundaryFirst = (False,False)
         self.Boundary = [[False for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
 
         print(self.EventRef,"--")
         self.MapEventTiles = [["" for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
+        self.EventDictTiles = [[{"type":"","data":{}} for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
         #print(self.MapEventTiles)
         #             Back,NPC,Fore
         self.map = [[[0,   0,  0] for x in range(self.spriteCount[0])] for y in range(self.spriteCount[1])]
@@ -158,6 +162,11 @@ class MapEditor:
                     self.HeldKeys.remove(event.key)
                 except:
                     pass
+    def Save(self):
+        f=open("Map.json","w")
+        json.dump({"MapBackTiles":self.MapBackTiles.tolist(),"MapNPCTiles":self.MapNPCTiles.tolist(),"MapForeTiles":self.MapForeTiles.tolist(),"MapEventTiles":self.EventDictTiles,"Boundary":self.Boundary},f)
+        f.close()
+        return
     def draw(self):
         # Draw Background Grid
         for y in range(self.spriteCount[1]):
@@ -206,6 +215,8 @@ class MapEditor:
             self.Boundary[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]=not self.BoundaryFirst[1]
         else:
             self.BoundaryFirst=(False,False)
+        if m[2] and not self.Mouse[2] and self.Selected[0]==3:
+            self.InputBoxes=[InputBox((20,self.height-x*10),(self.width*3/4,10)) for x in range(len(self.DataRef[self.Selected[1]]))]
         #print(self.HeldKeys)
         #print(self.Mouse,m)
         if self.HeldKeys.__contains__(int(pg.K_LSHIFT)) and self.Selected[0]>0:
@@ -221,14 +232,18 @@ class MapEditor:
                     self.MapForeTiles[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]=self.Selected[1]
                 case 3:
                     self.MapEventTiles[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]="" if self.Selected[1]==-1 else self.EventRef[self.Selected[1]]
+                    self.EventDictTiles[m[1]//self.spriteSize[1]][m[0]//self.spriteSize[0]]={"type":("" if self.Selected[1]==-1 else self.EventRef[self.Selected[1]]),"data":self.DataRef[self.Selected[1]]}
         # Draw Bottom Toolbar
         #   Draw Save Button
-        self.screen.blit(scale(self.EditorSprites["SaveIcon"],self.spriteSize),(self.width-self.spriteSize[0]*2,self.height-self.spriteSize[1]*2))
-        if m[2] and not self.Mouse[2] and m[0]>self.width-self.spriteSize[0]*2 and m[0]<self.width-self.spriteSize[0] and m[1]>self.height-self.spriteSize[1]*2 and m[1]<self.height-self.spriteSize[1]:
-            print("Save")
+        tb=m[2] and m[0]>self.width-self.spriteSize[0]*2 and m[0]<self.width-self.spriteSize[0] and m[1]>self.height-self.spriteSize[1]*2 and m[1]<self.height-self.spriteSize[1]
+        self.screen.blit(scale(self.EditorSprites["SaveIcon"],((self.spriteSize[0]-4,self.spriteSize[1]-4) if tb else self.spriteSize)),(self.width-self.spriteSize[0]*2+(2 if tb else 0),self.height-self.spriteSize[1]*2+(2 if tb else 0)))
+        if tb and not self.Mouse[2]:
+            self.Save()
+            print("Saved")
         #   Draw Load Button
-        self.screen.blit(scale(self.EditorSprites["LoadIcon"],self.spriteSize),(self.width-self.spriteSize[0],self.height-self.spriteSize[1]*2))
-        if m[2] and not self.Mouse[2] and m[0]>self.width-self.spriteSize[0] and m[1]>self.height-self.spriteSize[1]*2 and m[1]<self.height-self.spriteSize[1]:
+        ta=m[2] and m[0]>self.width-self.spriteSize[0] and m[1]>self.height-self.spriteSize[1]*2 and m[1]<self.height-self.spriteSize[1]
+        self.screen.blit(scale(self.EditorSprites["LoadIcon"],((self.spriteSize[0]-4,self.spriteSize[1]-4) if ta else self.spriteSize)),(self.width-self.spriteSize[0]+(2 if ta else 0),self.height-self.spriteSize[1]*2+(2 if ta else 0)))
+        if ta and not self.Mouse[2]:
             print("Load")
         #print(self.Selected)
         # Draw BackRef
@@ -244,6 +259,14 @@ class MapEditor:
         for ERef in rl(self.EventRef):
             txt=Font.render(self.EventRefT[ERef],True,(0,0,0))
             self.screen.blit(txt,(self.width-self.spriteSize[0]//2*1,ERef*self.spriteSize[1]//2))
+
+        # Draw TextBoxes
+        for IB in rl(self.InputBoxes):
+            self.InputBoxes[IB].draw(self.screen)
+            try:
+                self.DataRef[self.Selected[1]]=self.InputBoxes[IB].txt if type(self.DataRef)==str else int(self.InputBoxes[IB].txt)
+            except:
+                pass
 
         # Mouse Update
         self.Mouse=tuple(m)
