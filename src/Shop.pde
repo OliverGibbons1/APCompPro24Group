@@ -5,11 +5,11 @@ class Shop {
   String consoleMessage;
   int spot;
   String weapon, potion, helmet, chestplate, trousers, boots;
-  Button [] selectButton = new Button[3];
+  Button [] selectButton = new Button[4];
   Button [] weaponButton = new Button[5];
   Button [] potionButton = new Button[3];
   Button [] armorButton;
-  boolean playerTurn = true;
+  boolean quit;
   int screenWidth = 640;
   int screenHeight = 640;
   boolean weaponDisplay, armorDisplay, potionDisplay = false;
@@ -26,12 +26,14 @@ class Shop {
   Shop() {
     this.player = p;
     it = new Item();
+    this.quit = false;
 
     //SELECTBUTTON ARRAY -------------------------------------
 
     selectButton[0] = new Button(qLeft - 50, 495, 100, 40, 's');
     selectButton[1] = new Button(qRight - 50, 495, 100, 40, 's');
     selectButton[2] = new Button(center - 50, 495, 100, 40, 's');
+    selectButton[3] = new Button (qRight - 30, 55, 100, 40, 's');
 
     //ARMORBUTTON ARRAY --------------------------------------
     armorButton = new Button[12];
@@ -114,6 +116,7 @@ class Shop {
     text("Weapon", qLeft, 520);
     text("Armor", qRight, 520);
     text("Potions", center, 520);
+    text("Exit", qRight + 18, 82);
 
     if (selectButton[0].pressed()) {
       weaponDisplay = true;
@@ -127,6 +130,8 @@ class Shop {
       potionDisplay = true;
       armorDisplay = false;
       weaponDisplay = false;
+    } else if (selectButton[3].pressed()) {
+      quit = true;
     }
 
     if (weaponDisplay) {
@@ -142,7 +147,11 @@ class Shop {
 
 
   void weaponDisplay() {
-    consoleMessage = "Welcome to the Weapons Shop! Buy what you can!";
+    boolean firstRun = true;
+    if (firstRun) {
+      consoleMessage = "Welcome to the Weapons Shop! Buy what you can!";
+      firstRun = false;
+    }
     fill(155);
     textSize(20);
     stroke(255);
@@ -163,6 +172,7 @@ class Shop {
     text("Weapon", qLeft, 520);
     text("Armor", qRight, 520);
     text("Potions", center, 520);
+    text("Exit", qRight + 18, 82);
 
     for (int i = 0; i < weaponButton.length; i++) {
       if (weaponButton[i].pressed() && weaponButton[i].type == 'w') {
@@ -174,21 +184,33 @@ class Shop {
       if (weaponButton[i].pressed() && !WBPressed[i]) {  // Check if the button is pressed and it's not already marked as pressed
         if (i == 0) {
           weapon = "Basic Sword";
+          consoleMessage = "Bought 'Basic Sword'";
         } else if (i == 1) {
           weapon = "Refined Sword";
+          consoleMessage = "Bought 'Refined Sword'";
         } else if (i == 2) {
           weapon = "Katana";
+          consoleMessage = "Bought 'Katana'";
         } else if (i == 3) {
           weapon = "Long Sword";
+          consoleMessage = "Bought 'Long Sword'";
         } else if (i == 4) {
           weapon = "Dragoon Sword";
+          consoleMessage = "Bought 'Dragoon Sword'";
         }
         price = it.wpnPrice(weapon);
+<<<<<<< Updated upstream
         if (p.money >= price) {
           p.money -= price;
           p.weapon = weapon;
           println("WB true");
         }
+=======
+        p.money -= price;
+        p.weapon = weapon;
+        consoleMessage = "Bought " + weapon;
+        println(consoleMessage);
+>>>>>>> Stashed changes
         WBPressed[i] = true; // Mark the button as pressed
       } else if (!weaponButton[i].pressed()) {
         WBPressed[i] = false; // Reset the pressed state when the button is released
@@ -218,6 +240,7 @@ class Shop {
     text("Weapon", qLeft, 520);
     text("Armor", qRight, 520);
     text("Potions", center, 520);
+    text("Exit", qRight + 18, 82);
 
     for (int i = 0; i < armorButton.length; i++) {
       armorButton[i].display();
@@ -274,6 +297,7 @@ class Shop {
           spot = 4;
         }
 
+<<<<<<< Updated upstream
         if (p.money >= price) {
           if (spot == 1) {
             p.money -= price;
@@ -292,6 +316,24 @@ class Shop {
             p.boots = boots;
             println("Purchased " + p.boots);
           }
+=======
+        if (spot == 1) {
+          p.helmet = helmet;
+          println(p.helmet);
+          println(p.maxHealth);
+        }
+        if (spot == 2) {
+          p.chestplate = chestplate;
+          println(p.chestplate);
+        }
+        if (spot == 3) {
+          p.trousers = trousers;
+          println(p.trousers);
+        }
+        if (spot == 4) {
+          p.boots = boots;
+          println(p.boots);
+>>>>>>> Stashed changes
         }
         //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
         ABPressed[i] = true; // Mark the button as pressed
@@ -323,6 +365,7 @@ class Shop {
     text("Weapon", qLeft, 520);
     text("Armor", qRight, 520);
     text("Potions", center, 520);
+    text("Exit", qRight + 18, 82);
 
     for (int i = 0; i < potionButton.length; i++) {
       potionButton[i].display();
