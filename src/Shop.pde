@@ -199,18 +199,17 @@ class Shop {
           consoleMessage = "Bought 'Dragoon Sword'";
         }
         price = it.wpnPrice(weapon);
-<<<<<<< Updated upstream
+
         if (p.money >= price) {
           p.money -= price;
           p.weapon = weapon;
           println("WB true");
         }
-=======
+
         p.money -= price;
         p.weapon = weapon;
         consoleMessage = "Bought " + weapon;
         println(consoleMessage);
->>>>>>> Stashed changes
         WBPressed[i] = true; // Mark the button as pressed
       } else if (!weaponButton[i].pressed()) {
         WBPressed[i] = false; // Reset the pressed state when the button is released
@@ -297,7 +296,7 @@ class Shop {
           spot = 4;
         }
 
-<<<<<<< Updated upstream
+
         if (p.money >= price) {
           if (spot == 1) {
             p.money -= price;
@@ -316,33 +315,32 @@ class Shop {
             p.boots = boots;
             println("Purchased " + p.boots);
           }
-=======
-        if (spot == 1) {
-          p.helmet = helmet;
-          println(p.helmet);
-          println(p.maxHealth);
+
+          if (spot == 1) {
+            p.helmet = helmet;
+            println(p.helmet);
+            println(p.maxHealth);
+          }
+          if (spot == 2) {
+            p.chestplate = chestplate;
+            println(p.chestplate);
+          }
+          if (spot == 3) {
+            p.trousers = trousers;
+            println(p.trousers);
+          }
+          if (spot == 4) {
+            p.boots = boots;
+            println(p.boots);
+          }
+          //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
+          ABPressed[i] = true; // Mark the button as pressed
+        } else if (!armorButton[i].pressed()) {
+          ABPressed[i] = false; // Reset the pressed state when the button is released
         }
-        if (spot == 2) {
-          p.chestplate = chestplate;
-          println(p.chestplate);
-        }
-        if (spot == 3) {
-          p.trousers = trousers;
-          println(p.trousers);
-        }
-        if (spot == 4) {
-          p.boots = boots;
-          println(p.boots);
->>>>>>> Stashed changes
-        }
-        //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
-        ABPressed[i] = true; // Mark the button as pressed
-      } else if (!armorButton[i].pressed()) {
-        ABPressed[i] = false; // Reset the pressed state when the button is released
       }
     }
   }
-
   void potionDisplay() {
     consoleMessage = "Welcome to the Potion Shop! Buy what you can!";
     fill(155);
