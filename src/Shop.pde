@@ -323,16 +323,18 @@ class Shop {
           if (spot == 2) {
             p.chestplate = chestplate;
             println(p.chestplate);
+            println(p.maxHealth);
           }
           if (spot == 3) {
             p.trousers = trousers;
             println(p.trousers);
+            println(p.maxHealth);
           }
           if (spot == 4) {
             p.boots = boots;
             println(p.boots);
+            println(p.maxHealth);
           }
-          //in here, check if a player has enough gold to purchase and set a boolean that alters damage/health done.
           ABPressed[i] = true; // Mark the button as pressed
         } else {
           println("Not enough money!");
