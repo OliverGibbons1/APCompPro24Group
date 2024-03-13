@@ -47,6 +47,7 @@ void draw() {
       AlreadyPressed-=1;
     }
   }
+//StartScreen buttons completed by Oliver Gibbons
   if (start == false) {
     M1.display();
     noFill();
@@ -153,6 +154,7 @@ void draw() {
     println("Game Saved");
   }
 }
+//All saveGame aspects by Oliver Gibbons
 void saveGame() {
   savedGame = true;
   saveGame.setInt("health", p.health);
