@@ -127,13 +127,16 @@ class MapEditor:
         self.InputBoxes=[]
 
         self.BackRef = [pg.image.load(f"{MapBackFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapBackFolder)) if x.decode().endswith(".png")]
+        self.MapBackRef = [x.decode() for x in os.listdir(os.fsencode(MapBackFolder)) if x.decode().endswith(".png")]
         self.MapBackTiles = np.zeros(self.spriteCount,dtype=int)
         self.MapBackTiles[0][0]=0
 
+        self.MapNPCRef = [x.decode() for x in os.listdir(os.fsencode(NPCSpritesFolder)) if x.decode().endswith(".png")]
         self.NPCRef = [pg.image.load(f"{NPCSpritesFolder}/{x.decode()}") for x in os.listdir(os.fsencode(NPCSpritesFolder)) if x.decode().endswith(".png")]
         self.MapNPCTiles = np.zeros(self.spriteCount,dtype=int)
         self.MapNPCTiles[:,:]=-1
 
+        self.MapForeRef = [x.decode() for x in os.listdir(os.fsencode(MapForeFolder)) if x.decode().endswith(".png")]
         self.ForeRef = [pg.image.load(f"{MapForeFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapForeFolder)) if x.decode().endswith(".png")]
         self.MapForeTiles = np.zeros(self.spriteCount,dtype=int)
         self.MapForeTiles[:,:]=-1
@@ -162,7 +165,7 @@ class MapEditor:
                     pass
     def Save(self):
         f=open("Map.json","w")
-        json.dump({"MapBackTiles":self.MapBackTiles.tolist(),"MapNPCTiles":self.MapNPCTiles.tolist(),"MapForeTiles":self.MapForeTiles.tolist(),"MapEventTiles":self.EventDictTiles,"Boundary":self.Boundary},f)
+        json.dump({"MapBackRef":self.MapBackRef,"MapBackTiles":self.MapBackTiles.tolist(),"MapNPCRef":self.MapNPCRef,"MapNPCTiles":self.MapNPCTiles.tolist(),"MapForeRef":self.MapForeRef,"MapForeTiles":self.MapForeTiles.tolist(),"MapEventTiles":self.EventDictTiles,"Boundary":self.Boundary},f)
         f.close()
         return
     def Load(self):
@@ -173,7 +176,7 @@ class MapEditor:
             return
         j=json.loads(c)
         BackRef=[pg.image.load(f"{MapBackFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapBackFolder)) if x.decode().endswith(".png")]
-        
+
         return
     def draw(self):
         # Draw Background Grid
