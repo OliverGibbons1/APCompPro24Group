@@ -93,6 +93,7 @@ class Encounter {
   }
 
   void display() {
+    textAlign(LEFT);
     fill(155);
     textSize(20);
     stroke(255);
