@@ -21,7 +21,7 @@ void setup() {
   p = new Player();
   shop = new Shop();
   enemy = new Enemy(10, 4, 20, "sprites/NPCSprites/SinisterMan.png", "Sinister Man");
-  encounter = new Encounter(enemy, "dialogue here", p);
+  encounter = new Encounter(enemy, "Hello there", p);
   startButton = new Button(240, 415, 140, 60, 'm');
   quitButton = new Button(240, 492, 140, 60, 'm');
   loadGameButton = new Button(240, 569, 140, 60, 'm');
@@ -36,14 +36,6 @@ void setup() {
 void draw() {
   if (start) {
     M1.displayMap();
-    if (keyPressed && AlreadyPressed<=0) {
-      AlreadyPressed=10;
-      if (key==' ') {
-        encounterOn =! encounterOn;
-      }
-    } else {
-      AlreadyPressed-=1;
-    }
   }
   if (start == false) {
     M1.display();
