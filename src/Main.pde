@@ -145,6 +145,11 @@ void draw() {
       encounter = new Encounter(enemy, "Back again, Blue Guy?", p);
     }
   }
+  
+  if(keyCode == 9){
+    saveGame();
+    println("Game Saved");
+  }
 }
 void saveGame() {
   savedGame = true;
