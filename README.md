@@ -5,10 +5,10 @@ Note: the map editor is for the developer's use only, not intended to be used as
 To play: press play! To load a game, press the "Load Game" button. To save a current gameplay, press "tab". 
 
 Advanced concepts:
-GUI controls: text, buttons, player movement
-Enhanced For-Loops
-I/O and Exception handling
-Advanced Collections
+GUI controls (text, buttons, player movement);
+Enhanced For-Loops;
+I/O and Exception handling;
+Advanced Collections;
 ## Collaborators: 
 
 [Oliver Gibbons](https://github.com/OliverGibbons1): Project Manager, Programming
