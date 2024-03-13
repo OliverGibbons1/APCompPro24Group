@@ -24,10 +24,24 @@ class Shop {
   boolean[] PBPressed = new boolean[potionButton.length];
 
   PImage weaponA, weaponB, weaponC, weaponD, weaponE;
+  PImage smallPotionImg, mediumPotionImg, largePotionImg;
+  PImage basicHelmetImg, basicChestplateImg, basicTrousersImg, basicBootsImg;
+  PImage refinedHelmetImg, refinedChestplateImg, refinedTrousersImg, refinedBootsImg;
+  PImage dragoonHelmetImg, dragoonChestplateImg, dragoonTrousersImg, dragoonBootsImg;
 
   int pm = (screenWidth / 2) - 150;
   int pma = (screenWidth / 2) + 10;
   int pmc = (screenWidth / 2) - 75;
+
+  int centeredBoxWidth = 500;
+  int centeredBoxHeight = 375;
+  int marginX = ((screenWidth - centeredBoxWidth) / 2) - 5;
+  int marginY = ((screenHeight - centeredBoxHeight) / 2) - 20;
+
+  int numRows = 3;
+  int numCols = 4;
+  int innerBoxWidth = (centeredBoxWidth - 2 * 10) / numCols;
+  int innerBoxHeight = (centeredBoxHeight - 2 * 10) / numRows;
 
   Shop() {
     //weaponE = dragoon sword
@@ -36,11 +50,48 @@ class Shop {
     weaponC = loadImage("sprites/ItemSprites/Katana.png");
     weaponD = loadImage("sprites/ItemSprites/LongSword.png");
     weaponE = loadImage("sprites/ItemSprites/DragoonSword.png");
+    smallPotionImg = loadImage("sprites/ItemSprites/HealthFlask.png");
+    mediumPotionImg = loadImage("sprites/ItemSprites/HealthFlask.png");
+    largePotionImg = loadImage("sprites/ItemSprites/HealthFlask.png");
+
+    basicHelmetImg = loadImage("sprites/ItemSprites/BasicHelmet.png");
+    basicChestplateImg = loadImage("sprites/ItemSprites/BasicChestplate.png");
+    basicTrousersImg = loadImage("sprites/ItemSprites/BasicTrousers.png");
+    basicBootsImg = loadImage("sprites/ItemSprites/BasicBoots.png");
+
+    refinedHelmetImg = loadImage("sprites/ItemSprites/RefinedHelmet.png");
+    refinedChestplateImg = loadImage("sprites/ItemSprites/RefinedChestplate.png");
+    refinedTrousersImg = loadImage("sprites/ItemSprites/RefinedTrousers.png");
+    refinedBootsImg = loadImage("sprites/ItemSprites/RefinedBoots.png");
+
+    dragoonHelmetImg = loadImage("sprites/ItemSprites/DragoonHelmet.png");
+    dragoonChestplateImg = loadImage("sprites/ItemSprites/DragoonChestplate.png");
+    dragoonTrousersImg = loadImage("sprites/ItemSprites/DragoonTrousers.png");
+    dragoonBootsImg = loadImage("sprites/ItemSprites/DragoonBoots.png");
+
     weaponA.resize(150, 100);
     weaponB.resize(150, 100);
     weaponC.resize(150, 100);
     weaponD.resize(150, 100);
     weaponE.resize(150, 100);
+    smallPotionImg.resize(50, 50);
+    mediumPotionImg.resize(75, 75);
+    largePotionImg.resize(100, 100);
+
+    basicHelmetImg.resize(innerBoxWidth, innerBoxHeight);
+    basicChestplateImg.resize(innerBoxWidth, innerBoxHeight);
+    basicTrousersImg.resize(innerBoxWidth, innerBoxHeight);
+    basicBootsImg.resize(innerBoxWidth, innerBoxHeight);
+
+    refinedHelmetImg.resize(innerBoxWidth, innerBoxHeight);
+    refinedChestplateImg.resize(innerBoxWidth, innerBoxHeight);
+    refinedTrousersImg.resize(innerBoxWidth, innerBoxHeight);
+    refinedBootsImg.resize(innerBoxWidth, innerBoxHeight);
+
+    dragoonHelmetImg.resize(innerBoxWidth, innerBoxHeight);
+    dragoonChestplateImg.resize(innerBoxWidth, innerBoxHeight);
+    dragoonTrousersImg.resize(innerBoxWidth, innerBoxHeight);
+    dragoonBootsImg.resize(innerBoxWidth, innerBoxHeight);
 
     this.player = p;
     it = new Item();
@@ -56,15 +107,7 @@ class Shop {
     //ARMORBUTTON ARRAY --------------------------------------
     armorButton = new Button[12];
 
-    int centeredBoxWidth = 500;
-    int centeredBoxHeight = 375;
-    int marginX = ((screenWidth - centeredBoxWidth) / 2) - 5;
-    int marginY = ((screenHeight - centeredBoxHeight) / 2) - 20;
 
-    int numRows = 3;
-    int numCols = 4;
-    int innerBoxWidth = (centeredBoxWidth - 2 * 10) / numCols;
-    int innerBoxHeight = (centeredBoxHeight - 2 * 10) / numRows;
 
     int index = 0;
     for (int row = 0; row < numRows; row++) {
@@ -265,6 +308,21 @@ class Shop {
     for (int i = 0; i < armorButton.length; i++) {
       armorButton[i].display();
 
+      image(basicHelmetImg, armorButton[0].x, armorButton[0].y);
+      image(basicChestplateImg, armorButton[1].x, armorButton[1].y);
+      image(basicTrousersImg, armorButton[2].x, armorButton[2].y);
+      image(basicBootsImg, armorButton[3].x, armorButton[3].y);
+
+      image(refinedHelmetImg, armorButton[4].x, armorButton[4].y);
+      image(refinedChestplateImg, armorButton[5].x, armorButton[5].y);
+      image(refinedTrousersImg, armorButton[6].x, armorButton[6].y);
+      image(refinedBootsImg, armorButton[7].x, armorButton[7].y);
+
+      image(dragoonHelmetImg, armorButton[8].x, armorButton[8].y);
+      image(dragoonChestplateImg, armorButton[9].x, armorButton[9].y);
+      image(dragoonTrousersImg, armorButton[10].x, armorButton[10].y);
+      image(dragoonBootsImg, armorButton[11].x, armorButton[11].y);
+
       if (armorButton[i].pressed() && !ABPressed[i]) {
         if (i == 0) {
           helmet = "Basic Helmet";
@@ -388,7 +446,9 @@ class Shop {
 
     for (int i = 0; i < potionButton.length; i++) {
       potionButton[i].display();
-
+      image(smallPotionImg, pm + 50, 200 + 25);
+      image(mediumPotionImg, pma + 25, 200 + 10);
+      image(largePotionImg, pmc + 10, 310);
       // Check if the button is pressed and it's not already marked as pressed
       if (potionButton[i].pressed() && !PBPressed[i]) {
         if (i == 0) {
