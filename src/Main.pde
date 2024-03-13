@@ -36,6 +36,14 @@ void setup() {
 void draw() {
   if (start) {
     M1.displayMap();
+    if (keyPressed && AlreadyPressed<=0) {
+      AlreadyPressed=10;
+      if (key==' ') {
+        encounterOn =! encounterOn;
+      }
+    } else {
+      AlreadyPressed-=1;
+    }
   }
   if (start == false) {
     M1.display();
