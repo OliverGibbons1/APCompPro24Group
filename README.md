@@ -18,6 +18,8 @@ A 64-bit RPG adventure game inspired by the original Nintendo-64 Dragon Quest se
 
 ## Enemy Encounter
 
+<img images="https://github.com/OliverGibbons1/APCompPro24Group/blob/main/images/EncounterSS.jpg?raw=true">
+
 ## Class Diagram
 
 <img src="https://github.com/OliverGibbons1/APCompPro24Group/blob/main/images/UpdatedClassDiagram.png?raw=true">
