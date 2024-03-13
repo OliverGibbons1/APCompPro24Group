@@ -73,8 +73,6 @@ void draw() {
       M1.resize(640, 640);
       start = true;
       s = s.equals(i) ? i:s;
-      //encounterOn = true;
-      shopOn = true;
     }
     if (loadGameButton.pressed()) {
       saveGame = loadJSONObject("data/new.json");
