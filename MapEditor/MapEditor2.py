@@ -1,3 +1,5 @@
+# Author: Evern McCullough
+# Date: 2024-1-1
 import os
 from os import getcwd as gcd
 import json

@@ -7,7 +7,7 @@ class Map{
   int[][] MapBackData;
   int[][] MapNPCData;
   int[][] MapForeData;
-  String[][] EventTiles; // FIx later
+  String[][] MapEventData; // Fix later
   int[] coords;
   int[] tileSize={32,32};
   int[] mapSize={10,10};
@@ -28,14 +28,17 @@ class Map{
     JSONArray MapJSONArray=MapJSON.getJSONArray("MapBackTiles");
     JSONArray NPCJSONArray=MapJSON.getJSONArray("MapNPCTiles");
     JSONArray ForeJSONArray=MapJSON.getJSONArray("MapForeTiles");
+    JSONArray EventJSONArray=MapJSON.getJSONArray("MapEventTiles");
     MapBackData=new int[mapSize[0]][mapSize[1]];
     MapNPCData= new int[mapSize[0]][mapSize[1]];
     MapForeData= new int[mapSize[0]][mapSize[1]];
+    MapEventData= new String[mapSize[0]][mapSize[1]];
     for (int y=0;y<MapJSONArray.size();y++) {
       for (int x=0;x<MapJSONArray.getJSONArray(y).size();x++) {
         MapBackData[y][x]=MapJSONArray.getJSONArray(y).getInt(x);
         MapNPCData[y][x]=NPCJSONArray.getJSONArray(y).getInt(x);
         MapForeData[y][x]=ForeJSONArray.getJSONArray(y).getInt(x);
+        MapEventData[y][x]=EventJSONArray.getJSONArray(y).getJSONObject(x).getString("type");
       }
       //println("");
     }
@@ -80,6 +83,8 @@ class Map{
       }
     }
   }
+  
+  
   
   void display(){
     image(mapImage, 0, 0);
