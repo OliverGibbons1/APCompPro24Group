@@ -319,18 +319,15 @@ class Shop {
             p.helmet = helmet;
             println(p.helmet);
             println(p.maxHealth);
-          }
-          if (spot == 2) {
+          } else if (spot == 2) {
             p.chestplate = chestplate;
             println(p.chestplate);
             println(p.maxHealth);
-          }
-          if (spot == 3) {
+          } else if (spot == 3) {
             p.trousers = trousers;
             println(p.trousers);
             println(p.maxHealth);
-          }
-          if (spot == 4) {
+          } else if (spot == 4) {
             p.boots = boots;
             println(p.boots);
             println(p.maxHealth);
