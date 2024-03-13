@@ -73,8 +73,6 @@ void draw() {
       M1.resize(640, 640);
       start = true;
       s = s.equals(i) ? i:s;
-      //encounterOn = true;
-      shopOn = true;
     }
     if (loadGameButton.pressed()) {
       saveGame = loadJSONObject("data/new.json");
@@ -173,12 +171,6 @@ void clearSave() {
   saveGame.setBoolean("savedGame", false);
   saveJSONObject(saveGame, "data/new.json");
 }
-//void testSave() {
-//  p.health = 101;
-//  p.money = 126;
-//  p.x = 11;
-//  p.y = 11;
-//}
 boolean checkGameOver() {
   if (p.health <= 0) {
     return true;
