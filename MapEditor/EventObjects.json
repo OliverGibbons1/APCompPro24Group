@@ -3,6 +3,7 @@
 		"dialog":"",
 		"Enemy":""
 	},
+	"Shop":{"IGNORE":1},
 	"Map Leave Left":{"IGNORE":1},
 	"Map Leave Right":{"IGNORE":1},
 	"Map Leave Up":{"IGNORE":1},

@@ -20,8 +20,8 @@ void setup() {
   M1 = new Map("Maps/Map.json");
   p = new Player();
   shop = new Shop();
-  enemy = new Enemy(4, 4, 4, "sprites/NPCSprites/SinisterMan.png", "Test Enemy");
-  encounter = new Encounter(enemy, "dialogue here", p);
+  enemy = new Enemy(10, 4, 20, "sprites/NPCSprites/SinisterMan.png", "Sinister Man");
+  encounter = new Encounter(enemy, "Hello there", p);
   startButton = new Button(240, 415, 140, 60, 'm');
   quitButton = new Button(240, 492, 140, 60, 'm');
   loadGameButton = new Button(240, 569, 140, 60, 'm');
@@ -114,7 +114,7 @@ void draw() {
     }
   }
 
-  if (!encounterOn) {
+  if (!encounterOn && !shopOn) {
     p.move();
   }
 
@@ -123,12 +123,6 @@ void draw() {
     if (shop.quit) {
       shopOn = false;
     }
-  }
-
-  p.move();
-
-  if (!encounterOn) {
-    p.move();
   }
 
   if (checkGameOver()) {
@@ -150,6 +144,11 @@ void draw() {
       enemy = new Enemy(4, 4, 4, "sprites/SinisterMan.png", "Test Enemy");
       encounter = new Encounter(enemy, "Back again, Blue Guy?", p);
     }
+  }
+  
+  if(keyCode == 9){
+    saveGame();
+    println("Game Saved");
   }
 }
 void saveGame() {

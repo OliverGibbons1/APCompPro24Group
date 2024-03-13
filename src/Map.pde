@@ -22,20 +22,19 @@ class Map{
     }
     FileN=newMap;
     MapJSON=loadJSONObject(FileN);
-    JSONArray MapJSONArray=MapJSON.getJSONArray("MapTiles");
+    JSONArray MapJSONArray=MapJSON.getJSONArray("MapBackTiles");
     MapData=new int[mapSize[0]][mapSize[1]];
     for (int y=0;y<MapJSONArray.size();y++) {
       for (int x=0;x<MapJSONArray.getJSONArray(y).size();x++) {
         MapData[y][x]=MapJSONArray.getJSONArray(y).getInt(x);
         if (!(RelevantTiles.contains(MapData[y][x]))) { // For Optimization
           RelevantTiles.add(MapData[y][x]);
-          //println(MapData[y][x]);
         }
         //print(Integer.toString(MapData[y][x])+" ");
       }
       //println("");
     }
-    JSONArray MapImagesJSONArr=MapJSON.getJSONArray("MapTilesRef");
+    JSONArray MapImagesJSONArr=MapJSON.getJSONArray("MapBackRef");
     MapSprites=new PImage[MapImagesJSONArr.size()];
     for (int s=0;s<MapImagesJSONArr.size();s++) {
       MapSprites[s]=loadImage("Sprites/MapTiles/MapBack/"+MapImagesJSONArr.getString(s));
