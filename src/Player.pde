@@ -1,3 +1,5 @@
+// Completed by all of us
+// Player Sprite done by Jack Wakefield
 class Player {
   int x, y, health, damage, money, maxHealth;
   int moveW = 0;

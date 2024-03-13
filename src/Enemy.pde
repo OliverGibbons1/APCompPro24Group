@@ -1,3 +1,4 @@
+// Completed by Ian Turner
 class Enemy {
   int health, damage, money;
   PImage sprite;

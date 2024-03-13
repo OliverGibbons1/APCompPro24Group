@@ -1,3 +1,4 @@
+// Completed by Bryce Thomson
 class Item {
   //float common = 1;
   //float rare = 1.2;

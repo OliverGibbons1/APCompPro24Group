@@ -1,3 +1,4 @@
+// Completed by Bryce Thomson
 class Weapon {
   String name;
   int dmg, price;

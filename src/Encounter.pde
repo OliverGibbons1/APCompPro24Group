@@ -1,3 +1,4 @@
+// Completed by Ian Turner
 class Encounter {
   Player player;
   String dialogue, consoleMessage;

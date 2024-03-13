@@ -1,3 +1,4 @@
+// Completed by Bryce Thomson
 class Armor{
   String name;
   int hp, spot, price;

@@ -1,3 +1,4 @@
+// Completed by all of us
 Player P1;
 Encounter[] Encounters;
 Shop shop;

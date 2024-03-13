@@ -1,3 +1,4 @@
+//Completed by Bryce Thomson
 class Potion{
   String name;
   int hp, price;
