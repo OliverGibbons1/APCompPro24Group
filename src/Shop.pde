@@ -23,7 +23,25 @@ class Shop {
   boolean[] ABPressed = new boolean[12];
   boolean[] PBPressed = new boolean[potionButton.length];
 
+  PImage weaponA, weaponB, weaponC, weaponD, weaponE;
+
+  int pm = (screenWidth / 2) - 150;
+  int pma = (screenWidth / 2) + 10;
+  int pmc = (screenWidth / 2) - 75;
+
   Shop() {
+    //weaponE = dragoon sword
+    weaponA = loadImage("sprites/ItemSprites/BasicSword.png");
+    weaponB = loadImage("sprites/ItemSprites/RefinedSword.png");
+    weaponC = loadImage("sprites/ItemSprites/Katana.png");
+    weaponD = loadImage("sprites/ItemSprites/LongSword.png");
+    weaponE = loadImage("sprites/ItemSprites/DragoonSword.png");
+    weaponA.resize(150, 100);
+    weaponB.resize(150, 100);
+    weaponC.resize(150, 100);
+    weaponD.resize(150, 100);
+    weaponE.resize(150, 100);
+
     this.player = p;
     it = new Item();
     this.quit = false;
@@ -59,9 +77,7 @@ class Shop {
     }
 
     //WEAPONBUTTON ARRAY -----------------------------------------
-    int pm = (screenWidth / 2) - 150;
-    int pma = (screenWidth / 2) + 10;
-    int pmc = (screenWidth / 2) - 75;
+
 
     // First row boxes
     weaponButton[0] = new Button(pm, 130, 150, 100, 'w');
@@ -181,6 +197,11 @@ class Shop {
 
     for (int i = 0; i < weaponButton.length; i++) {
       weaponButton[i].display();
+      image(weaponA, pm, 130);
+      image(weaponB, pma, 130);
+      image(weaponC, pm, 240);
+      image(weaponD, pma, 240);
+      image(weaponE, pmc, 350);
       if (weaponButton[i].pressed() && !WBPressed[i]) {  // Check if the button is pressed and it's not already marked as pressed
         if (i == 0) {
           weapon = "Basic Sword";

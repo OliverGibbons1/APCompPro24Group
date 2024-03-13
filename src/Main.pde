@@ -21,7 +21,7 @@ void setup() {
   p = new Player();
   shop = new Shop();
   enemy = new Enemy(10, 4, 20, "sprites/NPCSprites/SinisterMan.png", "Sinister Man");
-  encounter = new Encounter(enemy, "dialogue here", p);
+  encounter = new Encounter(enemy, "Hello there", p);
   startButton = new Button(240, 415, 140, 60, 'm');
   quitButton = new Button(240, 492, 140, 60, 'm');
   loadGameButton = new Button(240, 569, 140, 60, 'm');
@@ -145,6 +145,11 @@ void draw() {
       encounter = new Encounter(enemy, "Back again, Blue Guy?", p);
     }
   }
+  
+  if(keyCode == 9){
+    saveGame();
+    println("Game Saved");
+  }
 }
 void saveGame() {
   savedGame = true;
@@ -165,12 +170,6 @@ void clearSave() {
   saveGame.setBoolean("savedGame", false);
   saveJSONObject(saveGame, "data/new.json");
 }
-//void testSave() {
-//  p.health = 101;
-//  p.money = 126;
-//  p.x = 11;
-//  p.y = 11;
-//}
 boolean checkGameOver() {
   if (p.health <= 0) {
     return true;
