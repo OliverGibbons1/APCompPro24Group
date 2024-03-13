@@ -1,7 +1,9 @@
 # Dragoon Expedition
 A 64-bit RPG adventure game inspired by the original Nintendo-64 Dragon Quest series. Run in Processing with Python apps to aid the creation of maps and boundaries. 
+
 To download: click the "<> Code" button and download the ZIP. Open the ZIP in Finder and double-click the Main class. 
 Note: the map editor is for the developer's use only, not intended to be used as a function of the game. It helps in the construction of the Maps, as the name implies. 
+
 To play: press play! To load a game, press the "Load Game" button. To save a current gameplay, press "tab". 
 
 Advanced concepts:
