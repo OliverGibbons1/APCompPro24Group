@@ -70,7 +70,9 @@ class Player {
     image(this.sprite, x, y);
   }
 
-  void move() {
+  void move(Boolean[][] MapBound) {
+    int preX=x;
+    int preY=y;
     if (keyPressed) {
       if (key == 'w' && moveW==0 && y>0) {
         y = y - 64;
@@ -83,6 +85,10 @@ class Player {
       }
       if (key == 'd' && moveW == 0 && x<544) {
         x = x + 64;
+      }
+      if (MapBound[int(float(y)%64)][int(float(x)%64)]) {
+        x=preX;
+        y=preY;
       }
       moveW+=1;
     }

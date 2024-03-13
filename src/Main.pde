@@ -119,7 +119,7 @@ void draw() {
   }
 
   if (!encounterOn && !shopOn) {
-    p.move();
+    p.move(M1.MapBoundData);
   }
 
   if (shopOn) {
