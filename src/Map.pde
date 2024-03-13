@@ -29,7 +29,6 @@ class Map{
         MapData[y][x]=MapJSONArray.getJSONArray(y).getInt(x);
         if (!(RelevantTiles.contains(MapData[y][x]))) { // For Optimization
           RelevantTiles.add(MapData[y][x]);
-          //println(MapData[y][x]);
         }
         //print(Integer.toString(MapData[y][x])+" ");
       }

@@ -102,8 +102,6 @@ class Enemy:
     def draw(self, screen):
         screen.blit(self.img, (self.x, self.y))
 
-
-
 class MapEditor:
     def __init__(self,screen,ProgSize,SpriteSize):
         self.spriteCount=(10,10)
@@ -166,6 +164,16 @@ class MapEditor:
         f=open("Map.json","w")
         json.dump({"MapBackTiles":self.MapBackTiles.tolist(),"MapNPCTiles":self.MapNPCTiles.tolist(),"MapForeTiles":self.MapForeTiles.tolist(),"MapEventTiles":self.EventDictTiles,"Boundary":self.Boundary},f)
         f.close()
+        return
+    def Load(self):
+        f=open("Map.json","r")
+        c=f.read()
+        f.close()
+        if c=='':
+            return
+        j=json.loads(c)
+        BackRef=[pg.image.load(f"{MapBackFolder}/{x.decode()}") for x in os.listdir(os.fsencode(MapBackFolder)) if x.decode().endswith(".png")]
+        
         return
     def draw(self):
         # Draw Background Grid
