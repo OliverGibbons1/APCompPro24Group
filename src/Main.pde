@@ -40,6 +40,8 @@ void draw() {
       AlreadyPressed=10;
       if (key==' ') {
         encounterOn =! encounterOn;
+      }else if (key == 'p'){
+        shopOn =! shopOn;
       }
     } else {
       AlreadyPressed-=1;
