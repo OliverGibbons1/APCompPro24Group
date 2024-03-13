@@ -116,7 +116,7 @@ void draw() {
     }
   }
 
-  if (!encounterOn) {
+  if (!encounterOn && !shopOn) {
     p.move();
   }
 
@@ -125,12 +125,6 @@ void draw() {
     if (shop.quit) {
       shopOn = false;
     }
-  }
-
-  p.move();
-
-  if (!encounterOn) {
-    p.move();
   }
 
   if (checkGameOver()) {
