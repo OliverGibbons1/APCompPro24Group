@@ -56,7 +56,7 @@ class Button:
 			return False,False
 
 class InputBox:
-	def __init__(self, pos, size, color=(255,255,255), font="Arial", font_size=20, font_color=(0,0,0),constraint="normal",auto_correct_terms=[]):
+	def __init__(self, pos, size, color=(255,255,255), font="Arial", font_size=20, font_color=(0,0,0), constraint="normal", auto_correct_terms=[]):
 		self.pos = pos
 		self.size = size
 		self.color = color

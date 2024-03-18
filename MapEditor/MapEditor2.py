@@ -229,7 +229,7 @@ class MapEditor:
         else:
             self.BoundaryFirst=(False,False)
         if m[2] and not self.Mouse[2] and self.Selected[0]==3:
-            self.InputBoxes=[InputBox((20,self.height-x*10),(self.width*3/4,10)) for x in range(len(self.DataRef[self.Selected[1]]))]
+            self.InputBoxes=[InputBox((20,self.height-x*10-25),(self.width*3/4,20)) for x in range(len(self.DataRef[self.Selected[1]]))]
         #print(self.HeldKeys)
         #print(self.Mouse,m)
         if self.HeldKeys.__contains__(int(pg.K_LSHIFT)) and self.Selected[0]>0:
@@ -275,6 +275,8 @@ class MapEditor:
 
         # Draw TextBoxes
         for IB in rl(self.InputBoxes):
+            self.InputBoxes[IB].keypress(BPG.keyboard)
+            self.InputBoxes.clicked(m)
             self.InputBoxes[IB].draw(self.screen)
             try:
                 self.DataRef[self.Selected[1]]=self.InputBoxes[IB].txt if type(self.DataRef)==str else int(self.InputBoxes[IB].txt)
